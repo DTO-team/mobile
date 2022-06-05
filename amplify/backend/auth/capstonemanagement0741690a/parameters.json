@@ -1,0 +1,27 @@
+{
+  "authSelections": "identityPoolAndUserPool",
+  "resourceName": "capstonemanagement0741690a",
+  "serviceType": "imported",
+  "region": "ap-southeast-1",
+  "usernameAttributes": [
+    "email"
+  ],
+  "authProvidersUserPool": [
+    "Google"
+  ],
+  "requiredAttributes": [
+    "email"
+  ],
+  "passwordPolicyMinLength": 8,
+  "passwordPolicyCharacters": [
+    "Requires Lowercase",
+    "Requires Uppercase",
+    "Requires Numbers",
+    "Requires Symbols"
+  ],
+  "mfaConfiguration": "OFF",
+  "autoVerifiedAttributes": [
+    "email"
+  ],
+  "mfaTypes": []
+}

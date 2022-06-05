@@ -1,0 +1,11 @@
+{
+  "auth": {
+    "capstonemanagement0741690a": {
+      "service": "Cognito",
+      "serviceType": "imported",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
