@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'Landing.dart';
 import 'Provider/app_user.dart';
+import 'Widget/color.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,8 +21,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Amplify Auth Demo',
         theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
-        ),
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: primary,
+        ),),
         home: LandingPage(),
       ),
     );

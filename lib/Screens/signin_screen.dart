@@ -11,10 +11,6 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Amplify Auth Demo'),
-        elevation: 10,
-      ),
       body: _buildContent(context),
       backgroundColor: Colors.grey[200],
     );
@@ -53,14 +49,7 @@ class SignInPage extends StatelessWidget {
             height: 8.0,
 
           ),
-          Text(
-            'Or',
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.black87,
-            ),
-            textAlign: TextAlign.center,
-          ),
+
           SizedBox(
             height: 8.0,
           ),

@@ -32,6 +32,12 @@ dependencies:
   amplify_flutter: ^0.5.1
   amplify_auth_cognito: '<1.0.0'
   provider: ^6.0.3
+  flutter_svg_provider: ^1.0.3
+  photo_view: ^0.14.0
+  websafe_svg: ^2.1.1+1
+  http: ^0.13.4
+
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -63,6 +69,13 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/google-logo.png
+    - assets/home.svg
+    - assets/topic.svg
+    - assets/user.svg
+    - assets/project.svg
+    - assets/chamb.png
+    - assets/Search.svg
+    - assets/list.svg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
