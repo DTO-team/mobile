@@ -85,21 +85,7 @@ class NewFeedCard extends StatelessWidget {
                       Text(feed.tweet),
                       SizedBox(height: 6,),
                       ///Picture
-                      if(feed.imageLinks.length > 0 &&
-                          feed.imageLinks != null)
-                        Container(
-                          height: 200,
-                          decoration: BoxDecoration(
-                            color: blue,
-                            shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(10),
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage(feed.imageLinks[0]),
 
-                            ),
-                          ),
-                        ),
 
                     ],
                   )),
@@ -109,7 +95,7 @@ class NewFeedCard extends StatelessWidget {
           ),
         ),
         Divider(
-          thickness: 4,
+          thickness: 0.8,
           color: gray,
           height: 20,
         )

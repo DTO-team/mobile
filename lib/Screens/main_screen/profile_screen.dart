@@ -12,12 +12,17 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[900],
       appBar: AppBar(
         title: Text('Profile'),
         centerTitle: true,
+        backgroundColor: Colors.grey[850],
+        //shadow
+        elevation: 0,
       ),
-      resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(child:
+
+      body:
+      // item o trong ko dinh vao appbar hay trai duoi phai
       Padding(
         padding: EdgeInsets.fromLTRB(30, 40, 30, 10),
         child: Column(
@@ -31,7 +36,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             Divider(
               height: 90,
-              color: Colors.grey,
+              color: Colors.yellowAccent,
               thickness: 1,
             ),
 
@@ -39,14 +44,20 @@ class _ProfilePageState extends State<ProfilePage> {
             SizedBox(height: 10),
             Text('Name',
                 style: TextStyle(
-                    color: kTeamColor,
+                    color: Colors.amberAccent,
                     fontSize: 20,
                     fontWeight: FontWeight.bold)),
+            SizedBox(height: 10),
+            Text(
+              'Chamber',
+              style: TextStyle(letterSpacing: 2, color: Colors.amber),
+            ),
+            SizedBox(height: 10),
 
             SizedBox(height: 10),
             Text(
               'Super Lemonade',
-              style: TextStyle(letterSpacing: 2, color: kTeamColor),
+              style: TextStyle(letterSpacing: 2, color: Colors.amber),
             ),
             SizedBox(height: 10),
 
@@ -54,23 +65,20 @@ class _ProfilePageState extends State<ProfilePage> {
               children: <Widget>[
                 Icon(
                   Icons.email,
-                  color: secondary,
+                  color: Colors.green,
                 ),
                 SizedBox(
                   width: 10,
                 ),
                 Text(
                   'My Email',
-                  style: TextStyle(color: kTeamColor, letterSpacing: 2),
+                  style: TextStyle(color: Colors.amber, letterSpacing: 2),
                 )
               ],
             )
           ],
         ),
       ),
-      ),
-      // item o trong ko dinh vao appbar hay trai duoi phai
-
     );
   }
 }

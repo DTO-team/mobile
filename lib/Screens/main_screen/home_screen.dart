@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   /// tạo ra 1 key để toàn app có thể access vào get state hay Widget
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+//  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,6 @@ class _HomePageState extends State<HomePage> {
           userProfilePic: 'assets/chamb.png',
           tweet:
               'Do not worry, with me this will be easy. C\'est simple comme bonjour',
-          imageLinks: ['assets/chamb.png'],
           tweetedAt: 'Oct 2',
           topic: 'Project OnGoinggggg'),
       NewFeed(
@@ -36,7 +35,6 @@ class _HomePageState extends State<HomePage> {
           userProfilePic: 'assets/chamb.png',
           tweet:
               'This killing is terrible business but I always say if I must do something, be the best',
-          imageLinks: ['assets/chamb.png'],
           tweetedAt: 'Oct 4',
           topic: 'Project OnGoing'),
       NewFeed(
@@ -46,7 +44,6 @@ class _HomePageState extends State<HomePage> {
           userProfilePic: 'assets/chamb.png',
           tweet:
               'Our guests have arrived. Let\'s make a good first impression, shall we?',
-          imageLinks: ['assets/chamb.png'],
           tweetedAt: 'Oct 4',
           topic: 'Project OnGoing'),
       NewFeed(
@@ -56,7 +53,6 @@ class _HomePageState extends State<HomePage> {
           userProfilePic: 'assets/chamb.png',
           tweet:
               'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
-          imageLinks: ['assets/chamb.png'],
           tweetedAt: 'Oct 4',
           topic: 'Project OnGoing'),
       NewFeed(
@@ -66,7 +62,6 @@ class _HomePageState extends State<HomePage> {
           userProfilePic: 'assets/chamb.png',
           tweet:
               'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
-          imageLinks: ['assets/chamb.png'],
           tweetedAt: 'Oct 4',
           topic: 'Project OnGoing'),
       NewFeed(
@@ -76,7 +71,6 @@ class _HomePageState extends State<HomePage> {
           userProfilePic: 'assets/chamb.png',
           tweet:
               'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
-          imageLinks: ['assets/chamb.png'],
           tweetedAt: 'Oct 4',
           topic: 'Project OnGoing'),
       NewFeed(
@@ -86,7 +80,6 @@ class _HomePageState extends State<HomePage> {
           userProfilePic: 'assets/chamb.png',
           tweet:
               'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
-          imageLinks: ['assets/chamb.png'],
           tweetedAt: 'Oct 4',
           topic: 'Project OnGoing'),
       NewFeed(
@@ -96,7 +89,6 @@ class _HomePageState extends State<HomePage> {
           userProfilePic: 'assets/chamb.png',
           tweet:
               'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
-          imageLinks: ['assets/chamb.png'],
           tweetedAt: 'Oct 4',
           topic: 'Project OnGoing'),
       NewFeed(
@@ -106,7 +98,6 @@ class _HomePageState extends State<HomePage> {
           userProfilePic: 'assets/chamb.png',
           tweet:
               'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
-          imageLinks: ['assets/chamb.png'],
           tweetedAt: 'Oct 4',
           topic: 'Project OnGoing'),
       NewFeed(
@@ -116,7 +107,6 @@ class _HomePageState extends State<HomePage> {
           userProfilePic: 'assets/chamb.png',
           tweet:
               'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
-          imageLinks: ['assets/chamb.png'],
           tweetedAt: 'Oct 4',
           topic: 'Project OnGoing'),
     ];
@@ -124,22 +114,142 @@ class _HomePageState extends State<HomePage> {
       ///trao cho th nay
       ///ừ cái key đó, ta hoàn toàn có thể get được tham chiếu của chính Widget đó qua biến
       ///currentWidget và thậm chí get được cả State của Widget đó
-      key: _scaffoldKey,
+     // key: _scaffoldKey,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            expandedHeight: 120,
             centerTitle: true,
             floating: true,
             snap: true,
+            pinned: true,
             elevation: 0,
+            backgroundColor: primary,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Image.asset('assets/chamb.png',
+              width: double.maxFinite,
+              fit: BoxFit.cover),
+
+            ),
+            bottom: PreferredSize(
+              preferredSize: Size.fromHeight(50),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: white,
+                  borderRadius: BorderRadius.only(topRight:Radius.circular(20),
+                  topLeft: Radius.circular(20)),
+                ),
+                  width: double.maxFinite,
+                  child: Center(child: Text("What's New ?",style: TextStyle(fontSize: 19),))),
+            ),
+
 
           ),
           SliverToBoxAdapter(
-            child: Container(
-              margin: EdgeInsets.only(top: 1),
-              height: 0.1,
+               child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                     Padding(
+                       padding:  EdgeInsets.all(10),
+                       child: Container(
+                         decoration: BoxDecoration(
+                           color: info,
+                           borderRadius:
+                             BorderRadius.circular(3.0),
+                           boxShadow: [
+                             BoxShadow(
+                               color: Colors.grey
+                                   .withOpacity(0.3),
+                               spreadRadius: 1,
+                               blurRadius: 7,
+                               offset: Offset(0,
+                                   3), // changes position of shadow
+                             ),
+                           ],
+                         ),
+                         child: Text(
+                           "User Total:${nfs.length} ",
+                           style: TextStyle(
+                               color: white,
+                               fontSize: 12.0,
+                               fontWeight:
+                               FontWeight.bold),
+                         ),
+                         padding: EdgeInsets.symmetric(
+                             horizontal: 8.0,
+                             vertical: 8.0),
+                       ),
+
+                     ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: info,
+                          borderRadius:
+                          BorderRadius.circular(3.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey
+                                  .withOpacity(0.3),
+                              spreadRadius: 1,
+                              blurRadius: 7,
+                              offset: Offset(0,
+                                  3), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: Text(
+                          "User Total:${nfs.length} ",
+                          style: TextStyle(
+                              color: white,
+                              fontSize: 12.0,
+                              fontWeight:
+                              FontWeight.bold),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 8.0,
+                            vertical: 8.0),
+                      ),
+
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: info,
+                          borderRadius:
+                          BorderRadius.circular(3.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey
+                                  .withOpacity(0.3),
+                              spreadRadius: 1,
+                              blurRadius: 7,
+                              offset: Offset(0,
+                                  3), // changes position of shadow
+                            ),
+                          ],
+                        ),
+                        child: Text(
+                          "User Total:${nfs.length} ",
+                          style: TextStyle(
+                              color: white,
+                              fontSize: 12.0,
+                              fontWeight:
+                              FontWeight.bold),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 8.0,
+                            vertical: 8.0),
+                      ),
+
+                    ),
+                  ],
+                ),
+
             ),
-          ),
+
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
@@ -149,6 +259,7 @@ class _HomePageState extends State<HomePage> {
               },
               childCount: nfs.length,
             ),
+
           )
         ],
       ),

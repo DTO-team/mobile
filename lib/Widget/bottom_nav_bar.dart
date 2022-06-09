@@ -25,8 +25,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   static const List<Widget> _pages = <Widget>[
     HomePage(),
-    TopicPage(),
     ProjectPage(),
+    TopicPage(),
     ProfilePage(),
   ];
 
@@ -60,10 +60,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
           icon: ImageIcon(Svg('assets/home.svg')), label: 'Home',),
         BottomNavigationBarItem(
             backgroundColor: kTextColor,
-            icon: ImageIcon(Svg('assets/topic.svg')), label: 'Topic'),
+            icon: ImageIcon(Svg('assets/project.svg')), label: 'Project'),
         BottomNavigationBarItem(
             backgroundColor: kTextColor,
-            icon: ImageIcon(Svg('assets/project.svg')), label: 'Project'),
+            icon: ImageIcon(Svg('assets/topic.svg')), label: 'Topic'),
         BottomNavigationBarItem(
             backgroundColor: kTextColor,
             icon: ImageIcon(Svg('assets/user.svg')), label: 'Profile'),

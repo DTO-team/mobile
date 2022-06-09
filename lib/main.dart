@@ -1,3 +1,5 @@
+import 'package:capstone_management_dto/Screens/demoAPI.dart';
+import 'package:capstone_management_dto/Screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
     colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: primary,
         ),),
-        home: LandingPage(),
+        home: LandingPage()
       ),
     );
   }
