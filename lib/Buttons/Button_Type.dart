@@ -1,4 +1,4 @@
 enum ButtonType{
   Google,
-  Signin
+  Signout
 }

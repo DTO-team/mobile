@@ -1,6 +1,8 @@
 import 'package:capstone_management_dto/Buttons/Button_Type.dart';
 import 'package:flutter/material.dart';
 
+import '../Widget/color.dart';
+
 class SignInButton extends StatelessWidget {
   final Color color;
   final String text;
@@ -50,12 +52,13 @@ class SignInButton extends StatelessWidget {
             Opacity(opacity: 0.0, child: Image.asset('assets/google-logo.png')),
           ],
         );
-      case ButtonType.Signin:
+      case ButtonType.Signout:
         return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              Icons.email,
+              Icons.logout,
+              color: AppColor.primary,
             ),
             Text(
               text,
@@ -64,7 +67,7 @@ class SignInButton extends StatelessWidget {
             Opacity(
               opacity: 0.0,
               child: Icon(
-                Icons.email,
+                Icons.logout,
               ),
             ),
           ],

@@ -1,8 +1,11 @@
+import 'package:capstone_management_dto/Screens/demoAPI.dart';
+import 'package:capstone_management_dto/Screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'Landing.dart';
 import 'Provider/app_user.dart';
+import 'Widget/color.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,9 +23,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Amplify Auth Demo',
         theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
-        ),
-        home: LandingPage(),
+    colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: primary,
+        ),),
+        home: LandingPage()
       ),
     );
   }
