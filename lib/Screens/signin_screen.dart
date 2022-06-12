@@ -49,10 +49,6 @@ class SignInPage extends StatelessWidget {
             height: 8.0,
 
           ),
-
-          SizedBox(
-            height: 8.0,
-          ),
        
         ],
       ),

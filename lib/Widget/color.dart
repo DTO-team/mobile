@@ -20,8 +20,8 @@ const gray = Color(0xFFAAB8C2);
 const lightGray = Color(0xFFE1E8ED);
 const extraLightGray = Color(0xFFF5F8FA);
 const white = Color(0xFFFFFFFF);
-const primary = Color(0xFF344955);
-const secondary = Color(0xFFF9AA33);
+const primary = Color(0xFF094542);
+const secondary = Color(0xFFEDE5CC);
 const kTeamColor = Color(0xFF4A6572);
 const kTextColor = Color(0xFF232F34);
 const Color black = Color(0xFF000000);
@@ -38,3 +38,13 @@ const Color inputSuccess = Color.fromRGBO(123, 222, 177, 1.0);
 const Color inputError = Color.fromRGBO(252, 179, 164, 1.0);
 const Color muted = Color.fromRGBO(136, 152, 170, 1.0);
 const Color text = Color.fromRGBO(50, 50, 93, 1.0);
+class AppColor {
+  static Color primary = Color(0xFF094542);
+  static Color primarySoft = Color(0xFF0B5551);
+  static Color primaryExtraSoft = Color(0xFFEEF4F4);
+  static Color secondary = Color(0xFFEDE5CC);
+  static Color whiteSoft = Color(0xFFF8F8F8);
+  static LinearGradient bottomShadow = LinearGradient(colors: [Color(0xFF107873).withOpacity(0.2), Color(0xFF107873).withOpacity(0)], begin: Alignment.bottomCenter, end: Alignment.topCenter);
+  static LinearGradient linearBlackBottom = LinearGradient(colors: [Colors.black.withOpacity(0.45), Colors.black.withOpacity(0)], begin: Alignment.bottomCenter, end: Alignment.topCenter);
+  static LinearGradient linearBlackTop = LinearGradient(colors: [Colors.black.withOpacity(0.5), Colors.transparent], begin: Alignment.topCenter, end: Alignment.bottomCenter);
+}

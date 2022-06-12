@@ -27,6 +27,7 @@ class AppUser extends ChangeNotifier {
   void signIn(AuthProvider authProvider) async {
     try {
       await Amplify.Auth.signInWithWebUI(provider: authProvider);
+
       isSignedIn = true;
       notifyListeners();
     } catch (e) {

@@ -1,83 +1,129 @@
-import 'package:capstone_management_dto/Widget/color.dart';
 import 'package:flutter/material.dart';
-class ProfilePage extends StatefulWidget {
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
+
+import '../../Buttons/Button_Type.dart';
+import '../../Buttons/Sign_in_button.dart';
+import '../../Provider/app_user.dart';
+import '../../Widget/UserInfoTile.dart';
+import '../../Widget/color.dart';
+
+class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
-
-  @override
-  State<ProfilePage> createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[900],
       appBar: AppBar(
-        title: Text('Profile'),
-        centerTitle: true,
-        backgroundColor: Colors.grey[850],
-        //shadow
+        brightness: Brightness.dark,
+        backgroundColor: primary,
         elevation: 0,
+        centerTitle: true,
+        title: Text('My Profile', style: TextStyle(fontFamily: 'inter', fontWeight: FontWeight.w400, fontSize: 16)),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {},
+            child: Text(
+              'Edit',
+              style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
+            ),
+            style: TextButton.styleFrom(primary: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100))),
+          ),
+        ],
       ),
-
-      body:
-      // item o trong ko dinh vao appbar hay trai duoi phai
-      Padding(
-        padding: EdgeInsets.fromLTRB(30, 40, 30, 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Center(
-              child: CircleAvatar(
-                backgroundImage: AssetImage('assets/chamb.png'),
-                radius: 60,
+      body: ListView(
+        shrinkWrap: true,
+        physics: BouncingScrollPhysics(),
+        children: [
+          // Section 1 - Profile Picture Wrapper
+          Container(
+            color: primary,
+            padding: EdgeInsets.symmetric(vertical: 24),
+            child: GestureDetector(
+              onTap: () {
+                print('Code to open file manager');
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 130,
+                    height: 130,
+                    margin: EdgeInsets.only(bottom: 15),
+                    decoration: BoxDecoration(
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.circular(100),
+                      // Profile Picture
+                      image: DecorationImage(image: AssetImage('assets/chamb.png'), fit: BoxFit.cover),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Change Profile Picture', style: TextStyle(fontFamily: 'inter', fontWeight: FontWeight.w600, color: Colors.white)),
+                      SizedBox(width: 8),
+                      SvgPicture.asset('assets/camera.svg', color: Colors.white),
+                    ],
+                  )
+                ],
               ),
             ),
-            Divider(
-              height: 90,
-              color: Colors.yellowAccent,
-              thickness: 1,
-            ),
-
-            // space giua cac item
-            SizedBox(height: 10),
-            Text('Name',
-                style: TextStyle(
-                    color: Colors.amberAccent,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold)),
-            SizedBox(height: 10),
-            Text(
-              'Chamber',
-              style: TextStyle(letterSpacing: 2, color: Colors.amber),
-            ),
-            SizedBox(height: 10),
-
-            SizedBox(height: 10),
-            Text(
-              'Super Lemonade',
-              style: TextStyle(letterSpacing: 2, color: Colors.amber),
-            ),
-            SizedBox(height: 10),
-
-            Row(
-              children: <Widget>[
-                Icon(
-                  Icons.email,
-                  color: Colors.green,
+          ),
+          // Section 2 - User Info Wrapper
+          Container(
+            margin: EdgeInsets.only(top: 24),
+            width: MediaQuery.of(context).size.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                UserInfoTile(
+                  margin: EdgeInsets.only(bottom: 16),
+                  label: 'Email',
+                  value: 'chauhclse150664@fpt.edu.vn', padding: EdgeInsets.all(0),valueBackground: Colors.white
+                ),
+                UserInfoTile(
+                  margin: EdgeInsets.only(bottom: 16),
+                  label: 'Full Name',
+                  value: 'Reina Zahra Azizah', padding:EdgeInsets.all(0),valueBackground: Colors.white
+                ),
+                UserInfoTile(
+                  margin: EdgeInsets.only(bottom: 16),
+                  label: 'Subscription Type',
+                  value: 'Premium Subscription',
+                  valueBackground: Colors.white, padding: EdgeInsets.all(0),
+                ),
+                UserInfoTile(
+                  margin: EdgeInsets.only(bottom: 16),
+                  label: 'Subscription Time',
+                  value: 'Until 22 Oct 2021', valueBackground: Colors.white, padding: EdgeInsets.all(0),
                 ),
                 SizedBox(
-                  width: 10,
+                  height: 15,
                 ),
-                Text(
-                  'My Email',
-                  style: TextStyle(color: Colors.amber, letterSpacing: 2),
-                )
+                SignInButton(
+                  button: ButtonType.Signout,
+                  onPressed: () =>
+                      context.read<AppUser>().signOut(),
+                  color: AppColor.secondary,
+                  text: 'Log out',
+                  textColor: Colors.black87,
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+
               ],
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

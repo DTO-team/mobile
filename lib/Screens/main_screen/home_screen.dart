@@ -117,40 +117,41 @@ class _HomePageState extends State<HomePage> {
      // key: _scaffoldKey,
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            expandedHeight: 120,
+          const SliverAppBar(
+            // expandedHeight: 120,
             centerTitle: true,
             floating: true,
             snap: true,
             pinned: true,
             elevation: 0,
             backgroundColor: primary,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset('assets/chamb.png',
-              width: double.maxFinite,
-              fit: BoxFit.cover),
-
-            ),
-            bottom: PreferredSize(
-              preferredSize: Size.fromHeight(50),
-              child: Container(
-                decoration: BoxDecoration(
-                  color: white,
-                  borderRadius: BorderRadius.only(topRight:Radius.circular(20),
-                  topLeft: Radius.circular(20)),
-                ),
-                  width: double.maxFinite,
-                  child: Center(child: Text("What's New ?",style: TextStyle(fontSize: 19),))),
-            ),
+            // flexibleSpace: FlexibleSpaceBar(
+            //   background: Image.asset('assets/chamb.png',
+            //   width: double.maxFinite,
+            //   fit: BoxFit.cover),
+            //
+            // ),
+            // bottom: PreferredSize(
+            //   preferredSize: Size.fromHeight(50),
+            //   child: Container(
+            //     decoration: BoxDecoration(
+            //       color: white,
+            //       borderRadius: BorderRadius.only(topRight:Radius.circular(20),
+            //       topLeft: Radius.circular(20)),
+            //     ),
+            //       width: double.maxFinite,
+            //       child: Center(child: Text("What's New ?",style: TextStyle(fontSize: 19),))),
+            // ),
 
 
           ),
+          
           SliverToBoxAdapter(
                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                      Padding(
-                       padding:  EdgeInsets.all(10),
+                       padding:  const EdgeInsets.all(10),
                        child: Container(
                          decoration: BoxDecoration(
                            color: info,
@@ -162,22 +163,22 @@ class _HomePageState extends State<HomePage> {
                                    .withOpacity(0.3),
                                spreadRadius: 1,
                                blurRadius: 7,
-                               offset: Offset(0,
+                               offset: const Offset(0,
                                    3), // changes position of shadow
                              ),
                            ],
                          ),
+                         padding: const EdgeInsets.symmetric(
+                             horizontal: 8.0,
+                             vertical: 8.0),
                          child: Text(
                            "User Total:${nfs.length} ",
-                           style: TextStyle(
+                           style: const TextStyle(
                                color: white,
                                fontSize: 12.0,
                                fontWeight:
                                FontWeight.bold),
                          ),
-                         padding: EdgeInsets.symmetric(
-                             horizontal: 8.0,
-                             vertical: 8.0),
                        ),
 
                      ),
@@ -194,22 +195,22 @@ class _HomePageState extends State<HomePage> {
                                   .withOpacity(0.3),
                               spreadRadius: 1,
                               blurRadius: 7,
-                              offset: Offset(0,
+                              offset: const Offset(0,
                                   3), // changes position of shadow
                             ),
                           ],
                         ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0,
+                            vertical: 8.0),
                         child: Text(
                           "User Total:${nfs.length} ",
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: white,
                               fontSize: 12.0,
                               fontWeight:
                               FontWeight.bold),
                         ),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 8.0,
-                            vertical: 8.0),
                       ),
 
                     ),
@@ -226,22 +227,22 @@ class _HomePageState extends State<HomePage> {
                                   .withOpacity(0.3),
                               spreadRadius: 1,
                               blurRadius: 7,
-                              offset: Offset(0,
+                              offset: const Offset(0,
                                   3), // changes position of shadow
                             ),
                           ],
                         ),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0,
+                            vertical: 8.0),
                         child: Text(
                           "User Total:${nfs.length} ",
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: white,
                               fontSize: 12.0,
                               fontWeight:
                               FontWeight.bold),
                         ),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 8.0,
-                            vertical: 8.0),
                       ),
 
                     ),
