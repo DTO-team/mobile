@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'color.dart';
+import '../color.dart';
 
 class UserInfoTile extends StatelessWidget {
   final String label, value;
@@ -26,7 +26,7 @@ class UserInfoTile extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             padding: EdgeInsets.all(16),
             color: valueBackground,
-            child: Text('$value', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, fontFamily: 'inter')),
+            child: Text('$value', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
           )
         ],
       ),

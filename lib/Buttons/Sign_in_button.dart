@@ -1,4 +1,4 @@
-import 'package:capstone_management_dto/Buttons/Button_Type.dart';
+import 'package:capstone_management_dto/Buttons/button_type.dart';
 import 'package:flutter/material.dart';
 
 import '../Widget/color.dart';
@@ -40,7 +40,7 @@ class SignInButton extends StatelessWidget {
 
   Row buildRow() {
     switch (button) {
-      case ButtonType.Google:
+      case ButtonType.google:
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -52,7 +52,7 @@ class SignInButton extends StatelessWidget {
             Opacity(opacity: 0.0, child: Image.asset('assets/google-logo.png')),
           ],
         );
-      case ButtonType.Signout:
+      case ButtonType.signout:
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -64,7 +64,7 @@ class SignInButton extends StatelessWidget {
               text,
               style: TextStyle(color: textColor, fontSize: 15),
             ),
-            Opacity(
+            const Opacity(
               opacity: 0.0,
               child: Icon(
                 Icons.logout,

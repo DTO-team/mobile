@@ -1,4 +1,3 @@
 enum ButtonType{
-  Google,
-  Signout
+  google, signout
 }

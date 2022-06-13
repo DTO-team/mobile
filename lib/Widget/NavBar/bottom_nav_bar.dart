@@ -2,10 +2,10 @@ import 'package:capstone_management_dto/Screens/main_screen/topic_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
-import '../Screens/main_screen/home_screen.dart';
-import '../Screens/main_screen/profile_screen.dart';
-import '../Screens/main_screen/project_screen.dart';
-import 'color.dart';
+import '../../Screens/main_screen/home_screen.dart';
+import '../../Screens/main_screen/profile_screen.dart';
+import '../../Screens/main_screen/project_screen.dart';
+import '../color.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
