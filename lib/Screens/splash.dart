@@ -1,8 +1,6 @@
 import 'package:capstone_management_dto/Landing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
-import '../Widget/bottom_nav_bar.dart';
 import 'SignIn_screen.dart';
 
 class Splash extends StatefulWidget {

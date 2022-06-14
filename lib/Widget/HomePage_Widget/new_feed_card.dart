@@ -1,8 +1,7 @@
 import 'package:capstone_management_dto/Widget/color.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../Provider/newfeed.dart';
+import '../../Provider/newfeed.dart';
 
 class NewFeedCard extends StatelessWidget {
   final NewFeed feed;
@@ -80,7 +79,7 @@ class NewFeedCard extends StatelessWidget {
                         ]),
                       ///Topic
                       SizedBox(height: 5,),
-                      Text('Topic: ${feed.topic}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17,color: kTextColor),),
+                     // Text('Topic: ${feed.topic}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17,color: kTextColor),),
                       SizedBox(height: 2,),
                       Text(feed.tweet),
                       SizedBox(height: 6,),

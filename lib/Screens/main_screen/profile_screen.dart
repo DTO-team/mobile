@@ -1,11 +1,10 @@
+import 'package:capstone_management_dto/Buttons/button_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-
-import '../../Buttons/Button_Type.dart';
-import '../../Buttons/Sign_in_button.dart';
+import '../../Buttons/sign_in_button.dart';
 import '../../Provider/app_user.dart';
-import '../../Widget/UserInfoTile.dart';
+import '../../Widget/ProfilePage_Widget/UserInfoTile.dart';
 import '../../Widget/color.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -19,32 +18,33 @@ class ProfilePage extends StatelessWidget {
         backgroundColor: primary,
         elevation: 0,
         centerTitle: true,
-        title: Text('My Profile', style: TextStyle(fontFamily: 'inter', fontWeight: FontWeight.w400, fontSize: 16)),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios, color: Colors.white),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
+        title: const Text('My Profile', style: TextStyle(fontFamily: 'inter', fontWeight: FontWeight.w400, fontSize: 16)),
+        ////return page 
+        // leading: IconButton(
+        //   icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+        //   onPressed: () {
+        //     Navigator.of(context).pop();
+        //   },
+        // ),
         actions: [
           TextButton(
             onPressed: () {},
-            child: Text(
+            style: TextButton.styleFrom(primary: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100))),
+            child:  const Text(
               'Edit',
               style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w600),
             ),
-            style: TextButton.styleFrom(primary: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100))),
           ),
         ],
       ),
       body: ListView(
         shrinkWrap: true,
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         children: [
           // Section 1 - Profile Picture Wrapper
           Container(
             color: primary,
-            padding: EdgeInsets.symmetric(vertical: 24),
+            padding: const EdgeInsets.symmetric(vertical: 24),
             child: GestureDetector(
               onTap: () {
                 print('Code to open file manager');
@@ -56,19 +56,19 @@ class ProfilePage extends StatelessWidget {
                   Container(
                     width: 130,
                     height: 130,
-                    margin: EdgeInsets.only(bottom: 15),
+                    margin: const EdgeInsets.only(bottom: 15),
                     decoration: BoxDecoration(
                       color: Colors.grey,
                       borderRadius: BorderRadius.circular(100),
                       // Profile Picture
-                      image: DecorationImage(image: AssetImage('assets/chamb.png'), fit: BoxFit.cover),
+                      image: const DecorationImage(image: AssetImage('assets/chamb.png'), fit: BoxFit.cover),
                     ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Change Profile Picture', style: TextStyle(fontFamily: 'inter', fontWeight: FontWeight.w600, color: Colors.white)),
-                      SizedBox(width: 8),
+                      const Text('Change Profile Picture', style: TextStyle(fontFamily: 'inter', fontWeight: FontWeight.w600, color: Colors.white)),
+                      const SizedBox(width: 8),
                       SvgPicture.asset('assets/camera.svg', color: Colors.white),
                     ],
                   )
@@ -78,45 +78,45 @@ class ProfilePage extends StatelessWidget {
           ),
           // Section 2 - User Info Wrapper
           Container(
-            margin: EdgeInsets.only(top: 24),
+            margin: const EdgeInsets.only(top: 24),
             width: MediaQuery.of(context).size.width,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 UserInfoTile(
-                  margin: EdgeInsets.only(bottom: 16),
+                  margin: const EdgeInsets.only(bottom: 16),
                   label: 'Email',
-                  value: 'chauhclse150664@fpt.edu.vn', padding: EdgeInsets.all(0),valueBackground: Colors.white
+                  value: 'chauhclse150664@fpt.edu.vn', padding: const EdgeInsets.all(0),valueBackground: AppColor.primaryExtraSoft
                 ),
                 UserInfoTile(
-                  margin: EdgeInsets.only(bottom: 16),
+                  margin: const EdgeInsets.only(bottom: 16),
                   label: 'Full Name',
-                  value: 'Reina Zahra Azizah', padding:EdgeInsets.all(0),valueBackground: Colors.white
+                  value: 'Hoang Cac Loan Chau', padding:const EdgeInsets.all(0),valueBackground: AppColor.primaryExtraSoft
                 ),
                 UserInfoTile(
-                  margin: EdgeInsets.only(bottom: 16),
-                  label: 'Subscription Type',
-                  value: 'Premium Subscription',
-                  valueBackground: Colors.white, padding: EdgeInsets.all(0),
+                  margin: const EdgeInsets.only(bottom: 16),
+                  label: 'Deparment Code',
+                  value: 'SE150664',
+                  valueBackground: AppColor.primaryExtraSoft, padding: const EdgeInsets.all(0),
                 ),
                 UserInfoTile(
-                  margin: EdgeInsets.only(bottom: 16),
-                  label: 'Subscription Time',
-                  value: 'Until 22 Oct 2021', valueBackground: Colors.white, padding: EdgeInsets.all(0),
+                  margin: const EdgeInsets.only(bottom: 16),
+                  label: 'DoB',
+                  value: '07 04 2001', valueBackground: AppColor.primaryExtraSoft, padding: const EdgeInsets.all(0),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 SignInButton(
-                  button: ButtonType.Signout,
+                  button: ButtonType.signout,
                   onPressed: () =>
                       context.read<AppUser>().signOut(),
                   color: AppColor.secondary,
                   text: 'Log out',
                   textColor: Colors.black87,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
 

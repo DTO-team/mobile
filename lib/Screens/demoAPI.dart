@@ -1,4 +1,4 @@
-import 'package:capstone_management_dto/Modals/Lecture.dart';
+import 'package:capstone_management_dto/Modals/lecture.dart';
 import 'package:capstone_management_dto/Modals/User.dart';
 import 'package:capstone_management_dto/Services/remote_service.dart';
 import 'package:flutter/material.dart';

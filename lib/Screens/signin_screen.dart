@@ -1,9 +1,9 @@
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
-import 'package:capstone_management_dto/Buttons/Button_Type.dart';
-import 'package:capstone_management_dto/Buttons/Sign_in_button.dart';
+import 'package:capstone_management_dto/Buttons/button_type.dart';
+import 'package:capstone_management_dto/Buttons/sign_in_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import '../Buttons/button_type.dart';
 import '../Provider/app_user.dart';
 class SignInPage extends StatelessWidget {
 
@@ -38,7 +38,7 @@ class SignInPage extends StatelessWidget {
             height: 48.0,
           ),
           SignInButton(
-            button: ButtonType.Google,
+            button: ButtonType.google,
             onPressed: () =>
                 context.read<AppUser>().signIn(AuthProvider.google),
             color: Colors.white,

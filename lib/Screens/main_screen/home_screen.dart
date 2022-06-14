@@ -1,7 +1,5 @@
-import 'package:capstone_management_dto/Widget/new_feed_card.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:capstone_management_dto/Widget/HomePage_Widget/new_feed_card.dart';
 import 'package:flutter/material.dart';
-
 import '../../Provider/newfeed.dart';
 import '../../Widget/color.dart';
 
@@ -117,14 +115,17 @@ class _HomePageState extends State<HomePage> {
      // key: _scaffoldKey,
       body: CustomScrollView(
         slivers: [
-          const SliverAppBar(
+           const SliverAppBar(
             // expandedHeight: 120,
             centerTitle: true,
             floating: true,
-            snap: true,
-            pinned: true,
             elevation: 0,
             backgroundColor: primary,
+            flexibleSpace: FlexibleSpaceBar(
+              title: Text('What\'s News'),
+              centerTitle: true,
+
+            ),
             // flexibleSpace: FlexibleSpaceBar(
             //   background: Image.asset('assets/chamb.png',
             //   width: double.maxFinite,
@@ -145,109 +146,84 @@ class _HomePageState extends State<HomePage> {
 
 
           ),
-          
+
           SliverToBoxAdapter(
-               child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                     Padding(
-                       padding:  const EdgeInsets.all(10),
-                       child: Container(
-                         decoration: BoxDecoration(
-                           color: info,
-                           borderRadius:
-                             BorderRadius.circular(3.0),
-                           boxShadow: [
-                             BoxShadow(
-                               color: Colors.grey
-                                   .withOpacity(0.3),
-                               spreadRadius: 1,
-                               blurRadius: 7,
-                               offset: const Offset(0,
-                                   3), // changes position of shadow
+               child: Container(
+                 color: AppColor.primary,
+                 child: Padding(
+                   padding: const EdgeInsets.all(10.0),
+                   child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                         Expanded(
+                           child: Container(
+                             decoration: BoxDecoration(
+                               color: AppColor.secondary,
+                               borderRadius:
+                                 BorderRadius.circular(3.0),
+                               boxShadow: [
+                                 BoxShadow(
+                                   color: Colors.grey
+                                       .withOpacity(0.3),
+                                   spreadRadius: 1,
+                                   blurRadius: 7,
+                                   offset: const Offset(0,
+                                       3), // changes position of shadow
+                                 ),
+                               ],
                              ),
-                           ],
+                             padding: const EdgeInsets.symmetric(
+                                 horizontal: 8.0,
+                                 vertical: 8.0),
+                             child: Center(
+                               child: Text(
+                                 "User Total:${nfs.length} ",
+                                 style:  TextStyle(
+                                     color: AppColor.primarySoft,
+                                     fontSize: 12.0,
+                                     fontWeight:
+                                     FontWeight.bold),
+                               ),
+                             ),
+                           ),
                          ),
-                         padding: const EdgeInsets.symmetric(
-                             horizontal: 8.0,
-                             vertical: 8.0),
-                         child: Text(
-                           "User Total:${nfs.length} ",
-                           style: const TextStyle(
-                               color: white,
-                               fontSize: 12.0,
-                               fontWeight:
-                               FontWeight.bold),
-                         ),
-                       ),
-
-                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: info,
-                          borderRadius:
-                          BorderRadius.circular(3.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey
-                                  .withOpacity(0.3),
-                              spreadRadius: 1,
-                              blurRadius: 7,
-                              offset: const Offset(0,
-                                  3), // changes position of shadow
+                        SizedBox(width: 5,),
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: AppColor.secondary,
+                              borderRadius:
+                              BorderRadius.circular(3.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey
+                                      .withOpacity(0.3),
+                                  spreadRadius: 1,
+                                  blurRadius: 7,
+                                  offset: const Offset(0,
+                                      3), // changes position of shadow
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0,
-                            vertical: 8.0),
-                        child: Text(
-                          "User Total:${nfs.length} ",
-                          style: const TextStyle(
-                              color: white,
-                              fontSize: 12.0,
-                              fontWeight:
-                              FontWeight.bold),
-                        ),
-                      ),
-
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: info,
-                          borderRadius:
-                          BorderRadius.circular(3.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey
-                                  .withOpacity(0.3),
-                              spreadRadius: 1,
-                              blurRadius: 7,
-                              offset: const Offset(0,
-                                  3), // changes position of shadow
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0,
+                                vertical: 8.0),
+                            child: Center(
+                              child: Text(
+                                "User Total:${nfs.length} ",
+                                style:  TextStyle(
+                                    color: AppColor.primarySoft,
+                                    fontSize: 12.0,
+                                    fontWeight:
+                                    FontWeight.bold),
+                              ),
                             ),
-                          ],
+                          ),
                         ),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0,
-                            vertical: 8.0),
-                        child: Text(
-                          "User Total:${nfs.length} ",
-                          style: const TextStyle(
-                              color: white,
-                              fontSize: 12.0,
-                              fontWeight:
-                              FontWeight.bold),
-                        ),
-                      ),
-
+                      ],
                     ),
-                  ],
-                ),
+                 ),
+               ),
 
             ),
 

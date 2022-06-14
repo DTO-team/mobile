@@ -79,6 +79,7 @@ flutter:
     - assets/Search.svg
     - assets/list.svg
     - assets/camera.svg
+    - assets/filter.svg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

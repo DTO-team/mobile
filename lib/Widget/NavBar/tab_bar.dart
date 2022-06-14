@@ -1,7 +1,7 @@
 import 'package:capstone_management_dto/Screens/main_screen/project_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../Screens/main_screen/topic_screen.dart';
+import '../../Screens/main_screen/topic_screen.dart';
 class TabBarTopic extends StatefulWidget {
   const TabBarTopic({Key? key}) : super(key: key);
 
@@ -17,7 +17,7 @@ class _TabBarTopicState extends State<TabBarTopic> {
       child: Scaffold(
         appBar: AppBar(
             flexibleSpace:
-                Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+                Column(mainAxisAlignment: MainAxisAlignment.end, children: const [
           TabBar(
             tabs: [
               Tab(
@@ -31,7 +31,7 @@ class _TabBarTopicState extends State<TabBarTopic> {
         ])
         ),
         body: TabBarView(
-          children: [TopicPage(), ProjectPage()],
+          children: const [TopicPage(), ProjectPage()],
         ),
       ),
     );

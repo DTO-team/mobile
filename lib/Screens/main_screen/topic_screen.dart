@@ -1,10 +1,11 @@
+import 'package:capstone_management_dto/Widget/HomePage_Widget/new_feed_card.dart';
+import 'package:capstone_management_dto/Widget/TopicPage_Widget/topic_card.dart';
+import 'package:capstone_management_dto/Widget/search_bar.dart';
 import 'package:capstone_management_dto/Widget/color.dart';
-import 'package:capstone_management_dto/Widget/topic_card.dart';
 import 'package:flutter/material.dart';
 
-import '../../Modals/User.dart';
 import '../../Provider/newfeed.dart';
-import '../../Services/remote_service.dart';
+import '../../Widget/search_bar.dart';
 
 class TopicPage extends StatefulWidget {
   const TopicPage({Key? key}) : super(key: key);
@@ -106,6 +107,7 @@ class _TopicPageState extends State<TopicPage> {
         tweetedAt: 'Oct 4',
         topic: 'Project OnGoing'),
   ];
+
   // late List<User>? users;
   // var isLoaded = false;
   // @override
@@ -125,22 +127,44 @@ class _TopicPageState extends State<TopicPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(slivers: [
-        SliverAppBar(
-          backgroundColor: primary,
-        ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            childCount: nfs.length,
-                (BuildContext context, int index) {
-              return TopicCard(feed: nfs[index] ,);
-            },
-
+      appBar: AppBar(
+        backgroundColor: AppColor.primary,
+        title: Text('Topic'),
+        centerTitle: true,
+      ),
+      body: ListView(
+        physics: BouncingScrollPhysics(),
+        children: [Container(
+          margin: EdgeInsets.only(top: 2),
+          color: Colors.white,
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  SearchBar(
+                    routeTo: (){},
+                  )
+                ],
+              )
+            ],
           ),
 
-        )
-      ],
+        ),
+          ListView.separated(
+            shrinkWrap: true,
+            itemCount: nfs.length,
+            physics: NeverScrollableScrollPhysics()
+            ,
+            separatorBuilder: (context, index) {
+              return SizedBox(height: 1);
+            },
+            itemBuilder: (context, int index) {
+              return TopicCard(feed: nfs[index]);
+            },)
+        ],
+
       ),
+
     );
   }
 }
