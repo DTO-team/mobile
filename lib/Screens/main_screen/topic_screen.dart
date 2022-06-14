@@ -1,7 +1,7 @@
 import 'package:capstone_management_dto/Widget/HomePage_Widget/new_feed_card.dart';
 import 'package:capstone_management_dto/Widget/TopicPage_Widget/topic_card.dart';
-import 'package:capstone_management_dto/Widget/search_bar.dart';
 import 'package:capstone_management_dto/Widget/color.dart';
+import 'package:capstone_management_dto/Widget/search_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../../Provider/newfeed.dart';
@@ -22,7 +22,7 @@ class _TopicPageState extends State<TopicPage> {
         team: 'DTOOOOOOOOOOOOOOO',
         userProfilePic: 'assets/chamb.png',
         tweet:
-        'Do not worry, with me this will be easy. C\'est simple comme bonjour',
+            'Do not worry, with me this will be easy. C\'est simple comme bonjour',
         tweetedAt: 'Oct 2',
         topic: 'Project OnGoinggggg'),
     NewFeed(
@@ -31,7 +31,7 @@ class _TopicPageState extends State<TopicPage> {
         team: 'Lute100',
         userProfilePic: 'assets/chamb.png',
         tweet:
-        'This killing is terrible business but I always say if I must do something, be the best',
+            'This killing is terrible business but I always say if I must do something, be the best',
         tweetedAt: 'Oct 4',
         topic: 'Project OnGoing'),
     NewFeed(
@@ -40,7 +40,7 @@ class _TopicPageState extends State<TopicPage> {
         team: 'Lute100',
         userProfilePic: 'assets/chamb.png',
         tweet:
-        'Our guests have arrived. Let\'s make a good first impression, shall we?',
+            'Our guests have arrived. Let\'s make a good first impression, shall we?',
         tweetedAt: 'Oct 4',
         topic: 'Project OnGoing'),
     NewFeed(
@@ -49,7 +49,7 @@ class _TopicPageState extends State<TopicPage> {
         team: 'Lute100',
         userProfilePic: 'assets/chamb.png',
         tweet:
-        'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
+            'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
         tweetedAt: 'Oct 4',
         topic: 'Project OnGoing'),
     NewFeed(
@@ -58,7 +58,7 @@ class _TopicPageState extends State<TopicPage> {
         team: 'Lute100',
         userProfilePic: 'assets/chamb.png',
         tweet:
-        'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
+            'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
         tweetedAt: 'Oct 4',
         topic: 'Project OnGoing'),
     NewFeed(
@@ -67,7 +67,7 @@ class _TopicPageState extends State<TopicPage> {
         team: 'Lute100',
         userProfilePic: 'assets/chamb.png',
         tweet:
-        'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
+            'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
         tweetedAt: 'Oct 4',
         topic: 'Project OnGoing'),
     NewFeed(
@@ -76,7 +76,7 @@ class _TopicPageState extends State<TopicPage> {
         team: 'Lute100',
         userProfilePic: 'assets/chamb.png',
         tweet:
-        'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
+            'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
         tweetedAt: 'Oct 4',
         topic: 'Project OnGoing'),
     NewFeed(
@@ -85,7 +85,7 @@ class _TopicPageState extends State<TopicPage> {
         team: 'Lute100',
         userProfilePic: 'assets/chamb.png',
         tweet:
-        'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
+            'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
         tweetedAt: 'Oct 4',
         topic: 'Project OnGoing'),
     NewFeed(
@@ -94,7 +94,7 @@ class _TopicPageState extends State<TopicPage> {
         team: 'Lute100',
         userProfilePic: 'assets/chamb.png',
         tweet:
-        'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
+            'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
         tweetedAt: 'Oct 4',
         topic: 'Project OnGoing'),
     NewFeed(
@@ -103,7 +103,7 @@ class _TopicPageState extends State<TopicPage> {
         team: 'Lute100',
         userProfilePic: 'assets/chamb.png',
         tweet:
-        'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
+            'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
         tweetedAt: 'Oct 4',
         topic: 'Project OnGoing'),
   ];
@@ -129,42 +129,74 @@ class _TopicPageState extends State<TopicPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColor.primary,
+        elevation: 0,
         title: Text('Topic'),
         centerTitle: true,
       ),
       body: ListView(
+        shrinkWrap: true,
         physics: BouncingScrollPhysics(),
-        children: [Container(
-          margin: EdgeInsets.only(top: 2),
-          color: Colors.white,
-          child: Stack(
+        children: [
+          // Section 1 - Featured Recipe - Wrapper
+          Stack(
             children: [
+              Container(
+                height: MediaQuery.of(context).size.height /12,
+                color: AppColor.primary,
+              ),
+              // Section 1 - Content
               Column(
                 children: [
+                  // Search Bar
                   SearchBar(
-                    routeTo: (){},
-                  )
+                    routeTo: () {
+                    },
+                  ),
                 ],
               )
             ],
           ),
-
-        ),
-          ListView.separated(
-            shrinkWrap: true,
-            itemCount: nfs.length,
-            physics: NeverScrollableScrollPhysics()
-            ,
-            separatorBuilder: (context, index) {
-              return SizedBox(height: 1);
-            },
-            itemBuilder: (context, int index) {
-              return TopicCard(feed: nfs[index]);
-            },)
+          Container(
+            margin: EdgeInsets.only(top: 14),
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Header
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Newly Posted',
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, fontFamily: 'inter'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                      },
+                      child: Text('see all'),
+                      style: TextButton.styleFrom(primary: Colors.black, textStyle: TextStyle(fontWeight: FontWeight.w400, fontSize: 14)),
+                    ),
+                  ],
+                ),
+                // Content
+                ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: nfs.length,
+                  physics: NeverScrollableScrollPhysics(),
+                  separatorBuilder: (context, index) {
+                    return SizedBox(height: 16);
+                  },
+                  itemBuilder: (context, index) {
+                    return TopicCard(
+                      feed: nfs[index],
+                    );
+                  },
+                ),
+              ],
+            ),
+          )
         ],
-
       ),
-
     );
   }
 }
