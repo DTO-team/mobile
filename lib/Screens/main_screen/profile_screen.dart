@@ -87,23 +87,23 @@ class ProfilePage extends StatelessWidget {
                 UserInfoTile(
                   margin: const EdgeInsets.only(bottom: 16),
                   label: 'Email',
-                  value: 'chauhclse150664@fpt.edu.vn', padding: const EdgeInsets.all(0),valueBackground: Colors.white
+                  value: 'chauhclse150664@fpt.edu.vn', padding: const EdgeInsets.all(0),valueBackground: AppColor.primaryExtraSoft
                 ),
                 UserInfoTile(
                   margin: const EdgeInsets.only(bottom: 16),
                   label: 'Full Name',
-                  value: 'Hoang Cac Loan Chau', padding:const EdgeInsets.all(0),valueBackground: Colors.white
+                  value: 'Hoang Cac Loan Chau', padding:const EdgeInsets.all(0),valueBackground: AppColor.primaryExtraSoft
                 ),
                 UserInfoTile(
                   margin: const EdgeInsets.only(bottom: 16),
                   label: 'Deparment Code',
                   value: 'SE150664',
-                  valueBackground: Colors.white, padding: const EdgeInsets.all(0),
+                  valueBackground: AppColor.primaryExtraSoft, padding: const EdgeInsets.all(0),
                 ),
                 UserInfoTile(
                   margin: const EdgeInsets.only(bottom: 16),
                   label: 'DoB',
-                  value: '07 04 2001', valueBackground: Colors.white, padding: const EdgeInsets.all(0),
+                  value: '07 04 2001', valueBackground: AppColor.primaryExtraSoft, padding: const EdgeInsets.all(0),
                 ),
                 const SizedBox(
                   height: 15,

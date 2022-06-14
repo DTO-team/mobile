@@ -16,14 +16,14 @@ class TopicCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
         child: Container(
-          height: 90,
-          padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: AppColor.secondary,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+
               // Recipe Info
               Expanded(
                 child: Container(
