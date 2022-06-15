@@ -1,13 +1,12 @@
 import 'package:capstone_management/button/button_type.dart';
+import 'package:capstone_management/button/sign_in_button.dart';
+import 'package:capstone_management/provider/app_user.dart';
+import 'package:capstone_management/widget/color.dart';
+import 'package:capstone_management/widget/profile_page/user_info_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-
-import '../../button/sign_in_button.dart';
-import '../../provider/app_user.dart';
-import '../../widget/color.dart';
-import '../../widget/profile_page/user_info_tile.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);

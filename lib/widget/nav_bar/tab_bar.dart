@@ -1,7 +1,6 @@
 import 'package:capstone_management/screen/main/project_page.dart';
+import 'package:capstone_management/screen/main/topic_page.dart';
 import 'package:flutter/material.dart';
-
-import '../../screen/main/topic_page.dart';
 
 class TabBarTopic extends StatefulWidget {
   const TabBarTopic({Key? key}) : super(key: key);

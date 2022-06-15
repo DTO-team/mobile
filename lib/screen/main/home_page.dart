@@ -1,8 +1,7 @@
+import 'package:capstone_management/provider/new_feed.dart';
+import 'package:capstone_management/widget/color.dart';
 import 'package:capstone_management/widget/home_page/new_feed_card.dart';
 import 'package:flutter/material.dart';
-
-import '../../provider/new_feed.dart';
-import '../../widget/color.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

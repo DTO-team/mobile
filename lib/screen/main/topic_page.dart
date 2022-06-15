@@ -1,10 +1,8 @@
+import 'package:capstone_management/provider/new_feed.dart';
 import 'package:capstone_management/widget/color.dart';
 import 'package:capstone_management/widget/search_bar.dart';
 import 'package:capstone_management/widget/topic_page/topic_card.dart';
 import 'package:flutter/material.dart';
-
-import '../../provider/new_feed.dart';
-import '../../widget/search_bar.dart';
 
 class TopicPage extends StatefulWidget {
   const TopicPage({Key? key}) : super(key: key);

@@ -54,7 +54,7 @@ class _DemoAPIState extends State<DemoAPI> {
         replacement: const Center(
           child: CircularProgressIndicator(),
         ),
-        child:  ListView.builder(
+        child: ListView.builder(
             itemCount: users?.length,
             itemBuilder: (context, index) {
               return Text(users![index].fullName);

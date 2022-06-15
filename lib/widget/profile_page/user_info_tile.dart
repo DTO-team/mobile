@@ -1,6 +1,5 @@
+import 'package:capstone_management/widget/color.dart';
 import 'package:flutter/material.dart';
-
-import '../color.dart';
 
 class UserInfoTile extends StatelessWidget {
   final String label, value;
@@ -27,16 +26,17 @@ class UserInfoTile extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(left: 20),
-            child:
-                Text(label, style: const  TextStyle(color: primary, fontSize: 12)),
+            child: Text(label,
+                style: const TextStyle(color: primary, fontSize: 12)),
           ),
           Container(
-            margin: const  EdgeInsets.only(top: 6),
+            margin: const EdgeInsets.only(top: 6),
             width: MediaQuery.of(context).size.width,
-            padding: const  EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             color: valueBackground,
             child: Text(value,
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
           )
         ],
       ),

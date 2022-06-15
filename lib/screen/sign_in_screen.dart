@@ -1,13 +1,13 @@
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:capstone_management/button/button_type.dart';
 import 'package:capstone_management/button/sign_in_button.dart';
+import 'package:capstone_management/provider/app_user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../button/button_type.dart';
-import '../provider/app_user.dart';
-
 class SignInPage extends StatelessWidget {
+  const SignInPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
