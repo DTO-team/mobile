@@ -132,7 +132,6 @@ class _TopicPageState extends State<TopicPage> {
       ),
       body: ListView(
         shrinkWrap: true,
-        physics: const BouncingScrollPhysics(),
         children: [
           // Section 1 - Featured Recipe - Wrapper
           Stack(

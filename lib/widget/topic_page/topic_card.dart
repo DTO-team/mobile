@@ -11,64 +11,70 @@ class TopicCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+      },
       child: Container(
-        height: 90,
-        padding: const EdgeInsets.all(10),
+        height: MediaQuery.of(context).size.height/4,
+        padding: EdgeInsets.fromLTRB(0, 5,5, 0),
         decoration: BoxDecoration(
-          color: AppColor.whiteSoft,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Row(
-          children: [
-            // Recipe Info
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.only(left: 10),
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Recipe title
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 12),
-                      child: Text(
-                        feed.topic,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w600, fontFamily: 'inter'),
-                      ),
-                    ),
-                    // Recipe Calories and Time
-                    Row(
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(left: 5),
-                          child: Text(
-                            feed.team,
-                            style: const TextStyle(fontSize: 12),
-                          ),
-                        ),
-                        const SizedBox(width: 10),
-                        const Icon(
-                          Icons.alarm,
-                          size: 14,
-                          color: Colors.black,
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(left: 5),
-                          child: Text(
-                            feed.tweetedAt,
-                            style: const TextStyle(fontSize: 12),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 7,
+                offset: Offset(0, 3), // changes position of shadow
               ),
-            ),
-          ],
+            ],
+            color: AppColor.secondary,
+            borderRadius: BorderRadius.circular(5)
+        ),
+        child: Container(
+          margin: EdgeInsets.all(10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Recipe title
+              Text(
+                'Name',
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
+              ),
+              Padding(padding: EdgeInsets.only(top: 10)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(left: 5),
+                    child: Text(
+                      feed.team,
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 5),
+                    child: Text(
+                      feed.tweetedAt,
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  ),
+
+                ],
+              ),
+              Divider(thickness: 1, color: AppColor.primary,height: 60,),
+              Container(
+                padding: EdgeInsets.fromLTRB(2, 0, 2, 2),
+                child: Center(
+                  child: Text('Description : this is a long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long ',
+                    maxLines: 3,overflow: TextOverflow.ellipsis, textAlign: TextAlign.left,
+                  ),
+                ),
+              )
+
+            ],
+          ),
         ),
       ),
     );
