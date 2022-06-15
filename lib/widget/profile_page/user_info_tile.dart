@@ -7,12 +7,14 @@ class UserInfoTile extends StatelessWidget {
   final EdgeInsetsGeometry margin, padding;
   final Color valueBackground;
 
-  UserInfoTile(
+  const UserInfoTile(
       {required this.label,
       required this.value,
       required this.padding,
       required this.margin,
-      required this.valueBackground});
+      required this.valueBackground,
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,17 +26,17 @@ class UserInfoTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.only(left: 20),
+            padding: const EdgeInsets.only(left: 20),
             child:
-                Text('$label', style: TextStyle(color: primary, fontSize: 12)),
+                Text(label, style: const  TextStyle(color: primary, fontSize: 12)),
           ),
           Container(
-            margin: EdgeInsets.only(top: 6),
+            margin: const  EdgeInsets.only(top: 6),
             width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.all(16),
+            padding: const  EdgeInsets.all(16),
             color: valueBackground,
-            child: Text('$value',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+            child: Text(value,
+                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
           )
         ],
       ),

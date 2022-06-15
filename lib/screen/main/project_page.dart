@@ -45,9 +45,9 @@ class _ProjectPageState extends State<ProjectPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Demo API'),
+        title: const Text('Demo API'),
       ),
-      body: Text('Project'),
+      body: const Text('Project'),
       // Visibility(
       //   visible: isLoaded,
       //   replacement: const Center(

@@ -23,7 +23,8 @@ class SignInPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          SizedBox(
+          const SizedBox(
+            height: 50.0,
             child: Text(
               'Sign In',
               textAlign: TextAlign.center,
@@ -32,9 +33,8 @@ class SignInPage extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            height: 50.0,
           ),
-          SizedBox(
+          const SizedBox(
             height: 48.0,
           ),
           SignInButton(
@@ -45,7 +45,7 @@ class SignInPage extends StatelessWidget {
             text: 'Sign in with Google',
             textColor: Colors.black87,
           ),
-          SizedBox(
+          const SizedBox(
             height: 8.0,
           ),
         ],

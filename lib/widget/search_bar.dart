@@ -13,8 +13,8 @@ class SearchBar extends StatelessWidget {
     return GestureDetector(
       onTap: routeTo,
       child: Container(
-        margin: EdgeInsets.only(top: 8),
-        padding: EdgeInsets.symmetric(horizontal: 10.5),
+        margin: const EdgeInsets.only(top: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 10.5),
         height: 50,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -23,17 +23,17 @@ class SearchBar extends StatelessWidget {
             Expanded(
               child: Container(
                 height: 50,
-                margin: EdgeInsets.only(right: 15),
-                padding: EdgeInsets.symmetric(horizontal: 10),
+                margin: const EdgeInsets.only(right: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: AppColor.primarySoft),
                 child: Row(
                   children: [
-                    ImageIcon(Svg('assets/Search.svg'),
+                    ImageIcon(const Svg('assets/Search.svg'),
                         color: AppColor.secondary, size: 18),
                     Container(
-                      margin: EdgeInsets.only(left: 10),
+                      margin: const EdgeInsets.only(left: 10),
                       child: Text(
                         'Enter Topic?',
                         style: TextStyle(
@@ -53,7 +53,7 @@ class SearchBar extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 color: AppColor.secondary,
               ),
-              child: ImageIcon(Svg('assets/filter.svg')),
+              child: const ImageIcon(Svg('assets/filter.svg')),
             )
           ],
         ),

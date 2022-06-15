@@ -15,7 +15,7 @@ class AppUser extends ChangeNotifier {
     Amplify.addPlugins([authPlugin]);
 
     try {
-      await Amplify.configure(amplifyConfig);
+      await Amplify.configure(amplifyconfig);
     } catch (e) {
       print('Error ' + e.toString());
     } finally {

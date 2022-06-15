@@ -129,12 +129,12 @@ class _TopicPageState extends State<TopicPage> {
       appBar: AppBar(
         backgroundColor: AppColor.primary,
         elevation: 0,
-        title: Text('Topic'),
+        title: const Text('Topic'),
         centerTitle: true,
       ),
       body: ListView(
         shrinkWrap: true,
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         children: [
           // Section 1 - Featured Recipe - Wrapper
           Stack(
@@ -155,8 +155,8 @@ class _TopicPageState extends State<TopicPage> {
             ],
           ),
           Container(
-            margin: EdgeInsets.only(top: 14),
-            padding: EdgeInsets.symmetric(horizontal: 16),
+            margin: const EdgeInsets.only(top: 14),
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -164,7 +164,7 @@ class _TopicPageState extends State<TopicPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       'Newly Posted',
                       style: TextStyle(
                           fontSize: 16,
@@ -173,11 +173,11 @@ class _TopicPageState extends State<TopicPage> {
                     ),
                     TextButton(
                       onPressed: () {},
-                      child: Text('see all'),
                       style: TextButton.styleFrom(
                           primary: Colors.black,
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                               fontWeight: FontWeight.w400, fontSize: 14)),
+                      child: const Text('see all'),
                     ),
                   ],
                 ),
@@ -185,9 +185,9 @@ class _TopicPageState extends State<TopicPage> {
                 ListView.separated(
                   shrinkWrap: true,
                   itemCount: nfs.length,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   separatorBuilder: (context, index) {
-                    return SizedBox(height: 16);
+                    return const SizedBox(height: 16);
                   },
                   itemBuilder: (context, index) {
                     return TopicCard(

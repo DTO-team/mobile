@@ -38,17 +38,17 @@ const Color inputSuccess = Color.fromRGBO(123, 222, 177, 1.0);
 const Color inputError = Color.fromRGBO(252, 179, 164, 1.0);
 const Color muted = Color.fromRGBO(136, 152, 170, 1.0);
 const Color text = Color.fromRGBO(50, 50, 93, 1.0);
-const Color softprime = Color(0xFF107873);
+const Color softPrime = Color(0xFF107873);
 
 class AppColor {
-  static Color primary = Color(0xFF094542);
-  static Color primarySoft = Color(0xFF0B5551);
-  static Color primaryExtraSoft = Color(0xFFEEF4F4);
-  static Color secondary = Color(0xFFEDE5CC);
-  static Color whiteSoft = Color(0xFFF8F8F8);
+  static Color primary = const Color(0xFF094542);
+  static Color primarySoft = const Color(0xFF0B5551);
+  static Color primaryExtraSoft = const Color(0xFFEEF4F4);
+  static Color secondary = const Color(0xFFEDE5CC);
+  static Color whiteSoft = const Color(0xFFF8F8F8);
   static LinearGradient bottomShadow = LinearGradient(colors: [
-    Color(0xFF107873).withOpacity(0.2),
-    Color(0xFF107873).withOpacity(0)
+    const Color(0xFF107873).withOpacity(0.2),
+    const Color(0xFF107873).withOpacity(0)
   ], begin: Alignment.bottomCenter, end: Alignment.topCenter);
   static LinearGradient linearBlackBottom = LinearGradient(
       colors: [Colors.black.withOpacity(0.45), Colors.black.withOpacity(0)],

@@ -47,20 +47,18 @@ class _DemoAPIState extends State<DemoAPI> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Demo API'),
+        title: const Text('Demo API'),
       ),
       body: Visibility(
         visible: isLoaded,
-        child: ListView.builder(
-            itemCount: users?.length,
-            itemBuilder: (context, index) {
-              return Container(
-                child: Text(users![index].fullName),
-              );
-            }),
-        replacement: Center(
+        replacement: const Center(
           child: CircularProgressIndicator(),
         ),
+        child:  ListView.builder(
+            itemCount: users?.length,
+            itemBuilder: (context, index) {
+              return Text(users![index].fullName);
+            }),
       ),
     );
   }

@@ -18,7 +18,7 @@ class NewFeedCard extends StatelessWidget {
       children: [
         ///profile picture
         Container(
-          margin: EdgeInsets.fromLTRB(10, 10, 10, 0),
+          margin: const EdgeInsets.fromLTRB(10, 10, 10, 0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +36,7 @@ class NewFeedCard extends StatelessWidget {
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.only(left: 10),
+                  padding: const EdgeInsets.only(left: 10),
                   child: (Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,56 +45,58 @@ class NewFeedCard extends StatelessWidget {
                         ///
                         Text(
                           feed.userFirstName,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: kTextColor,
                               fontWeight: FontWeight.w500,
                               fontSize: 17),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
 
                         ///
                         Container(
                           height: 3,
                           width: 3,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               color: gray, shape: BoxShape.circle),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Flexible(
                           child: Text(
                             feed.team.length > 10
-                                ? feed.team.substring(0, 10) + '...'
+                                ? '${feed.team.substring(0, 10)}...'
                                 : feed.team,
-                            style: TextStyle(color: kTeamColor, fontSize: 15),
+                            style: const TextStyle(
+                                color: kTeamColor, fontSize: 15),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
 
                         ///
                         Container(
                           height: 3,
                           width: 3,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               color: gray, shape: BoxShape.circle),
                         ),
-                        SizedBox(width: 5),
+                        const SizedBox(width: 5),
                         Text(
                           feed.tweetedAt,
-                          style: TextStyle(color: kTeamColor, fontSize: 15),
+                          style:
+                              const TextStyle(color: kTeamColor, fontSize: 15),
                         ),
                       ]),
 
                       ///Topic
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       // Text('Topic: ${feed.topic}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17,color: kTextColor),),
-                      SizedBox(
+                      const SizedBox(
                         height: 2,
                       ),
                       Text(feed.tweet),
-                      SizedBox(
+                      const SizedBox(
                         height: 6,
                       ),
 
@@ -106,7 +108,7 @@ class NewFeedCard extends StatelessWidget {
             ],
           ),
         ),
-        Divider(
+        const Divider(
           thickness: 0.8,
           color: gray,
           height: 20,
