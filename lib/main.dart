@@ -1,17 +1,15 @@
-import 'package:capstone_management_dto/Screens/demoAPI.dart';
-import 'package:capstone_management_dto/Screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'Landing.dart';
-import 'Provider/app_user.dart';
-import 'Widget/color.dart';
+import 'landing.dart';
+import 'provider/app_user.dart';
+import 'widget/color.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(const CapstoneOngoingApp());
 
-class MyApp extends StatelessWidget {
+class CapstoneOngoingApp extends StatelessWidget {
+  const CapstoneOngoingApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -21,13 +19,13 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Amplify Auth Demo',
-        theme: ThemeData(
-    colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: primary,
-        ),),
-        home: LandingPage()
-      ),
+          title: 'Amplify Auth Demo',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSwatch().copyWith(
+              primary: primary,
+            ),
+          ),
+          home: const LandingPage()),
     );
   }
 }

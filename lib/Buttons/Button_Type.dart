@@ -1,3 +1,0 @@
-enum ButtonType{
-  google, signout
-}
