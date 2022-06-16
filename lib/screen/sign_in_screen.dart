@@ -18,7 +18,7 @@ class SignInPage extends StatelessWidget {
 
   Widget _buildContent(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -39,8 +39,7 @@ class SignInPage extends StatelessWidget {
           ),
           SignInButton(
             button: ButtonType.google,
-            onPressed: () =>
-                context.read<AppUser>().signIn(AuthProvider.google),
+            onPressed: () => context.read<AppUser>().signIn(AuthProvider.google),
             color: Colors.white,
             text: 'Sign in with Google',
             textColor: Colors.black87,
