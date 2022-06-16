@@ -3,10 +3,10 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:capstone_management/amplifyconfiguration.dart';
 import 'package:flutter/material.dart';
 
-class AppUser extends ChangeNotifier {
+class AWSCognitoProvider extends ChangeNotifier {
   bool isSignedIn = false;
 
-  AppUser() {
+  AWSCognitoProvider() {
     if (!Amplify.isConfigured) configureAmplify();
   }
 
@@ -26,8 +26,8 @@ class AppUser extends ChangeNotifier {
 
   void signIn(AuthProvider authProvider) async {
     try {
-      final signInResult = await Amplify.Auth.signInWithWebUI(
-          provider: authProvider);
+      final signInResult =
+          await Amplify.Auth.signInWithWebUI(provider: authProvider);
       isSignedIn = signInResult.isSignedIn;
       final idToken = signInResult.nextStep?.additionalInfo?['token'];
       notifyListeners();
@@ -44,5 +44,4 @@ class AppUser extends ChangeNotifier {
       print('Error $e');
     }
   }
-
 }

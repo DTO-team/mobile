@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'landing.dart';
-import 'provider/app_user.dart';
+import 'provider/aws_cognito_provider.dart';
 import 'widget/color.dart';
 
 void main() => runApp(const CapstoneOngoingApp());
@@ -15,7 +15,7 @@ class CapstoneOngoingApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (ctx) => AppUser(),
+          create: (ctx) => AWSCognitoProvider(),
         ),
       ],
       child: MaterialApp(

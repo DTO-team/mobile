@@ -1,4 +1,4 @@
-import 'package:capstone_management/provider/app_user.dart';
+import 'package:capstone_management/provider/aws_cognito_provider.dart';
 import 'package:capstone_management/screen/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +15,7 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
-    return context.watch<AppUser>().isSignedIn
+    return context.watch<AWSCognitoProvider>().isSignedIn
         ? const BottomNavBar()
         : const SignInPage();
   }
