@@ -3,8 +3,8 @@ import 'package:capstone_management/widget/color.dart';
 import 'package:capstone_management/widget/topic_page/detail_topic_card.dart';
 import 'package:flutter/material.dart';
 
-class TopicCard extends StatelessWidget {
-  const TopicCard({Key? key, required this.feed, required this.onPress}) : super(key: key);
+class ProjectCard extends StatelessWidget {
+  const ProjectCard({Key? key, required this.feed, required this.onPress}) : super(key: key);
 
 
   //final User users;
