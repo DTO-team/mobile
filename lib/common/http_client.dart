@@ -1,50 +1,49 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
-const String scheme = 'https';
-const String host = 'api.dto.codes/api';
-const String version = '/v1';
+class HttpClient {
+  static const _host = 'api.dto.codes';
+  static const _version = '/v1';
 
-Future<http.Response> get(String endpoint,
-    {Map<String, dynamic>? queryParameters}) {
-  final Uri url = _buildRequestUrl(endpoint, queryParameters: queryParameters);
-  return http.get(url);
-}
+  final Map<String, String> _defaultHeaders = {
+    'Content-Type': 'application/json; charset=UTF-8',
+    'Accept': 'application/json; charset=UTF-8',
+  };
 
-Future<http.Response> post(String endpoint, Object? body,
-    {Map<String, dynamic>? queryParameters}) {
-  final Uri url = _buildRequestUrl(endpoint, queryParameters: queryParameters);
-  return http.post(url, body: body);
-}
+  static final HttpClient _singletonHttpClient = HttpClient._privateConstructor();
 
-Future<http.Response> put(String endpoint, Object? body,
-    {Map<String, dynamic>? queryParameters}) {
-  final Uri url = _buildRequestUrl(endpoint, queryParameters: queryParameters);
-  return http.put(url, body: body);
-}
+  HttpClient._privateConstructor();
 
-Future<http.Response> patch(String endpoint, Object? body,
-    {Map<String, dynamic>? queryParameters}) {
-  final Uri url = _buildRequestUrl(endpoint, queryParameters: queryParameters);
-  return http.patch(url, body: body);
-}
+  factory HttpClient() => _singletonHttpClient;
 
-Future<http.Response> delete(String endpoint,
-    {Object? body, Map<String, dynamic>? queryParameters}) {
-  final Uri url = _buildRequestUrl(endpoint, queryParameters: queryParameters);
-  return http.delete(url, body: body);
-}
-
-Uri _buildRequestUrl(String endpoint, {Map<String, dynamic>? queryParameters}) {
-  final Uri url;
-  if (queryParameters == null) {
-    url = Uri(scheme: scheme, host: host + version, path: endpoint);
-  } else {
-    url = Uri(
-        scheme: scheme,
-        host: host + version,
-        path: endpoint,
-        queryParameters: queryParameters);
+  set token(String? token) {
+    _defaultHeaders['Authorization'] = 'Bearer $token';
   }
 
-  return url;
+  Future<http.Response> get(String endpoint, {Map<String, String>? queryParams}) {
+    Uri url = Uri.https(_host, '/api$_version$endpoint', queryParams);
+    return http.get(url, headers: _defaultHeaders);
+  }
+
+  Future<http.Response> post(String endpoint, {Map<String, String>? queryParams, Object? body}) {
+    Uri url = Uri.https(_host, '/api$_version$endpoint', queryParams);
+    return http.post(url, headers: _defaultHeaders, body: jsonEncode(body));
+  }
+
+  Future<http.Response> put(String endpoint, {Map<String, String>? queryParams, Object? body}) {
+    Uri url = Uri.https(_host, '/api$_version$endpoint', queryParams);
+    return http.put(url, headers: _defaultHeaders, body: body);
+  }
+
+  Future<http.Response> patch(String endpoint, {Map<String, String>? queryParams, Object? body}) {
+    Uri url = Uri.https(_host, '/api$_version$endpoint', queryParams);
+    return http.patch(url, headers: _defaultHeaders, body: body);
+  }
+
+  Future<http.Response> delete(String endpoint, {Map<String, String>? queryParams, Object? body}) {
+    Uri url = Uri.https(_host, '/api$_version$endpoint', queryParams);
+    return http.delete(url, headers: _defaultHeaders, body: body);
+  }
+
 }
