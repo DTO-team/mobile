@@ -1,6 +1,7 @@
 import 'package:capstone_management/provider/new_feed.dart';
 import 'package:capstone_management/widget/color.dart';
 import 'package:capstone_management/widget/search_bar.dart';
+import 'package:capstone_management/widget/topic_page/detail_topic_card.dart';
 import 'package:capstone_management/widget/topic_page/topic_card.dart';
 import 'package:flutter/material.dart';
 
@@ -123,80 +124,34 @@ class _TopicPageState extends State<TopicPage> {
   // }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColor.primary,
-        elevation: 0,
-        title: const Text('Topic'),
-        centerTitle: true,
-      ),
-      body: ListView(
-        shrinkWrap: true,
-        children: [
-          // Section 1 - Featured Recipe - Wrapper
-          Stack(
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height / 12,
-                color: AppColor.primary,
-              ),
-              // Section 1 - Content
-              Column(
-                children: [
-                  // Search Bar
-                  SearchBar(
-                    routeTo: () {},
-                  ),
-                ],
-              )
-            ],
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 14),
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Header
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Newly Posted',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: 'inter'),
-                    ),
-                    TextButton(
-                      onPressed: () {},
-                      style: TextButton.styleFrom(
-                          primary: Colors.black,
-                          textStyle: const TextStyle(
-                              fontWeight: FontWeight.w400, fontSize: 14)),
-                      child: const Text('see all'),
-                    ),
-                  ],
-                ),
-                // Content
-                ListView.separated(
-                  shrinkWrap: true,
-                  itemCount: nfs.length,
-                  physics: const NeverScrollableScrollPhysics(),
-                  separatorBuilder: (context, index) {
-                    return const SizedBox(height: 16);
-                  },
-                  itemBuilder: (context, index) {
-                    return TopicCard(
-                      feed: nfs[index],
-                    );
-                  },
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
+   return Scaffold(
+     body: CustomScrollView(
+       slivers: [
+         SliverAppBar(
+           centerTitle: true,
+           title: Text('Topic',style: TextStyle(color: primary),),
+           floating: true,
+           backgroundColor: whiteSoft,
+           elevation: 0,
+         ),
+         SliverToBoxAdapter(
+           child: SearchBar(routeTo: (){},)
+         ),
+
+         SliverList(delegate: SliverChildBuilderDelegate(
+             (BuildContext context, int index){
+               return Padding(
+                 padding: const EdgeInsets.all(8.0),
+                 child: TopicCard(feed: nfs[index], onPress: () {  Navigator.push(context, MaterialPageRoute(
+                     builder: (context) => DetailTopicCard()
+                 )); },),
+               );
+             },
+           childCount: nfs.length,
+         )
+         )
+       ],
+     ),
+   );
   }
 }

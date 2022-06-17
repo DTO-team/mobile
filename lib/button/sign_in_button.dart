@@ -7,7 +7,7 @@ class SignInButton extends StatelessWidget {
   final String text;
   final Color textColor;
   final double height;
-  static const double borderRadius = 4.0;
+  static const double borderRadius = 20;
   final VoidCallback onPressed;
   final ButtonType button;
 
@@ -25,7 +25,7 @@ class SignInButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: height,
-      child: ElevatedButton(
+      child: OutlinedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           primary: color,
@@ -37,7 +37,7 @@ class SignInButton extends StatelessWidget {
     );
   }
 
-  Row buildRow() {
+   buildRow() {
     switch (button) {
       case ButtonType.google:
         return Row(
@@ -52,24 +52,27 @@ class SignInButton extends StatelessWidget {
           ],
         );
       case ButtonType.signOut:
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.logout,
-              color: AppColor.primary,
-            ),
-            Text(
-              text,
-              style: TextStyle(color: textColor, fontSize: 15),
-            ),
-            const Opacity(
-              opacity: 0.0,
-              child: Icon(
+        return Container(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
                 Icons.logout,
+                color: textColor,
               ),
-            ),
-          ],
+              SizedBox(width: 5,),
+              Text(
+                text,
+                style: TextStyle(color: textColor, fontSize: 15),
+              ),
+              const Opacity(
+                opacity: 0.0,
+                child: Icon(
+                  Icons.logout,
+                ),
+              ),
+            ],
+          ),
         );
     }
   }
