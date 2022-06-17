@@ -1,6 +1,6 @@
 import 'package:capstone_management/button/button_type.dart';
 import 'package:capstone_management/button/sign_in_button.dart';
-import 'package:capstone_management/provider/app_user.dart';
+import 'package:capstone_management/provider/aws_cognito_provider.dart';
 import 'package:capstone_management/widget/color.dart';
 import 'package:capstone_management/widget/profile_page/user_info_tile.dart';
 import 'package:flutter/material.dart';
@@ -133,15 +133,12 @@ class ProfilePage extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12),
-                  child: SignInButton(
-                    button: ButtonType.signOut,
-                    onPressed: () => context.read<AppUser>().signOut(),
-                    color: whiteSoft,
-                    text: 'Log out',
-                    textColor: kTextColor,
-                  ),
+                SignInButton(
+                  button: ButtonType.signOut,
+                  onPressed: () => context.read<AWSCognitoProvider>().signOut(),
+                  color: AppColor.secondary,
+                  text: 'Log out',
+                  textColor: Colors.black87,
                 ),
                 const SizedBox(
                   height: 15,
