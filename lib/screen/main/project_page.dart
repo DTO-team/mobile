@@ -33,7 +33,7 @@ class _ProjectPageState extends State<ProjectPage> {
   }
 
   getUser() async {
-    users = await Remote().getUsers();
+    users = (await Remote().getUsers()) as List<User>?;
     if (users != null) {
       setState(() {
         isLoaded = true;

@@ -1,6 +1,6 @@
 import 'package:capstone_management/button/button_type.dart';
 import 'package:capstone_management/button/sign_in_button.dart';
-import 'package:capstone_management/provider/aws_cognito_provider.dart';
+import 'package:capstone_management/provider/app_user_provider.dart';
 import 'package:capstone_management/widget/color.dart';
 import 'package:capstone_management/widget/profile_page/user_info_tile.dart';
 import 'package:flutter/material.dart';
@@ -135,7 +135,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 SignInButton(
                   button: ButtonType.signOut,
-                  onPressed: () => context.read<AWSCognitoProvider>().signOut(),
+                  onPressed: () => context.read<AppUserProvider>().signOut(),
                   color: AppColor.secondary,
                   text: 'Log out',
                   textColor: Colors.black87,

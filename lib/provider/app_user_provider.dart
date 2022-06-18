@@ -6,52 +6,62 @@ import 'package:capstone_management/amplifyconfiguration.dart';
 import 'package:capstone_management/common/http_client.dart';
 import 'package:capstone_management/common/string_util.dart';
 import 'package:flutter/foundation.dart';
+import 'package:logger/logger.dart';
 
-class AWSCognitoProvider extends ChangeNotifier {
+import '../modal/user.dart';
+
+class AppUserProvider extends ChangeNotifier {
+  static final logger = Logger();
+
   bool isSignedIn = false;
+  User? appUser;
 
-  AWSCognitoProvider() {
+  AppUserProvider() {
     if (!Amplify.isConfigured) configureAmplify();
   }
 
-  void configureAmplify() async {
+  Future<void> configureAmplify() async {
     Amplify.addPlugin(AmplifyAuthCognito());
-
     try {
       await Amplify.configure(amplifyconfig);
     } catch (e) {
-      if (kDebugMode) {
-        print('Error $e');
-      }
+      logger.e(e);
     } finally {
       signOut();
     }
   }
 
-  void signIn(AuthProvider authProvider) async {
+  Future<void> signIn(AuthProvider authProvider) async {
     try {
       final signInResult =
           await Amplify.Auth.signInWithWebUI(provider: authProvider);
+
       final idToken = signInResult.nextStep?.additionalInfo?['token'];
-      if (!isNullOrEmpty(idToken)) {
+      if (signInResult.isSignedIn && !isNullOrEmpty(idToken)) {
         final httpClient = HttpClient();
+
         final response =
             await httpClient.post('/auth/login', body: {'idToken': idToken});
         if (response.statusCode == 200) {
           final body = jsonDecode(response.body);
-          httpClient.token = body['accessToken'];
-          isSignedIn = true;
+          if (body['accessToken'] != null) {
+            httpClient.token = body['accessToken'];
+            isSignedIn = true;
+            appUser = User.fromJson(body);
+          } else {
+            signOut();
+          }
         } else {
           // TODO toast 'Login fail'
+          signOut();
         }
       } else {
         // TODO toast 'Login fail'
+        signOut();
       }
       notifyListeners();
     } catch (e) {
-      if (kDebugMode) {
-        print('Error $e');
-      }
+      logger.e(e);
     }
   }
 
@@ -60,12 +70,11 @@ class AWSCognitoProvider extends ChangeNotifier {
       await Amplify.Auth.signOut().whenComplete(() {
         isSignedIn = false;
         HttpClient().token = null;
+        appUser = null;
       });
       notifyListeners();
     } on AuthException catch (e) {
-      if (kDebugMode) {
-        print('Error $e');
-      }
+      logger.e(e);
     }
   }
 }

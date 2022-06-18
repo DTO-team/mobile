@@ -1,14 +1,8 @@
-// To parse this JSON data, do
-//
-//     final user = userFromJson(jsonString);
-
 import 'dart:convert';
 
-List<User> userFromJson(String str) =>
-    List<User>.from(json.decode(str).map((x) => User.fromJson(x)));
+User userFromJson(String str) => User.fromJson(json.decode(str));
 
-String userToJson(List<User> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String userToJson(User data) => json.encode(data.toJson());
 
 class User {
   User({
@@ -17,6 +11,8 @@ class User {
     required this.userName,
     required this.fullName,
     required this.role,
+    required this.statusId,
+    this.avatarUrl,
   });
 
   String id;
@@ -24,20 +20,26 @@ class User {
   String userName;
   String fullName;
   String role;
+  int statusId;
+  String? avatarUrl;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-        id: json["id"],
-        email: json["email"],
-        userName: json["userName"],
-        fullName: json["fullName"],
-        role: json["role"],
-      );
+    id: json["id"],
+    email: json["email"],
+    userName: json["userName"],
+    fullName: json["fullName"],
+    role: json["role"],
+    statusId: json["statusId"],
+    avatarUrl: json["avatarUrl"],
+  );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "email": email,
-        "userName": userName,
-        "fullName": fullName,
-        "role": role,
-      };
+    "id": id,
+    "email": email,
+    "userName": userName,
+    "fullName": fullName,
+    "role": role,
+    "statusId": statusId,
+    "avatarUrl": avatarUrl,
+  };
 }

@@ -3,7 +3,7 @@ import 'package:capstone_management/modal/user.dart';
 import 'package:http/http.dart' as http;
 
 class Remote {
-  Future<List<User>?> getUsers() async {
+  Future<User?> getUsers() async {
     var client = http.Client();
     var uri = Uri.parse('https://api.dto.codes/api/v1/users');
     var response = await client.get(uri);
@@ -11,6 +11,7 @@ class Remote {
       var json = response.body;
       return userFromJson(json);
     }
+    return null;
   }
 
   Future<List<Lecturer>?> getLectures() async {
@@ -19,5 +20,6 @@ class Remote {
     if (response.statusCode == 200) {
       return lecturerFromJson(response.body);
     }
+    return null;
   }
 }
