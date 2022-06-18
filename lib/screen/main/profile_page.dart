@@ -18,11 +18,12 @@ class ProfilePage extends StatelessWidget {
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarBrightness: Brightness.dark,
         ),
-        backgroundColor: primary,
+        backgroundColor: whiteSoft,
         elevation: 0,
         centerTitle: true,
         title: const Text('My Profile',
             style: TextStyle(
+              color: kTitleTextColor,
                 fontFamily: 'inter',
                 fontWeight: FontWeight.w400,
                 fontSize: 16)),
@@ -37,13 +38,13 @@ class ProfilePage extends StatelessWidget {
           TextButton(
             onPressed: () {},
             style: TextButton.styleFrom(
-                primary: Colors.white,
+                primary: primary,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100))),
             child: const Text(
               'Edit',
               style: TextStyle(
-                  color: Colors.white,
+                  color: kTitleTextColor,
                   fontSize: 14,
                   fontWeight: FontWeight.w600),
             ),
@@ -52,7 +53,6 @@ class ProfilePage extends StatelessWidget {
       ),
       body: ListView(
         shrinkWrap: true,
-        physics: const BouncingScrollPhysics(),
         children: [
           // Section 1 - Profile Picture Wrapper
           Container(
@@ -109,25 +109,25 @@ class ProfilePage extends StatelessWidget {
                     label: 'Email',
                     value: 'chauhclse150664@fpt.edu.vn',
                     padding: const EdgeInsets.all(0),
-                    valueBackground: AppColor.primaryExtraSoft),
+                    valueBackground: primaryExtraSoft),
                 UserInfoTile(
                     margin: const EdgeInsets.only(bottom: 16),
                     label: 'Full Name',
                     value: 'Hoang Cac Loan Chau',
                     padding: const EdgeInsets.all(0),
-                    valueBackground: AppColor.primaryExtraSoft),
+                    valueBackground: primaryExtraSoft),
                 UserInfoTile(
                   margin: const EdgeInsets.only(bottom: 16),
                   label: 'Deparment Code',
                   value: 'SE150664',
-                  valueBackground: AppColor.primaryExtraSoft,
+                  valueBackground: primaryExtraSoft,
                   padding: const EdgeInsets.all(0),
                 ),
                 UserInfoTile(
                   margin: const EdgeInsets.only(bottom: 16),
                   label: 'DoB',
                   value: '07 04 2001',
-                  valueBackground: AppColor.primaryExtraSoft,
+                  valueBackground: primaryExtraSoft,
                   padding: const EdgeInsets.all(0),
                 ),
                 const SizedBox(
@@ -136,7 +136,7 @@ class ProfilePage extends StatelessWidget {
                 SignInButton(
                   button: ButtonType.signOut,
                   onPressed: () => context.read<AppUserProvider>().signOut(),
-                  color: AppColor.secondary,
+                  color: secondary,
                   text: 'Log out',
                   textColor: Colors.black87,
                 ),

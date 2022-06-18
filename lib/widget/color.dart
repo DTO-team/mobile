@@ -14,20 +14,17 @@ const kBadgeColor = Color(0xFFEE376E);
 const kGrayColor = Color(0xFF8793B2);
 const kTitleTextColor = Color(0xFF30384D);
 const kDefaultPadding = 20.0;
-const background = Color(0xFF000000);
 const blue = Color(0xFF1DA1F2);
 const gray = Color(0xFFAAB8C2);
 const lightGray = Color(0xFFE1E8ED);
 const extraLightGray = Color(0xFFF5F8FA);
 const white = Color(0xFFFFFFFF);
-const primary = Color(0xFF094542);
-const secondary = Color(0xFFEDE5CC);
 const kTeamColor = Color(0xFF4A6572);
 const kTextColor = Color(0xFF232F34);
 const Color black = Color(0xFF000000);
 const Color initial = Color.fromRGBO(23, 43, 77, 1.0);
 const Color label = Color.fromRGBO(254, 36, 114, 1.0);
-const Color info = Color.fromRGBO(17, 205, 239, 1.0);
+const Color info = Color(0xFF1890FF);
 const Color error = Color.fromRGBO(245, 54, 92, 1.0);
 const Color success = Color.fromRGBO(45, 206, 137, 1.0);
 const Color warning = Color.fromRGBO(251, 99, 64, 1.0);
@@ -39,23 +36,21 @@ const Color inputError = Color.fromRGBO(252, 179, 164, 1.0);
 const Color muted = Color.fromRGBO(136, 152, 170, 1.0);
 const Color text = Color.fromRGBO(50, 50, 93, 1.0);
 const Color softPrime = Color(0xFF107873);
-
-class AppColor {
-  static Color primary = const Color(0xFF094542);
-  static Color primarySoft = const Color(0xFF0B5551);
-  static Color primaryExtraSoft = const Color(0xFFEEF4F4);
-  static Color secondary = const Color(0xFFEDE5CC);
-  static Color whiteSoft = const Color(0xFFF8F8F8);
-  static LinearGradient bottomShadow = LinearGradient(colors: [
+const Color primary = const Color(0xFF00AB55);
+const Color primarySoft = const Color(0xFF54D62C);
+const Color primaryExtraSoft = const Color(0xFFEEF4F4);
+const Color secondary = const Color(0xFF3366FF);
+const Color whiteSoft = const Color(0xFFF8F8F8);
+LinearGradient bottomShadow = LinearGradient(colors: [
     const Color(0xFF107873).withOpacity(0.2),
     const Color(0xFF107873).withOpacity(0)
   ], begin: Alignment.bottomCenter, end: Alignment.topCenter);
-  static LinearGradient linearBlackBottom = LinearGradient(
+   LinearGradient linearBlackBottom = LinearGradient(
       colors: [Colors.black.withOpacity(0.45), Colors.black.withOpacity(0)],
       begin: Alignment.bottomCenter,
       end: Alignment.topCenter);
-  static LinearGradient linearBlackTop = LinearGradient(
+   LinearGradient linearBlackTop = LinearGradient(
       colors: [Colors.black.withOpacity(0.5), Colors.transparent],
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter);
-}
+

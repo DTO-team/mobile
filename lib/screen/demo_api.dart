@@ -46,9 +46,7 @@ class _DemoAPIState extends State<DemoAPI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Demo API'),
-      ),
+
       body: Visibility(
         visible: isLoaded,
         replacement: const Center(

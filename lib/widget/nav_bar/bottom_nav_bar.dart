@@ -8,13 +8,18 @@ import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
-
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
   int _selectedItem = 0;
+  List<GlobalKey<NavigatorState>> _navigatorKeys = [
+    GlobalKey<NavigatorState>(),
+    GlobalKey<NavigatorState>(),
+    GlobalKey<NavigatorState>()
+  ];
+
 
   void _onItemTapped(int index) {
     setState(() {
@@ -28,30 +33,74 @@ class _BottomNavBarState extends State<BottomNavBar> {
     TopicPage(),
     ProfilePage(),
   ];
+  Map<String, WidgetBuilder> _routeBuilders(BuildContext context, int index) {
+    return {
+      '/': (context) {
+        return [
+          HomePage(),
+          ProjectPage(),
+          TopicPage(),
+          ProfilePage()
+        ].elementAt(index);
+      },
+    };
+  }
+  Widget _buildOffstageNavigator(int index) {
+    var routeBuilders = _routeBuilders(context, index);
+
+    return Offstage(
+      offstage: _selectedItem != index,
+      child: Navigator(
+        onGenerateRoute: (routeSettings) {
+          return MaterialPageRoute(
+            builder: (context) => routeBuilders[routeSettings.name!]!(context),
+          );
+        },
+      ),
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: _pages.elementAt(_selectedItem),
+    return WillPopScope(
+      onWillPop: () async {
+        final isFirstRouteInCurrentTab =
+        !await _navigatorKeys[_selectedItem].currentState!.maybePop();
+
+        // let system handle back button if we're on the first route
+        return isFirstRouteInCurrentTab;
+      },
+      child: Scaffold(
+        body: Stack(
+          children: [
+            _buildOffstageNavigator(0),
+            _buildOffstageNavigator(1),
+            _buildOffstageNavigator(2),
+            _buildOffstageNavigator(3),
+
+          ],
+        ),
+        //---------------------------------------------------------
+        bottomNavigationBar: buildBottomNavigationBar(),
       ),
-      //---------------------------------------------------------
-      bottomNavigationBar: buildBottomNavigationBar(),
     );
   }
 
   BottomNavigationBar buildBottomNavigationBar() {
     return BottomNavigationBar(
-      elevation: 0,
+      currentIndex: _selectedItem,
+      onTap: _onItemTapped,
+      elevation: 10,
       iconSize: 17,
-      backgroundColor: primary,
+      backgroundColor: whiteSoft,
 
       ///Selected color
-      selectedItemColor: secondary,
+      selectedItemColor: primary,
 
       ///Unselected color
       showUnselectedLabels: true,
-      unselectedItemColor: Colors.white,
+      unselectedItemColor: Colors.black,
       type: BottomNavigationBarType.fixed,
 
       items: const <BottomNavigationBarItem>[
@@ -73,8 +122,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             icon: ImageIcon(Svg('assets/user.svg')),
             label: 'Profile'),
       ],
-      currentIndex: _selectedItem,
-      onTap: _onItemTapped,
+
     );
   }
 }

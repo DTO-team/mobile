@@ -4,7 +4,7 @@ import 'package:capstone_management/widget/home_page/new_feed_card.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage( {Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -120,97 +120,59 @@ class _HomePageState extends State<HomePage> {
             centerTitle: true,
             floating: true,
             elevation: 0,
-            backgroundColor: primary,
+            backgroundColor: whiteSoft,
+
             flexibleSpace: FlexibleSpaceBar(
-              title: Text('What\'s News'),
+              title: Text('What\'s News',style: TextStyle(color: primary),),
               centerTitle: true,
             ),
-            // flexibleSpace: FlexibleSpaceBar(
-            //   background: Image.asset('assets/chamb.png',
-            //   width: double.maxFinite,
-            //   fit: BoxFit.cover),
-            //
-            // ),
-            // bottom: PreferredSize(
-            //   preferredSize: Size.fromHeight(50),
-            //   child: Container(
-            //     decoration: BoxDecoration(
-            //       color: white,
-            //       borderRadius: BorderRadius.only(topRight:Radius.circular(20),
-            //       topLeft: Radius.circular(20)),
-            //     ),
-            //       width: double.maxFinite,
-            //       child: Center(child: Text("What's New ?",style: TextStyle(fontSize: 19),))),
-            // ),
           ),
           SliverToBoxAdapter(
             child: Container(
-              color: AppColor.primary,
+              color: whiteSoft,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: AppColor.secondary,
-                          borderRadius: BorderRadius.circular(3.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.3),
-                              spreadRadius: 1,
-                              blurRadius: 7,
-                              offset: const Offset(
-                                  0, 3), // changes position of shadow
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 5),
+                  height: 200,
+                  decoration: BoxDecoration(
+
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: whiteSoft,
+                            borderRadius: BorderRadius.circular(3.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.3),
+                                spreadRadius: 1,
+                                blurRadius: 7,
+                                offset: const Offset(
+                                    0, 3), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 8.0),
+                          child: Center(
+                            child: Text(
+                              "User Total:${nfs.length} ",
+                              style: TextStyle(
+                                  color: primarySoft,
+                                  fontSize: 12.0,
+                                  fontWeight: FontWeight.bold),
                             ),
-                          ],
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 8.0),
-                        child: Center(
-                          child: Text(
-                            "User Total:${nfs.length} ",
-                            style: TextStyle(
-                                color: AppColor.primarySoft,
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: AppColor.secondary,
-                          borderRadius: BorderRadius.circular(3.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.3),
-                              spreadRadius: 1,
-                              blurRadius: 7,
-                              offset: const Offset(
-                                  0, 3), // changes position of shadow
-                            ),
-                          ],
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 8.0),
-                        child: Center(
-                          child: Text(
-                            "User Total:${nfs.length} ",
-                            style: TextStyle(
-                                color: AppColor.primarySoft,
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+
+
+                    ],
+                  ),
                 ),
               ),
             ),
