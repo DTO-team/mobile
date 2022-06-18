@@ -35,7 +35,7 @@ class _DemoAPIState extends State<DemoAPI> {
   }
 
   getDataUser() async {
-    users = await Remote().getUsers();
+    users = (await Remote().getUsers()) as List<User>?;
     if (users != null) {
       setState(() {
         isLoaded = true;
