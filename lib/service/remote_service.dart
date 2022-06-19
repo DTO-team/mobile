@@ -1,25 +1,20 @@
-import 'package:capstone_management/modal/lecturer.dart';
+import 'package:capstone_management/common/http_client.dart';
+import 'package:capstone_management/modal/topic.dart';
 import 'package:capstone_management/modal/user.dart';
-import 'package:http/http.dart' as http;
 
 class Remote {
   Future<User?> getUsers() async {
-    var client = http.Client();
-    var uri = Uri.parse('https://api.dto.codes/api/v1/users');
-    var response = await client.get(uri);
-    if (response.statusCode == 200) {
-      var json = response.body;
-      return userFromJson(json);
-    }
-    return null;
   }
 
-  Future<List<Lecturer>?> getLectures() async {
-    final response =
-        await http.get(Uri.parse('https://api.dto.codes/api/v1/lecturers'));
+  Future<List<Topic>?> getAllTopic() async {
+    final httpClient = HttpClient();
+    final response =await httpClient.post('/topics/list');
     if (response.statusCode == 200) {
-      return lecturerFromJson(response.body);
+     return topicFromJson(response.body);
     }
-    return null;
+    else{
+      throw Exception('Failed to load topics--- ${response.statusCode}' );
+    }
+
   }
 }

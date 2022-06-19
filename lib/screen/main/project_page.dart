@@ -26,17 +26,17 @@ class _ProjectPageState extends State<ProjectPage> {
     // TODO: implement initState
     super.initState();
     getUser();
-    getLec();
+  //  getLec();
   }
 
-  getLec() async {
-    lecturers = await Remote().getLectures();
-    if (users != null) {
-      setState(() {
-        isLoaded = true;
-      });
-    }
-  }
+  // getLec() async {
+  //   lecturers = await Remote().getLectures();
+  //   if (users != null) {
+  //     setState(() {
+  //       isLoaded = true;
+  //     });
+  //   }
+  // }
 
   getUser() async {
     users = (await Remote().getUsers()) as List<User>?;

@@ -21,18 +21,18 @@ class _DemoAPIState extends State<DemoAPI> {
     // TODO: implement initState
     super.initState();
     getDataUser();
-    getDataLecturer();
+    // getDataLecturer();
     print(isLoaded);
   }
 
-  getDataLecturer() async {
-    lecs = await Remote().getLectures();
-    if (lecs != null) {
-      setState(() {
-        isLoaded = true;
-      });
-    }
-  }
+  // getDataLecturer() async {
+  //   lecs = await Remote().getLectures();
+  //   if (lecs != null) {
+  //     setState(() {
+  //       isLoaded = true;
+  //     });
+  //   }
+  // }
 
   getDataUser() async {
     users = (await Remote().getUsers()) as List<User>?;
