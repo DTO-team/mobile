@@ -1,6 +1,5 @@
 import 'package:capstone_management/modal/lecturer.dart';
 import 'package:capstone_management/modal/user.dart';
-import 'package:capstone_management/service/remote_service.dart';
 import 'package:flutter/material.dart';
 
 class DemoAPI extends StatefulWidget {
@@ -35,7 +34,7 @@ class _DemoAPIState extends State<DemoAPI> {
   // }
 
   getDataUser() async {
-    users = (await Remote().getUsers()) as List<User>?;
+    //users = (await Remote().getUsers()) as List<User>?;
     if (users != null) {
       setState(() {
         isLoaded = true;

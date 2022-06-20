@@ -2,37 +2,43 @@
 //
 //     final topic = topicFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
-List<Topic> topicFromJson(String str) => List<Topic>.from(json.decode(str).map((x) => Topic.fromJson(x)));
+import 'package:capstone_management/modal/lecturer.dart';
+import 'package:capstone_management/modal/user.dart';
 
-String topicToJson(List<Topic> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+Topic topicFromJson(String str) => Topic.fromJson(json.decode(str));
+
+String topicToJson(Topic data) => json.encode(data.toJson());
 
 class Topic {
   Topic({
+    required this.id,
     required this.name,
     required this.description,
-    required this.lecturerEmail,
-    required this.companyEmail,
+    this.companyDetail,
+    required this.lecturersDetails,
   });
 
+  String id;
   String name;
   String description;
-  String lecturerEmail;
-  String companyEmail;
+  User? companyDetail;
+  List<Lecturer> lecturersDetails;
 
   factory Topic.fromJson(Map<String, dynamic> json) => Topic(
+    id: json["topicId"],
     name: json["name"],
     description: json["description"],
-    lecturerEmail: json["lecturerEmail"],
-    companyEmail: json["companyEmail"],
+    companyDetail: (json["companyDetail"] != null) ? User.fromJson(json["companyDetail"]) : null,
+    lecturersDetails: List<Lecturer>.from(json["lecturersDetails"].map((x) => Lecturer.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
+    "topicId": id,
     "name": name,
     "description": description,
-    "lecturerEmail": lecturerEmail,
-    "companyEmail": companyEmail,
+    "companyDetail": companyDetail?.toJson(),
+    "lecturersDetails": List<dynamic>.from(lecturersDetails.map((x) => x.toJson())),
   };
 }

@@ -1,6 +1,5 @@
 import 'package:capstone_management/modal/lecturer.dart';
 import 'package:capstone_management/modal/user.dart';
-import 'package:capstone_management/service/remote_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../provider/new_feed.dart';
@@ -39,7 +38,7 @@ class _ProjectPageState extends State<ProjectPage> {
   // }
 
   getUser() async {
-    users = (await Remote().getUsers()) as List<User>?;
+    //users = (await TopicRepository().getUsers()) as List<User>?;
     if (users != null) {
       setState(() {
         isLoaded = true;
