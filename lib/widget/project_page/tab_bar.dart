@@ -1,4 +1,3 @@
-import 'package:capstone_management/screen/demo_api.dart';
 import 'package:capstone_management/screen/team_page.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +29,7 @@ class _TabBarProjectState extends State<TabBarProject> {
           ),
         ),
         body: TabBarView(
-          children: const [DemoAPI(), TeamPage()],
+          children: const [TeamPage()],
         ),
       ),
     );

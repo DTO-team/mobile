@@ -18,7 +18,7 @@ class Remote {
     final response =
         await http.get(Uri.parse('https://api.dto.codes/api/v1/lecturers'));
     if (response.statusCode == 200) {
-      return lecturerFromJson(response.body);
+      return null;
     }
     return null;
   }

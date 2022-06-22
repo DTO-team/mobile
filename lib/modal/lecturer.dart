@@ -1,57 +1,45 @@
-// To parse this JSON data, do
-//
-//     final lecturer = lecturerFromJson(jsonString);
-
 import 'dart:convert';
 
-List<Lecturer> lecturerFromJson(String str) =>
-    List<Lecturer>.from(json.decode(str).map((x) => Lecturer.fromJson(x)));
+import 'package:capstone_management/modal/user.dart';
 
-String lecturerToJson(List<Lecturer> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+Lecturer lecturerFromJson(String str) => Lecturer.fromJson(json.decode(str));
 
-class Lecturer {
+String lecturerToJson(Lecturer data) => json.encode(data.toJson());
+
+class Lecturer extends User {
   Lecturer({
-    required this.id,
-    required this.departmentId,
-    this.department,
-    this.idNavigation,
-    required this.councilLecturers,
-    required this.mentors,
-    required this.reviews,
-    required this.topicLecturers,
+    required super.id,
+    required super.email,
+    required super.userName,
+    required super.fullName,
+    required super.role,
+    required super.statusId,
+    super.avatarUrl,
+    required this.department,
   });
 
-  String id;
-  String departmentId;
-  dynamic department;
-  dynamic idNavigation;
-  List<dynamic> councilLecturers;
-  List<dynamic> mentors;
-  List<dynamic> reviews;
-  List<dynamic> topicLecturers;
+  String department;
 
   factory Lecturer.fromJson(Map<String, dynamic> json) => Lecturer(
-        id: json["id"],
-        departmentId: json["departmentId"],
-        department: json["department"],
-        idNavigation: json["idNavigation"],
-        councilLecturers:
-            List<dynamic>.from(json["councilLecturers"].map((x) => x)),
-        mentors: List<dynamic>.from(json["mentors"].map((x) => x)),
-        reviews: List<dynamic>.from(json["reviews"].map((x) => x)),
-        topicLecturers:
-            List<dynamic>.from(json["topicLecturers"].map((x) => x)),
-      );
+    id: json["id"],
+    email: json["email"],
+    userName: json["userName"],
+    fullName: json["fullName"],
+    role: json["role"],
+    statusId: json["statusId"],
+    avatarUrl: json["avatarUrl"],
+    department: json["department"],
+  );
 
+  @override
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "departmentId": departmentId,
-        "department": department,
-        "idNavigation": idNavigation,
-        "councilLecturers": List<dynamic>.from(councilLecturers.map((x) => x)),
-        "mentors": List<dynamic>.from(mentors.map((x) => x)),
-        "reviews": List<dynamic>.from(reviews.map((x) => x)),
-        "topicLecturers": List<dynamic>.from(topicLecturers.map((x) => x)),
-      };
+    "id": id,
+    "email": email,
+    "userName": userName,
+    "fullName": fullName,
+    "role": role,
+    "statusId": statusId,
+    "avatarUrl": avatarUrl,
+    "department": department,
+  };
 }
