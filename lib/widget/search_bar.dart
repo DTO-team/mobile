@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
-import 'color.dart';
+import '../constant/color.dart';
 
 class SearchBar extends StatelessWidget {
   const SearchBar({Key? key, required this.routeTo}) : super(key: key);

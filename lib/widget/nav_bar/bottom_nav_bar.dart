@@ -2,7 +2,7 @@ import 'package:capstone_management/screen/main/home_page.dart';
 import 'package:capstone_management/screen/main/profile_page.dart';
 import 'package:capstone_management/screen/main/project_page.dart';
 import 'package:capstone_management/screen/main/topic_page.dart';
-import 'package:capstone_management/widget//color.dart';
+import 'package:capstone_management/constant/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 

@@ -18,6 +18,5 @@ class _LandingPageState extends State<LandingPage> {
     return context.watch<AppUserProvider>().isSignedIn
         ? const BottomNavBar()
         : const SignInPage();
-// return BottomNavBar();
   }
 }

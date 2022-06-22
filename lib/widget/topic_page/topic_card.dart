@@ -1,5 +1,8 @@
+import 'package:capstone_management/constant/text_style.dart';
 import 'package:capstone_management/modal/topic.dart';
-import 'package:capstone_management/widget/color.dart';
+import 'package:capstone_management/provider/new_feed.dart';
+import 'package:capstone_management/constant/color.dart';
+import 'package:capstone_management/widget/topic_page/detail_topic_card.dart';
 import 'package:flutter/material.dart';
 
 class TopicCard extends StatelessWidget {
@@ -10,27 +13,26 @@ class TopicCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return GestureDetector(
       onTap: onPress,
       child: Container(
         height: MediaQuery.of(context).size.height/4,
-        padding: const EdgeInsets.fromLTRB(0, 5,5, 0),
+        padding: EdgeInsets.fromLTRB(0, 5,5, 0),
         decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
                 spreadRadius: 2,
                 blurRadius: 7,
-                offset: const Offset(0, 3), // changes position of shadow
+                offset: Offset(0, 3), // changes position of shadow
               ),
             ],
             color: whiteSoft,
-          borderRadius: const BorderRadius.only(
-              topRight: Radius.circular(20.0),
-          ),
+            borderRadius: BorderRadius.circular(5)
         ),
         child: Container(
-          margin: const EdgeInsets.all(10),
+          margin: EdgeInsets.all(10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,51 +40,33 @@ class TopicCard extends StatelessWidget {
               // Recipe title
               Text(
                 topic.name,
-                style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
+                style: AppTextSytle.textTheme,
               ),
-              const Padding(padding: EdgeInsets.only(top: 10)),
-              /*Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(left: 5),
-                    child: Text(
-                      topic.companyDetail.fullName,
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(left: 5),
-                    child: Text(
-                      topic.lecturerEmail,
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(left: 5),
-                    child: Text(
-                      topic.companyEmail,
-                      style: const TextStyle(fontSize: 12),
-                    ),
+              Padding(padding: EdgeInsets.only(top: 10)),
+              Container(
+                  margin: EdgeInsets.only(left: 5),
+                  child: RichText(text: TextSpan(
+                      text: 'Lecturer: ',
+                      style: AppTextSytle.subTitle1TextStyle,
+                      children: [
+                        TextSpan(text: '${topic.lecturersDetails.map((e) => e.email).toList().join(', ')}', style: AppTextSytle.bodyTextStyle )
+                      ]
+
                   ),
 
-                ],
-              ),*/
-              const Divider(thickness: 1, color: primary,height: 20,),
+                  )
+              ),
+             
+                  Divider(thickness: 1, color: primary,height: 20,),
               Container(
-                padding: const EdgeInsets.fromLTRB(2, 0, 2, 2),
-                child: Center(
-                  child: Text(topic.description,
-                    maxLines: 4,overflow: TextOverflow.ellipsis, textAlign: TextAlign.left,
-                  ),
+                padding: EdgeInsets.fromLTRB(2, 0, 2, 2),
+                child: Text(topic.description.length > 100 ? '${topic.description.substring(0,100)}...': topic.description,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis, textAlign: TextAlign.left,
+                  style: AppTextSytle.bodyTextStyle,
                 ),
               )
+
             ],
           ),
         ),

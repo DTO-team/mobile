@@ -1,7 +1,7 @@
 import 'package:capstone_management/provider/new_feed.dart';
-import 'package:capstone_management/widget/color.dart';
-import 'package:capstone_management/widget/topic_page/detail_topic_card.dart';
 import 'package:flutter/material.dart';
+
+import '../../constant/color.dart';
 
 class ProjectCard extends StatelessWidget {
   const ProjectCard({Key? key, required this.feed, required this.onPress}) : super(key: key);
@@ -42,39 +42,7 @@ class ProjectCard extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
               ),
               Padding(padding: EdgeInsets.only(top: 10)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(left: 5),
-                    child: Text(
-                      'Company',
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 5),
-                    child: Text(
-                      'Semester 3',
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 5),
-                    child: Text(
-                      feed.tweetedAt,
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ),
 
-                ],
-              ),
               Divider(thickness: 1, color: primary,height: 20,),
               Container(
                 padding: EdgeInsets.fromLTRB(2, 0, 2, 2),

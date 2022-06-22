@@ -1,5 +1,5 @@
 import 'package:capstone_management/button/button_type.dart';
-import 'package:capstone_management/widget/color.dart';
+import 'package:capstone_management/constant/color.dart';
 import 'package:flutter/material.dart';
 
 class SignInButton extends StatelessWidget {

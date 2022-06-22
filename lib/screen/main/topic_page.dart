@@ -1,8 +1,12 @@
+import 'package:capstone_management/modal/lecturer.dart';
 import 'package:capstone_management/modal/topic.dart';
 import 'package:capstone_management/repository/topic_repository.dart';
-import 'package:capstone_management/widget/color.dart';
+import 'package:capstone_management/constant/color.dart';
 import 'package:capstone_management/widget/search_bar.dart';
 import 'package:flutter/material.dart';
+
+import '../../widget/topic_page/detail_topic_card.dart';
+import '../../widget/topic_page/topic_card.dart';
 
 class TopicPage extends StatefulWidget {
   const TopicPage({Key? key}) : super(key: key);
@@ -12,14 +16,15 @@ class TopicPage extends StatefulWidget {
 }
 
 class _TopicPageState extends State<TopicPage> {
-  List<Topic>? _topics;
+   List<Topic>? _topics;
   var isLoaded = false;
 
   @override
   void initState() {
     super.initState();
     loadTopics();
-  }
+
+    }
 
   Future<void> loadTopics() async {
     _topics = await TopicRepository().getAllTopic();
@@ -27,6 +32,7 @@ class _TopicPageState extends State<TopicPage> {
       setState(() {
         isLoaded = true;
       });
+      print(isLoaded);
     }
   }
 
@@ -49,7 +55,7 @@ class _TopicPageState extends State<TopicPage> {
               child: SearchBar(
             routeTo: () {},
           )),
-          /* SliverList(
+           SliverList(
               delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
               return Visibility(
@@ -65,14 +71,14 @@ class _TopicPageState extends State<TopicPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const DetailTopicCard()));
+                              builder: (context) => DetailTopicCard(topic: _topics![index],)));
                     },
                   ),
                 ),
               );
             },
-            childCount: _topics?.length,
-          ))*/
+            childCount: _topics?.length ?? 0,
+          ))
         ],
       ),
     );

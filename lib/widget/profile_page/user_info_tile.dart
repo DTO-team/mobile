@@ -1,4 +1,4 @@
-import 'package:capstone_management/widget/color.dart';
+import 'package:capstone_management/constant/color.dart';
 import 'package:flutter/material.dart';
 
 class UserInfoTile extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:capstone_management/provider/new_feed.dart';
-import 'package:capstone_management/widget/color.dart';
+import 'package:capstone_management/constant/color.dart';
 import 'package:capstone_management/widget/home_page/new_feed_card.dart';
 import 'package:flutter/material.dart';
 
@@ -164,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                               style: TextStyle(
                                   color: primarySoft,
                                   fontSize: 12.0,
-                                  fontWeight: FontWeight.bold),
+                                    fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),

@@ -34,6 +34,9 @@ class Topic {
     lecturersDetails: List<Lecturer>.from(json["lecturersDetails"].map((x) => Lecturer.fromJson(x))),
   );
 
+
+
+
   Map<String, dynamic> toJson() => {
     "topicId": id,
     "name": name,
