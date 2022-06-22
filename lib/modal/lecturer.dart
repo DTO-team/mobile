@@ -15,10 +15,10 @@ class Lecturer extends User {
     required super.role,
     required super.statusId,
     super.avatarUrl,
-    required this.department,
+    required this.departmentName,
   });
 
-  String department;
+  String departmentName;
 
   factory Lecturer.fromJson(Map<String, dynamic> json) => Lecturer(
     id: json["id"],
@@ -28,7 +28,7 @@ class Lecturer extends User {
     role: json["role"],
     statusId: json["statusId"],
     avatarUrl: json["avatarUrl"],
-    department: json["department"],
+    departmentName: json["departmentName"],
   );
 
   @override
@@ -40,6 +40,6 @@ class Lecturer extends User {
     "role": role,
     "statusId": statusId,
     "avatarUrl": avatarUrl,
-    "department": department,
+    "departmentName": departmentName,
   };
 }
