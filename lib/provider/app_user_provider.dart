@@ -5,16 +5,15 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:capstone_management/amplifyconfiguration.dart';
 import 'package:capstone_management/common/http_client.dart';
 import 'package:capstone_management/common/string_util.dart';
+import 'package:capstone_management/modal/lecturer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:logger/logger.dart';
-
-import '../modal/user.dart';
 
 class AppUserProvider extends ChangeNotifier {
   static final logger = Logger();
 
   bool isSignedIn = false;
-  User? appUser;
+  Lecturer? appUser;
 
   AppUserProvider() {
     if (!Amplify.isConfigured) configureAmplify();
@@ -46,8 +45,8 @@ class AppUserProvider extends ChangeNotifier {
           final body = jsonDecode(response.body);
           if (body['accessToken'] != null) {
             httpClient.token = body['accessToken'];
+            appUser = Lecturer.fromJson(body);
             isSignedIn = true;
-            appUser = User.fromJson(body);
           } else {
             signOut();
           }
@@ -68,9 +67,9 @@ class AppUserProvider extends ChangeNotifier {
   void signOut() async {
     try {
       await Amplify.Auth.signOut().whenComplete(() {
-        isSignedIn = false;
         HttpClient().token = null;
         appUser = null;
+        isSignedIn = false;
       });
       notifyListeners();
     } on AuthException catch (e) {
