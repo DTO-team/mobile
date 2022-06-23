@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'landing.dart';
 import 'provider/app_user_provider.dart';
-import 'widget/color.dart';
+import 'constant/color.dart';
 
 void main() => runApp(const CapstoneOngoingApp());
 

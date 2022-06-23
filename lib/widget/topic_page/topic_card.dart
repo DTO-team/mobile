@@ -1,18 +1,19 @@
+import 'package:capstone_management/constant/text_style.dart';
+import 'package:capstone_management/modal/topic.dart';
 import 'package:capstone_management/provider/new_feed.dart';
-import 'package:capstone_management/widget/color.dart';
+import 'package:capstone_management/constant/color.dart';
 import 'package:capstone_management/widget/topic_page/detail_topic_card.dart';
 import 'package:flutter/material.dart';
 
 class TopicCard extends StatelessWidget {
-  const TopicCard({Key? key, required this.feed, required this.onPress}) : super(key: key);
+  const TopicCard({Key? key, required this.topic, required this.onPress}) : super(key: key);
 
-
-  //final User users;
-  final NewFeed feed;
+  final Topic topic;
   final VoidCallback onPress;
 
   @override
   Widget build(BuildContext context) {
+
     return GestureDetector(
       onTap: onPress,
       child: Container(
@@ -38,50 +39,31 @@ class TopicCard extends StatelessWidget {
             children: [
               // Recipe title
               Text(
-                'Name',
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
+                topic.name,
+                style: AppTextSytle.textTheme,
               ),
               Padding(padding: EdgeInsets.only(top: 10)),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(left: 5),
-                    child: Text(
-                      'Company',
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 5),
-                    child: Text(
-                      'Semester 3',
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 5),
-                    child: Text(
-                      feed.tweetedAt,
-                      style: TextStyle(fontSize: 12),
-                    ),
+              Container(
+                  margin: EdgeInsets.only(left: 5),
+                  child: RichText(text: TextSpan(
+                      text: 'Lecturer: ',
+                      style: AppTextSytle.subTitle1TextStyle,
+                      children: [
+                        TextSpan(text: '${topic.lecturersDetails.map((e) => e.email).toList().join(', ')}', style: AppTextSytle.bodyTextStyle )
+                      ]
+
                   ),
 
-                ],
+                  )
               ),
-              Divider(thickness: 1, color: primary,height: 20,),
+             
+                  Divider(thickness: 1, color: primary,height: 20,),
               Container(
                 padding: EdgeInsets.fromLTRB(2, 0, 2, 2),
-                child: Center(
-                  child: Text('Description : this is a long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long long4 long long long long long long long long long ',
-                    maxLines: 4,overflow: TextOverflow.ellipsis, textAlign: TextAlign.left,
-                  ),
+                child: Text(topic.description.length > 100 ? '${topic.description.substring(0,100)}...': topic.description,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis, textAlign: TextAlign.left,
+                  style: AppTextSytle.bodyTextStyle,
                 ),
               )
 

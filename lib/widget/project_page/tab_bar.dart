@@ -1,5 +1,5 @@
 import 'package:capstone_management/screen/demo_api.dart';
-import 'package:capstone_management/screen/team_page.dart';
+import 'package:capstone_management/widget/project_page/team_page.dart';
 import 'package:flutter/material.dart';
 
 class TabBarProject extends StatefulWidget {

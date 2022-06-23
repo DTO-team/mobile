@@ -2,56 +2,50 @@
 //
 //     final lecturer = lecturerFromJson(jsonString);
 
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
-List<Lecturer> lecturerFromJson(String str) =>
-    List<Lecturer>.from(json.decode(str).map((x) => Lecturer.fromJson(x)));
+Lecturer lecturerFromJson(String str) => Lecturer.fromJson(json.decode(str));
 
-String lecturerToJson(List<Lecturer> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String lecturerToJson(Lecturer data) => json.encode(data.toJson());
 
 class Lecturer {
   Lecturer({
     required this.id,
-    required this.departmentId,
-    this.department,
-    this.idNavigation,
-    required this.councilLecturers,
-    required this.mentors,
-    required this.reviews,
-    required this.topicLecturers,
+    required this.email,
+    required this.userName,
+    required this.fullName,
+    required this.role,
+    required this.statusId,
+    required this.department,
   });
 
   String id;
-  String departmentId;
-  dynamic department;
-  dynamic idNavigation;
-  List<dynamic> councilLecturers;
-  List<dynamic> mentors;
-  List<dynamic> reviews;
-  List<dynamic> topicLecturers;
+  String email;
+  String userName;
+  String fullName;
+  String role;
+  int statusId;
+  String department;
 
   factory Lecturer.fromJson(Map<String, dynamic> json) => Lecturer(
-        id: json["id"],
-        departmentId: json["departmentId"],
-        department: json["department"],
-        idNavigation: json["idNavigation"],
-        councilLecturers:
-            List<dynamic>.from(json["councilLecturers"].map((x) => x)),
-        mentors: List<dynamic>.from(json["mentors"].map((x) => x)),
-        reviews: List<dynamic>.from(json["reviews"].map((x) => x)),
-        topicLecturers:
-            List<dynamic>.from(json["topicLecturers"].map((x) => x)),
-      );
+    id: json["id"],
+    email: json["email"],
+    userName: json["userName"],
+    fullName: json["fullName"],
+    role: json["role"],
+    statusId: json["statusId"],
+    department: json["department"],
+  );
+
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "departmentId": departmentId,
-        "department": department,
-        "idNavigation": idNavigation,
-        "councilLecturers": List<dynamic>.from(councilLecturers.map((x) => x)),
-        "mentors": List<dynamic>.from(mentors.map((x) => x)),
-        "reviews": List<dynamic>.from(reviews.map((x) => x)),
-        "topicLecturers": List<dynamic>.from(topicLecturers.map((x) => x)),
-      };
+    "id": id,
+    "email": email,
+    "userName": userName,
+    "fullName": fullName,
+    "role": role,
+    "statusId": statusId,
+    "department": department,
+  };
 }
