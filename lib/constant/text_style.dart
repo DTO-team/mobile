@@ -2,11 +2,11 @@ import 'package:capstone_management/constant/color.dart';
 import 'package:flutter/material.dart';
 
 class AppTextSytle{
-  static const TextStyle textTheme = TextStyle(
+  static const TextStyle tittleTextStyle = TextStyle(
     fontFamily: 'Roboto',
     color: kTitleTextColor,
-    fontSize: 20,
-    fontWeight: FontWeight.w500,
+    fontSize: 26,
+    fontWeight: FontWeight.w600,
       letterSpacing: 0.15
 
   );
@@ -16,19 +16,18 @@ class AppTextSytle{
       fontSize: 14,
       fontWeight: FontWeight.normal,
       letterSpacing: 0.25
-
   );
   static const TextStyle subTitle2TextStyle = TextStyle(
       fontFamily: 'Roboto',
-      color: kTeamColor,
-      fontSize: 14,
+      color: kTextColor,
+      fontSize: 18,
       fontWeight: FontWeight.normal,
       letterSpacing: 0.15
 
   );
   static const TextStyle subTitle1TextStyle = TextStyle(
       fontFamily: 'Roboto',
-      color: kTitleTextColor,
+      color: kTeamColor,
       fontSize: 16,
       fontWeight: FontWeight.bold,
       letterSpacing: 0.15

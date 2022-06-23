@@ -14,21 +14,21 @@ String topicToJson(Topic data) => json.encode(data.toJson());
 class Topic {
   Topic({
     required this.id,
-    required this.name,
+    required this.topicName,
     required this.description,
     this.companyDetail,
     required this.lecturersDetails,
   });
 
   String id;
-  String name;
+  String topicName;
   String description;
   User? companyDetail;
   List<Lecturer> lecturersDetails;
 
   factory Topic.fromJson(Map<String, dynamic> json) => Topic(
     id: json["topicId"],
-    name: json["name"],
+    topicName: json["topicName"],
     description: json["description"],
     companyDetail: (json["companyDetail"] != null) ? User.fromJson(json["companyDetail"]) : null,
     lecturersDetails: List<Lecturer>.from(json["lecturersDetails"].map((x) => Lecturer.fromJson(x))),
@@ -39,7 +39,7 @@ class Topic {
 
   Map<String, dynamic> toJson() => {
     "topicId": id,
-    "name": name,
+    "topicName": topicName,
     "description": description,
     "companyDetail": companyDetail?.toJson(),
     "lecturersDetails": List<dynamic>.from(lecturersDetails.map((x) => x.toJson())),
