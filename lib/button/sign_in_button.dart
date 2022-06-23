@@ -1,5 +1,4 @@
 import 'package:capstone_management/button/button_type.dart';
-import 'package:capstone_management/widget/color.dart';
 import 'package:flutter/material.dart';
 
 class SignInButton extends StatelessWidget {
@@ -15,7 +14,7 @@ class SignInButton extends StatelessWidget {
     Key? key,
     required this.color,
     required this.onPressed,
-    this.height: 50,
+    this.height = 50,
     required this.button,
     required this.text,
     required this.textColor,
@@ -60,7 +59,7 @@ class SignInButton extends StatelessWidget {
                 Icons.logout,
                 color: textColor,
               ),
-              SizedBox(width: 5,),
+              const SizedBox(width: 5,),
               Text(
                 text,
                 style: TextStyle(color: textColor, fontSize: 15),
