@@ -22,7 +22,7 @@ class AppTextSytle{
       fontFamily: 'Roboto',
       color: kTextColor,
       fontSize: 18,
-      fontWeight: FontWeight.normal,
+      fontWeight: FontWeight.w500,
       letterSpacing: 0.15
 
   );
