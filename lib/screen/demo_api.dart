@@ -21,7 +21,6 @@ class _DemoAPIState extends State<DemoAPI> {
         children: [
           Container(margin: EdgeInsets.symmetric(vertical: 10),
               child: Text('Name of Topic this semester',style: AppTextSytle.tittleTextStyle,)),
-
          Text('Lecturer',style: AppTextSytle.subTitle2TextStyle,),
           Container(
             margin: EdgeInsets.only(top: 5),

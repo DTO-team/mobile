@@ -7,6 +7,7 @@ class AppTextSytle{
     color: kTitleTextColor,
     fontSize: 26,
     fontWeight: FontWeight.w600,
+
       letterSpacing: 0.15
 
   );

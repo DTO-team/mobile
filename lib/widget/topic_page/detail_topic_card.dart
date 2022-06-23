@@ -78,6 +78,67 @@ final Topic topic;
           ),
         ),
       ),
+      body:SingleChildScrollView(
+        child: Container(
+          height: MediaQuery.of(context).size.height,
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(margin: EdgeInsets.symmetric(vertical: 10),
+                  child: Center(child: Text(topic.name,style: AppTextSytle.textTheme,))),
+
+              Text('Lecturer',style: AppTextSytle.subTitle2TextStyle,),
+              ListView.builder(
+                shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+                itemCount: topic.lecturersDetails.length,
+                itemBuilder: (BuildContext context, int index) {
+                  if( topic.lecturersDetails.map((e) => e.email).toList()[index] != null){
+                    return lec_card(
+                      name:    topic.lecturersDetails.map((e) => e.fullName).toList()[index],
+                      avatar: 'assets/chamb.png',
+                      email: topic.lecturersDetails.map((e) => e.email).toList()[index],
+                    );
+                  }
+                  else{
+                    return Flexible(child: Center(child: Text('Empty')));
+                  }
+
+              },
+              ),
+              SizedBox(height: 5,),
+              Text('Description',style: AppTextSytle.subTitle2TextStyle,),
+              SizedBox(height: 5,),
+              Container(
+                margin: EdgeInsets.only(top: 5),
+                width: MediaQuery.of(context).size.width,
+                padding: EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                  color: whiteSoft,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.2),
+                      spreadRadius: 2,
+                      blurRadius: 2,
+                      offset: Offset(0, 1), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: Text('aaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdasaaaaaasssasdasdasdas')
+              )
+
+
+
+
+
+
+
+
+            ],
+          ),
+        ),
+      ),
 
     );
   }
