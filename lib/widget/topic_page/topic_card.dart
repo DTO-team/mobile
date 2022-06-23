@@ -39,8 +39,8 @@ class TopicCard extends StatelessWidget {
             children: [
               // Recipe title
               Text(
-                topic.name,
-                style: AppTextSytle.textTheme,
+                topic.topicName,
+                style: AppTextSytle.tittleTextStyle,
               ),
               Padding(padding: EdgeInsets.only(top: 10)),
               Container(

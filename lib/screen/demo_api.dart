@@ -20,8 +20,7 @@ class _DemoAPIState extends State<DemoAPI> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(margin: EdgeInsets.symmetric(vertical: 10),
-              child: Text('Name of Topic this semester',style: AppTextSytle.textTheme,)),
-
+              child: Text('Name of Topic this semester',style: AppTextSytle.tittleTextStyle,)),
          Text('Lecturer',style: AppTextSytle.subTitle2TextStyle,),
           Container(
             margin: EdgeInsets.only(top: 5),
