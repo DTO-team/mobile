@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:capstone_management/modal/user.dart';
 
 Lecturer lecturerFromJson(String str) => Lecturer.fromJson(json.decode(str));
-
 String lecturerToJson(Lecturer data) => json.encode(data.toJson());
 
 class Lecturer extends User {

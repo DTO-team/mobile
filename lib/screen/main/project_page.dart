@@ -1,10 +1,9 @@
 import 'package:capstone_management/modal/lecturer.dart';
 import 'package:capstone_management/modal/user.dart';
-import 'package:capstone_management/service/remote_service.dart';
 import 'package:flutter/material.dart';
 
 import '../../provider/new_feed.dart';
-import '../../widget/color.dart';
+import '../../constant/color.dart';
 import '../../widget/project_page/detail_project_card.dart';
 import '../../widget/project_page/project_card.dart';
 import '../../widget/search_bar.dart';
@@ -26,20 +25,20 @@ class _ProjectPageState extends State<ProjectPage> {
     // TODO: implement initState
     super.initState();
     getUser();
-    getLec();
+  //  getLec();
   }
 
-  getLec() async {
-    lecturers = await Remote().getLectures();
-    if (users != null) {
-      setState(() {
-        isLoaded = true;
-      });
-    }
-  }
+  // getLec() async {
+  //   lecturers = await Remote().getLectures();
+  //   if (users != null) {
+  //     setState(() {
+  //       isLoaded = true;
+  //     });
+  //   }
+  // }
 
   getUser() async {
-    users = (await Remote().getUsers()) as List<User>?;
+    //users = (await TopicRepository().getUsers()) as List<User>?;
     if (users != null) {
       setState(() {
         isLoaded = true;
