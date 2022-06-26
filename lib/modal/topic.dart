@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final topic = topicFromJson(jsonString);
-
 import 'dart:convert';
 
 import 'package:capstone_management/modal/lecturer.dart';
@@ -33,9 +29,6 @@ class Topic {
     companyDetail: (json["companyDetail"] != null) ? User.fromJson(json["companyDetail"]) : null,
     lecturersDetails: List<Lecturer>.from(json["lecturersDetails"].map((x) => Lecturer.fromJson(x))),
   );
-
-
-
 
   Map<String, dynamic> toJson() => {
     "topicId": id,

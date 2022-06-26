@@ -1,17 +1,19 @@
 import 'package:capstone_management/constant/color.dart';
 import 'package:flutter/material.dart';
 
-class UserInfoTile extends StatelessWidget {
+class UserInfoEditTile extends StatelessWidget {
   final String label, value;
   final EdgeInsetsGeometry margin, padding;
   final Color valueBackground;
+  final FormFieldValidator<String>? validator;
 
-  const UserInfoTile(
+  const UserInfoEditTile(
       {required this.label,
       required this.value,
       required this.padding,
       required this.margin,
       required this.valueBackground,
+      this.validator,
       Key? key})
       : super(key: key);
 
@@ -30,22 +32,21 @@ class UserInfoTile extends StatelessWidget {
                 style: const TextStyle(color: primary, fontSize: 12)),
           ),
           Container(
-            decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    spreadRadius: 1,
-                    blurRadius: 2,
-                    offset: const Offset(2, 2), // changes position of shadow
-                  ),
-                ],
-                color: whiteSoft,
-                borderRadius: BorderRadius.circular(5)
-            ),
+            decoration: BoxDecoration(boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 1,
+                blurRadius: 2,
+                offset: const Offset(2, 2), // changes position of shadow
+              ),
+            ], color: whiteSoft, borderRadius: BorderRadius.circular(5)),
             margin: const EdgeInsets.only(top: 6),
             width: MediaQuery.of(context).size.width,
             padding: const EdgeInsets.all(16),
-            child: Text(value,
+            child: TextFormField(
+                controller: TextEditingController(text: value),
+                decoration: const InputDecoration(),
+                validator: validator,
                 style:
                     const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
           )

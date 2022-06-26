@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import 'package:capstone_management/modal/user.dart';
+import 'department.dart';
+import 'user.dart';
 
 Lecturer lecturerFromJson(String str) => Lecturer.fromJson(json.decode(str));
 String lecturerToJson(Lecturer data) => json.encode(data.toJson());
@@ -14,10 +15,10 @@ class Lecturer extends User {
     required super.role,
     required super.statusId,
     super.avatarUrl,
-    required this.departmentName,
+    required this.department,
   });
 
-  String departmentName;
+  Department department;
 
   factory Lecturer.fromJson(Map<String, dynamic> json) => Lecturer(
     id: json["id"],
@@ -27,7 +28,7 @@ class Lecturer extends User {
     role: json["role"],
     statusId: json["statusId"],
     avatarUrl: json["avatarUrl"],
-    departmentName: json["departmentName"],
+    department: Department.fromJson(json["department"]),
   );
 
   @override
@@ -39,6 +40,6 @@ class Lecturer extends User {
     "role": role,
     "statusId": statusId,
     "avatarUrl": avatarUrl,
-    "departmentName": departmentName,
+    "department": department.toJson(),
   };
 }

@@ -37,10 +37,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return {
       '/': (context) {
         return [
-          HomePage(),
-          ProjectPage(),
-          TopicPage(),
-          ProfilePage()
+          const HomePage(),
+          const ProjectPage(),
+          const TopicPage(),
+          const ProfilePage()
         ].elementAt(index);
       },
     };

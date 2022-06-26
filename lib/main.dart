@@ -19,7 +19,7 @@ class CapstoneOngoingApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-          title: 'Amplify Auth Demo',
+          title: 'Capstone Ongoing',
           theme: ThemeData(
             colorScheme: ColorScheme.fromSwatch().copyWith(
               primary: primary,

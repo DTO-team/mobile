@@ -131,7 +131,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 UserInfoTile(
                   margin: const EdgeInsets.only(bottom: 16),
                   label: 'Department',
-                  value: _appUser.departmentName,
+                  value: _appUser.department.name,
                   valueBackground: primaryExtraSoft,
                   padding: const EdgeInsets.all(0),
                 ),
