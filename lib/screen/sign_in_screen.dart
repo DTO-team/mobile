@@ -23,17 +23,18 @@ class SignInPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const SizedBox(
-            height: 50.0,
-            child: Text(
-              'Sign In',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
+          Image.asset('assets/fpt_logo.png'),
+          // const SizedBox(
+          //   height: 70,
+          //   child: Text(
+          //     'Capstone On Going Management',
+          //     textAlign: TextAlign.center,
+          //     style: TextStyle(
+          //       fontSize: 32,
+          //       fontWeight: FontWeight.w600,
+          //     ),
+          //   ),
+          // ),
           const SizedBox(
             height: 48.0,
           ),

@@ -17,8 +17,8 @@ class TopicCard extends StatelessWidget {
     return GestureDetector(
       onTap: onPress,
       child: Container(
-        height: MediaQuery.of(context).size.height/4,
-        padding: EdgeInsets.fromLTRB(0, 5,5, 0),
+        padding: EdgeInsets.fromLTRB(5, 5,5, 5),
+        margin: EdgeInsets.only(top: 10),
         decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -59,11 +59,21 @@ class TopicCard extends StatelessWidget {
              
                   Divider(thickness: 1, color: primary,height: 20,),
               Container(
-                padding: EdgeInsets.fromLTRB(2, 0, 2, 2),
-                child: Text(topic.description.length > 100 ? '${topic.description.substring(0,100)}...': topic.description,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis, textAlign: TextAlign.left,
-                  style: AppTextSytle.bodyTextStyle,
+                margin: EdgeInsets.symmetric(vertical: 10),
+                child: RichText(
+                  text: TextSpan(
+                    text: 'Description: ',
+                      style: AppTextSytle.subTitle1TextStyle,
+                    children:
+                    [
+                      TextSpan(text:topic.description.length > 100 ? '${topic.description.substring(0,100)}...': topic.description,
+                        style: AppTextSytle.bodyTextStyle
+
+                ),
+
+                    ]
+                  ),
+
                 ),
               )
 

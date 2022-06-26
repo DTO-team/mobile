@@ -21,7 +21,7 @@ class AppTextSytle{
   static const TextStyle subTitle2TextStyle = TextStyle(
       fontFamily: 'Roboto',
       color: kTextColor,
-      fontSize: 18,
+      fontSize: 16,
       fontWeight: FontWeight.w500,
       letterSpacing: 0.15
 
@@ -32,6 +32,16 @@ class AppTextSytle{
       fontSize: 16,
       fontWeight: FontWeight.bold,
       letterSpacing: 0.15
+
+  );
+
+  static const TextStyle subTitle1_1TextStyle = TextStyle(
+      fontFamily: 'Roboto',
+      color: kTeamColor,
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      letterSpacing: 0.15,
+       decoration: TextDecoration.underline
 
   );
 
