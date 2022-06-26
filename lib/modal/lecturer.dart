@@ -5,6 +5,8 @@
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
+import 'department.dart';
+
 Lecturer lecturerFromJson(String str) => Lecturer.fromJson(json.decode(str));
 
 String lecturerToJson(Lecturer data) => json.encode(data.toJson());
@@ -17,6 +19,7 @@ class Lecturer {
     required this.fullName,
     required this.role,
     required this.statusId,
+    required this.avatarUrl,
     required this.department,
   });
 
@@ -26,7 +29,8 @@ class Lecturer {
   String fullName;
   String role;
   int statusId;
-  String department;
+  String? avatarUrl;
+  Department? department;
 
   factory Lecturer.fromJson(Map<String, dynamic> json) => Lecturer(
     id: json["id"],
@@ -35,9 +39,9 @@ class Lecturer {
     fullName: json["fullName"],
     role: json["role"],
     statusId: json["statusId"],
-    department: json["department"],
+    avatarUrl: json["avatarUrl"],
+    department: (json["department"] != null) ? Department.fromJson(json["department"]) : null,
   );
-
 
   Map<String, dynamic> toJson() => {
     "id": id,
@@ -46,6 +50,9 @@ class Lecturer {
     "fullName": fullName,
     "role": role,
     "statusId": statusId,
-    "department": department,
+    "avatarUrl": avatarUrl,
+    "department": department?.toJson(),
   };
 }
+
+

@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:capstone_management/common/http_client.dart';
-import 'package:capstone_management/modal/topic.dart';
+
+import '../modal/topic.dart';
+
 
 class TopicRepository {
 

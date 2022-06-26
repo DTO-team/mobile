@@ -1,4 +1,3 @@
-import 'package:capstone_management/modal/lecturer.dart';
 import 'package:capstone_management/modal/topic.dart';
 import 'package:capstone_management/repository/topic_repository.dart';
 import 'package:capstone_management/constant/color.dart';
@@ -16,7 +15,7 @@ class TopicPage extends StatefulWidget {
 }
 
 class _TopicPageState extends State<TopicPage> {
-   List<Topic>? _topics;
+  List<Topic>? _topics;
   var isLoaded = false;
 
   @override
@@ -24,7 +23,7 @@ class _TopicPageState extends State<TopicPage> {
     super.initState();
     loadTopics();
 
-    }
+  }
 
   Future<void> loadTopics() async {
     _topics = await TopicRepository().getAllTopic();
@@ -53,32 +52,32 @@ class _TopicPageState extends State<TopicPage> {
           ),
           SliverToBoxAdapter(
               child: SearchBar(
-            routeTo: () {},
-          )),
-           SliverList(
+                routeTo: () {},
+              )),
+          SliverList(
               delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              return Visibility(
-                replacement: const Center(
-                  child: CircularProgressIndicator(),
-                ),
-                visible: isLoaded,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TopicCard(
-                    topic: _topics![index],
-                    onPress: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => DetailTopicCard(topic: _topics![index],)));
-                    },
-                  ),
-                ),
-              );
-            },
-            childCount: _topics?.length ?? 0,
-          ))
+                    (BuildContext context, int index) {
+                  return Visibility(
+                    replacement: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    visible: isLoaded,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TopicCard(
+                        topic: _topics![index],
+                        onPress: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DetailTopicCard(topic: _topics![index],)));
+                        },
+                      ),
+                    ),
+                  );
+                },
+                childCount: _topics?.length ?? 0,
+              ))
         ],
       ),
     );
