@@ -15,9 +15,8 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
-    // return context.watch<AppUserProvider>().isSignedIn
-    //     ? const BottomNavBar()
-    //     : const SignInPage();
-    return BottomNavBar();
+    return context.watch<AppUserProvider>().isSignedIn
+        ? const BottomNavBar()
+        : const SignInPage();
   }
 }
