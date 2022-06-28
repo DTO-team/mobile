@@ -10,13 +10,25 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final Lecturer appUser = context.watch<AppUserProvider>().appUser!;
+  State<StatefulWidget> createState() => _ProfilePage();
+}
 
+class _ProfilePage extends State<ProfilePage> {
+  late Lecturer _appUser;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() => _appUser =
+        Provider.of<AppUserProvider>(context, listen: false).appUser!);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         systemOverlayStyle: const SystemUiOverlayStyle(
@@ -37,7 +49,10 @@ class ProfilePage extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const EditProfilePage()));
+                      builder: (context) => const EditProfilePage())).then(
+                  (value) => setState(() => _appUser =
+                      Provider.of<AppUserProvider>(context, listen: false)
+                          .appUser!));
             },
             style: TextButton.styleFrom(
                 primary: primary,
@@ -73,9 +88,9 @@ class ProfilePage extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.grey,
                       borderRadius: BorderRadius.circular(100),
-                      image: (appUser.avatarUrl != null)
+                      image: (_appUser.avatarUrl != null)
                           ? DecorationImage(
-                              image: NetworkImage(appUser.avatarUrl!))
+                              image: NetworkImage(_appUser.avatarUrl!))
                           : const DecorationImage(
                               image: AssetImage('assets/chamb.png')),
                     ),
@@ -108,25 +123,25 @@ class ProfilePage extends StatelessWidget {
                 UserInfoTile(
                     margin: const EdgeInsets.only(bottom: 16),
                     label: 'Username',
-                    value: appUser.userName,
+                    value: _appUser.userName,
                     padding: const EdgeInsets.all(0),
                     valueBackground: primaryExtraSoft),
                 UserInfoTile(
                     margin: const EdgeInsets.only(bottom: 16),
                     label: 'Email',
-                    value: appUser.email,
+                    value: _appUser.email,
                     padding: const EdgeInsets.all(0),
                     valueBackground: primaryExtraSoft),
                 UserInfoTile(
                     margin: const EdgeInsets.only(bottom: 16),
                     label: 'Full Name',
-                    value: appUser.fullName,
+                    value: _appUser.fullName,
                     padding: const EdgeInsets.all(0),
                     valueBackground: primaryExtraSoft),
                 UserInfoTile(
                   margin: const EdgeInsets.only(bottom: 16),
                   label: 'Department',
-                  value: appUser.department.name,
+                  value: _appUser.department.name,
                   valueBackground: primaryExtraSoft,
                   padding: const EdgeInsets.all(0),
                 ),

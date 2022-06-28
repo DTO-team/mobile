@@ -5,6 +5,7 @@ import 'package:capstone_management/provider/app_user_provider.dart';
 import 'package:capstone_management/constant/color.dart';
 import 'package:capstone_management/repository/lecturer_repository.dart';
 import 'package:capstone_management/widget/profile_page/edit_user_info_tile.dart';
+import 'package:capstone_management/widget/profile_page/user_info_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,14 +20,20 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   final _formKey = GlobalKey<FormState>();
-  final LecturerRepository repository = LecturerRepository();
+  final _repository = LecturerRepository();
 
-  late Lecturer appUser;
+  late Lecturer _appUser;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      _appUser = Provider.of<AppUserProvider>(context, listen: false).appUser!;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    appUser = context.watch<AppUserProvider>().appUser!;
-
     return Scaffold(
       appBar: AppBar(
         systemOverlayStyle: const SystemUiOverlayStyle(
@@ -41,6 +48,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 fontFamily: 'inter',
                 fontWeight: FontWeight.w400,
                 fontSize: 16)),
+        leading: const BackButton(
+          color: kTitleTextColor,
+        ),
       ),
       body: ListView(
         shrinkWrap: true,
@@ -50,7 +60,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
             color: primary,
             padding: const EdgeInsets.symmetric(vertical: 24),
             child: GestureDetector(
-              onTap: () {},
+              onVerticalDragUpdate: (details) {},
+              onHorizontalDragUpdate: (details) {
+                if (details.delta.direction <= 0) {
+                  Navigator.pop(context);
+                }
+              },
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -62,9 +77,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     decoration: BoxDecoration(
                       color: Colors.grey,
                       borderRadius: BorderRadius.circular(100),
-                      image: (appUser.avatarUrl != null)
+                      image: (_appUser.avatarUrl != null)
                           ? DecorationImage(
-                              image: NetworkImage(appUser.avatarUrl!))
+                              image: NetworkImage(_appUser.avatarUrl!))
                           : const DecorationImage(
                               image: AssetImage('assets/chamb.png')),
                     ),
@@ -96,10 +111,22 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  UserInfoTile(
+                      margin: const EdgeInsets.only(bottom: 16),
+                      label: 'Username',
+                      value: _appUser.userName,
+                      padding: const EdgeInsets.all(0),
+                      valueBackground: primaryExtraSoft),
+                  UserInfoTile(
+                      margin: const EdgeInsets.only(bottom: 16),
+                      label: 'Email',
+                      value: _appUser.email,
+                      padding: const EdgeInsets.all(0),
+                      valueBackground: primaryExtraSoft),
                   EditUserInfoTile(
                     margin: const EdgeInsets.only(bottom: 16),
                     label: 'Full name',
-                    value: appUser.fullName,
+                    value: _appUser.fullName,
                     padding: const EdgeInsets.all(0),
                     valueBackground: primaryExtraSoft,
                     validator: (value) {
@@ -110,26 +137,31 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       }
                     },
                     onSaved: (value) =>
-                        setState(() => appUser.fullName = value!),
+                        setState(() => _appUser.fullName = value!),
                   ),
-                  EditUserInfoTile(
+                  UserInfoTile(
                     margin: const EdgeInsets.only(bottom: 16),
                     label: 'Department',
-                    value: appUser.department.name,
+                    value: _appUser.department.name,
                     valueBackground: primaryExtraSoft,
                     padding: const EdgeInsets.all(0),
                   ),
-                  TextButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        _formKey.currentState?.save();
-                        repository.updateLecturer(appUser.id, appUser).then(
-                            (value) => Provider.of<AppUserProvider>(context,
-                                    listen: false)
-                                .appUser = value);
-                      }
-                    },
-                    child: const Text('Save'),
+                  Container(
+                    alignment: Alignment.center,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState?.save();
+                          _repository
+                              .updateLecturer(_appUser.id, _appUser)
+                              .then((value) => Provider.of<AppUserProvider>(
+                                      context,
+                                      listen: false)
+                                  .appUser = value);
+                        }
+                      },
+                      child: const Text('Save'),
+                    ),
                   ),
                   const SizedBox(
                     height: 15,
