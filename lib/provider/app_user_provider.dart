@@ -1,12 +1,11 @@
 import 'dart:convert';
-
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:capstone_management/amplifyconfiguration.dart';
 import 'package:capstone_management/common/http_client.dart';
 import 'package:capstone_management/common/string_util.dart';
 import 'package:capstone_management/modal/lecturer.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
 class AppUserProvider extends ChangeNotifier {
@@ -41,39 +40,41 @@ class AppUserProvider extends ChangeNotifier {
 
         final response =
             await httpClient.post('/auth/login', body: {'idToken': idToken});
-        if (response.statusCode == 200) {
-          final body = jsonDecode(response.body);
-          if (body['accessToken'] != null) {
-            httpClient.token = body['accessToken'];
-            appUser = Lecturer.fromJson(body);
-            isSignedIn = true;
-          } else {
-            signOut();
-          }
-        } else {
-          // TODO toast 'Login fail'
-          signOut();
+        if (response.statusCode != 200) {
+          return;
         }
-      } else {
-        // TODO toast 'Login fail'
-        signOut();
+
+        final body = jsonDecode(response.body);
+        if (body['accessToken'] != null) {
+          httpClient.token = body['accessToken'];
+          appUser = Lecturer.fromJson(body);
+          isSignedIn = true;
+        }
       }
-      notifyListeners();
     } catch (e) {
       logger.e(e);
+    } finally {
+      if (!isSignedIn) {
+        _clearSignInState();
+      }
+      notifyListeners();
     }
   }
 
   void signOut() async {
     try {
-      await Amplify.Auth.signOut().whenComplete(() {
-        HttpClient().token = null;
-        appUser = null;
-        isSignedIn = false;
-      });
-      notifyListeners();
+      _clearSignInState();
+      Amplify.Auth.signOut();
     } on AuthException catch (e) {
       logger.e(e);
+    } finally {
+      notifyListeners();
     }
+  }
+
+  void _clearSignInState() {
+    HttpClient().token = null;
+    appUser = null;
+    isSignedIn = false;
   }
 }

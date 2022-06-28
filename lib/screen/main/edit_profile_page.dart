@@ -1,5 +1,3 @@
-import 'package:capstone_management/button/button_type.dart';
-import 'package:capstone_management/button/sign_in_button.dart';
 import 'package:capstone_management/modal/lecturer.dart';
 import 'package:capstone_management/provider/app_user_provider.dart';
 import 'package:capstone_management/constant/color.dart';
@@ -169,13 +167,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ],
               ),
             ),
-          ),
-          SignInButton(
-            button: ButtonType.signOut,
-            onPressed: () => context.read<AppUserProvider>().signOut(),
-            color: secondary,
-            text: 'Log out',
-            textColor: Colors.black87,
           ),
         ],
       ),
