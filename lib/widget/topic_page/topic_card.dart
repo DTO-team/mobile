@@ -4,8 +4,7 @@ import 'package:capstone_management/constant/color.dart';
 import 'package:flutter/material.dart';
 
 class TopicCard extends StatelessWidget {
-  const TopicCard({Key? key, required this.topic, required this.onPress})
-      : super(key: key);
+  const TopicCard({Key? key, required this.topic, required this.onPress}) : super(key: key);
 
   final Topic topic;
   final VoidCallback onPress;
@@ -15,16 +14,20 @@ class TopicCard extends StatelessWidget {
     return GestureDetector(
       onTap: onPress,
       child: Container(
-        height: MediaQuery.of(context).size.height / 4,
-        padding: const EdgeInsets.fromLTRB(0, 5, 5, 0),
-        decoration: BoxDecoration(boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 2,
-            blurRadius: 7,
-            offset: const Offset(0, 3), // changes position of shadow
-          ),
-        ], color: whiteSoft, borderRadius: BorderRadius.circular(5)),
+        padding: EdgeInsets.fromLTRB(5, 5,5, 5),
+        margin: EdgeInsets.only(top: 10),
+        decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 7,
+                offset: Offset(0, 3), // changes position of shadow
+              ),
+            ],
+            color: whiteSoft,
+            borderRadius: BorderRadius.circular(5)
+        ),
         child: Container(
           margin: const EdgeInsets.all(10),
           child: Column(
@@ -58,18 +61,26 @@ class TopicCard extends StatelessWidget {
                 color: primary,
                 height: 20,
               ),
+             
               Container(
-                padding: const EdgeInsets.fromLTRB(2, 0, 2, 2),
-                child: Text(
-                  topic.description.length > 100
-                      ? '${topic.description.substring(0, 100)}...'
-                      : topic.description,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.left,
-                  style: AppTextSytle.bodyTextStyle,
+                margin: EdgeInsets.symmetric(vertical: 10),
+                child: RichText(
+                  text: TextSpan(
+                    text: 'Description: ',
+                      style: AppTextSytle.subTitle1TextStyle,
+                    children:
+                    [
+                      TextSpan(text:topic.description.length > 100 ? '${topic.description.substring(0,100)}...': topic.description,
+                        style: AppTextSytle.bodyTextStyle
+
+                ),
+
+                    ]
+                  ),
+
                 ),
               )
+
             ],
           ),
         ),

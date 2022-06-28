@@ -4,6 +4,7 @@ import 'department.dart';
 import 'user.dart';
 
 Lecturer lecturerFromJson(String str) => Lecturer.fromJson(json.decode(str));
+
 String lecturerToJson(Lecturer data) => json.encode(data.toJson());
 
 class Lecturer extends User {

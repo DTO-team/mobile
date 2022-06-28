@@ -1,7 +1,12 @@
 import 'package:capstone_management/provider/new_feed.dart';
 import 'package:capstone_management/constant/color.dart';
 import 'package:capstone_management/widget/home_page/new_feed_card.dart';
+import 'package:capstone_management/widget/home_page/time_line_card.dart';
+import 'package:capstone_management/widget/home_page/welcome_card.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+
+import '../../constant/text_style.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage( {Key? key}) : super(key: key);
@@ -108,11 +113,21 @@ class _HomePageState extends State<HomePage> {
           tweetedAt: 'Oct 4',
           topic: 'Project OnGoing'),
     ];
+    int _currentCard = 0 ;
+    List cardList = [ WelcomeCard(),TimeLineCard()];
+    List<T> map<T>(List list, Function handler) {
+      List<T> result = [];
+      for (var i = 0; i < list.length; i++) {
+        result.add(handler(i, list[i]));
+      }
+      return result;
+    }
     return Scaffold(
       ///trao cho th nay
       ///ừ cái key đó, ta hoàn toàn có thể get được tham chiếu của chính Widget đó qua biến
       ///currentWidget và thậm chí get được cả State của Widget đó
       // key: _scaffoldKey,
+
       body: CustomScrollView(
         slivers: [
           const SliverAppBar(
@@ -128,53 +143,46 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           SliverToBoxAdapter(
-            child: Container(
-              color: whiteSoft,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 5),
-                  height: 200,
-                  decoration: BoxDecoration(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
 
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Expanded(
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: whiteSoft,
-                            borderRadius: BorderRadius.circular(3.0),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.3),
-                                spreadRadius: 1,
-                                blurRadius: 7,
-                                offset: const Offset(
-                                    0, 3), // changes position of shadow
+                  color: whiteSoft,
+                  child: CarouselSlider(
+                    options: CarouselOptions(
+                      aspectRatio:16/9,
+                        viewportFraction: 1,
+                      scrollDirection: Axis.horizontal,
+                     // autoPlay: true,
+                      onPageChanged: (index, reason){
+                        setState(() {
+                          _currentCard = index;
+                        });
+                      }
+                    ),
+                    items: cardList.map((card){
+                      return Builder(
+                          builder:(BuildContext context){
+                            return Container(
+                              width: MediaQuery.of(context).size.width,
+                              child: Container(
+                                child: card,
                               ),
-                            ],
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 8.0),
-                          child: Center(
-                            child: Text(
-                              "User Total:${nfs.length} ",
-                              style: TextStyle(
-                                  color: primarySoft,
-                                  fontSize: 12.0,
-                                    fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                      ),
-
-
-                    ],
+                            );
+                          }
+                      );
+                    }).toList(),
                   ),
+
                 ),
-              ),
+                SizedBox(height: 10,),
+                Container(
+                  margin: EdgeInsets.only(left: 10),
+                  child: Text('Notifications',style: AppTextSytle.subTitle2TextStyle,),
+
+                ),
+              ],
             ),
           ),
           SliverList(

@@ -4,6 +4,9 @@ import 'package:capstone_management/common/http_client.dart';
 import 'package:capstone_management/modal/topic.dart';
 import 'package:logger/logger.dart';
 
+import '../modal/topic.dart';
+
+
 class TopicRepository {
   static final logger = Logger();
 
@@ -17,4 +20,5 @@ class TopicRepository {
       logger.e('Failed to load topics--- ${response.statusCode}');
     }
   }
+
 }
