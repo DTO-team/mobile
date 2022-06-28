@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'package:capstone_management/constant/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
-
-import '../constant/color.dart';
 
 class SearchBar extends StatelessWidget {
   const SearchBar({Key? key, required this.routeTo}) : super(key: key);
@@ -13,7 +11,7 @@ class SearchBar extends StatelessWidget {
     return GestureDetector(
       onTap: routeTo,
       child: Container(
-        decoration: BoxDecoration(color: whiteSoft),
+        decoration: const BoxDecoration(color: whiteSoft),
         padding: const EdgeInsets.symmetric(horizontal: 10.5),
         height: 50,
         child: Row(
@@ -26,25 +24,25 @@ class SearchBar extends StatelessWidget {
                 margin: const EdgeInsets.only(right: 15),
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: BoxDecoration(
-                  border: Border.all(color: black),
+                    border: Border.all(color: black),
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white),
                 child: Row(
                   children: [
-                    ImageIcon(const Svg('assets/Search.svg'),
+                    const ImageIcon(Svg('assets/Search.svg'),
                         color: black, size: 18),
-                    SizedBox(width: 5,),
+                    const SizedBox(
+                      width: 5,
+                    ),
                     Container(
                       margin: const EdgeInsets.only(left: 10),
                       child: SizedBox(
-                        width: MediaQuery.of(context).size.width*60/100,
-                        child: TextField(
+                        width: MediaQuery.of(context).size.width * 60 / 100,
+                        child: const TextField(
                           decoration: InputDecoration(
                               focusedBorder: InputBorder.none,
                               enabledBorder: InputBorder.none,
-                              hintText: 'Topic'
-                          ),
-
+                              hintText: 'Topic'),
                         ),
                       ),
                     )

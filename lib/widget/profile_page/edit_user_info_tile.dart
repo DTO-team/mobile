@@ -1,17 +1,21 @@
 import 'package:capstone_management/constant/color.dart';
 import 'package:flutter/material.dart';
 
-class UserInfoTile extends StatelessWidget {
+class EditUserInfoTile extends StatelessWidget {
   final String label, value;
   final EdgeInsetsGeometry margin, padding;
   final Color valueBackground;
+  final FormFieldValidator<String>? validator;
+  final FormFieldSetter<String>? onSaved;
 
-  const UserInfoTile(
+  const EditUserInfoTile(
       {required this.label,
       required this.value,
       required this.padding,
       required this.margin,
       required this.valueBackground,
+      this.validator,
+      this.onSaved,
       Key? key})
       : super(key: key);
 
@@ -41,7 +45,11 @@ class UserInfoTile extends StatelessWidget {
             margin: const EdgeInsets.only(top: 6),
             width: MediaQuery.of(context).size.width,
             padding: const EdgeInsets.all(16),
-            child: Text(value,
+            child: TextFormField(
+                controller: TextEditingController(text: value),
+                decoration: const InputDecoration(),
+                validator: validator,
+                onSaved: onSaved,
                 style:
                     const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
           )

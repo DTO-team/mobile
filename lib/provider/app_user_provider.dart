@@ -5,16 +5,12 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:capstone_management/amplifyconfiguration.dart';
 import 'package:capstone_management/common/http_client.dart';
 import 'package:capstone_management/common/string_util.dart';
-import 'package:flutter/foundation.dart';
-import 'package:logger/logger.dart';
-
-import '../modal/user.dart';
+import 'package:capstone_management/modal/lecturer.dart';
+import 'package:flutter/material.dart';
 
 class AppUserProvider extends ChangeNotifier {
-  static final logger = Logger();
-
   bool isSignedIn = false;
-  User? appUser;
+  Lecturer? appUser;
 
   AppUserProvider() {
     if (!Amplify.isConfigured) configureAmplify();
@@ -25,7 +21,7 @@ class AppUserProvider extends ChangeNotifier {
     try {
       await Amplify.configure(amplifyconfig);
     } catch (e) {
-      logger.e(e);
+      throw Exception(e);
     } finally {
       signOut();
     }
@@ -42,39 +38,41 @@ class AppUserProvider extends ChangeNotifier {
 
         final response =
             await httpClient.post('/auth/login', body: {'idToken': idToken});
-        if (response.statusCode == 200) {
-          final body = jsonDecode(response.body);
-          if (body['accessToken'] != null) {
-            httpClient.token = body['accessToken'];
-            isSignedIn = true;
-            appUser = User.fromJson(body);
-          } else {
-            signOut();
-          }
-        } else {
-          // TODO toast 'Login fail'
-          signOut();
+        if (response.statusCode != 200) {
+          return;
         }
-      } else {
-        // TODO toast 'Login fail'
-        signOut();
+
+        final body = jsonDecode(response.body);
+        if (body['accessToken'] != null) {
+          httpClient.token = body['accessToken'];
+          appUser = Lecturer.fromJson(body);
+          isSignedIn = true;
+        }
+      }
+    } catch (e) {
+      throw Exception(e);
+    } finally {
+      if (!isSignedIn) {
+        _clearSignInState();
       }
       notifyListeners();
-    } catch (e) {
-      logger.e(e);
     }
   }
 
   void signOut() async {
     try {
-      await Amplify.Auth.signOut().whenComplete(() {
-        isSignedIn = false;
-        HttpClient().token = null;
-        appUser = null;
-      });
-      notifyListeners();
+      _clearSignInState();
+      Amplify.Auth.signOut();
     } on AuthException catch (e) {
-      logger.e(e);
+      throw Exception(e);
+    } finally {
+      notifyListeners();
     }
+  }
+
+  void _clearSignInState() {
+    HttpClient().token = null;
+    appUser = null;
+    isSignedIn = false;
   }
 }

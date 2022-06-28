@@ -1,5 +1,5 @@
-import 'package:capstone_management/provider/new_feed.dart';
 import 'package:capstone_management/constant/color.dart';
+import 'package:capstone_management/provider/new_feed.dart';
 import 'package:flutter/material.dart';
 
 class NewFeedCard extends StatelessWidget {

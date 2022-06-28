@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'constant/color.dart';
 import 'landing.dart';
 import 'provider/app_user_provider.dart';
-import 'constant/color.dart';
 
 void main() => runApp(const CapstoneOngoingApp());
 
@@ -19,7 +19,7 @@ class CapstoneOngoingApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-          title: 'Amplify Auth Demo',
+          title: 'Capstone Ongoing',
           theme: ThemeData(
             colorScheme: ColorScheme.fromSwatch().copyWith(
               primary: primary,

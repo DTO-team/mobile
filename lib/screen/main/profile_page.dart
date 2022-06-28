@@ -1,15 +1,31 @@
 import 'package:capstone_management/button/button_type.dart';
 import 'package:capstone_management/button/sign_in_button.dart';
-import 'package:capstone_management/provider/app_user_provider.dart';
 import 'package:capstone_management/constant/color.dart';
+import 'package:capstone_management/modal/lecturer.dart';
+import 'package:capstone_management/provider/app_user_provider.dart';
+import 'package:capstone_management/screen/main/edit_profile_page.dart';
 import 'package:capstone_management/widget/profile_page/user_info_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _ProfilePage();
+}
+
+class _ProfilePage extends State<ProfilePage> {
+  late Lecturer _appUser;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() => _appUser =
+        Provider.of<AppUserProvider>(context, listen: false).appUser!);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,20 +39,21 @@ class ProfilePage extends StatelessWidget {
         centerTitle: true,
         title: const Text('My Profile',
             style: TextStyle(
-              color: kTitleTextColor,
+                color: kTitleTextColor,
                 fontFamily: 'inter',
                 fontWeight: FontWeight.w400,
                 fontSize: 16)),
-        ////return page
-        // leading: IconButton(
-        //   icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
-        //   onPressed: () {
-        //     Navigator.of(context).pop();
-        //   },
-        // ),
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const EditProfilePage())).then(
+                  (value) => setState(() => _appUser =
+                      Provider.of<AppUserProvider>(context, listen: false)
+                          .appUser!));
+            },
             style: TextButton.styleFrom(
                 primary: primary,
                 shape: RoundedRectangleBorder(
@@ -59,9 +76,7 @@ class ProfilePage extends StatelessWidget {
             color: primary,
             padding: const EdgeInsets.symmetric(vertical: 24),
             child: GestureDetector(
-              onTap: () {
-                print('Code to open file manager');
-              },
+              onTap: () {},
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -73,10 +88,11 @@ class ProfilePage extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.grey,
                       borderRadius: BorderRadius.circular(100),
-                      // Profile Picture
-                      image: const DecorationImage(
-                          image: AssetImage('assets/chamb.png'),
-                          fit: BoxFit.cover),
+                      image: (_appUser.avatarUrl != null)
+                          ? DecorationImage(
+                              image: NetworkImage(_appUser.avatarUrl!))
+                          : const DecorationImage(
+                              image: AssetImage('assets/chamb.png')),
                     ),
                   ),
                   Row(
@@ -106,27 +122,26 @@ class ProfilePage extends StatelessWidget {
               children: [
                 UserInfoTile(
                     margin: const EdgeInsets.only(bottom: 16),
+                    label: 'Username',
+                    value: _appUser.userName,
+                    padding: const EdgeInsets.all(0),
+                    valueBackground: primaryExtraSoft),
+                UserInfoTile(
+                    margin: const EdgeInsets.only(bottom: 16),
                     label: 'Email',
-                    value: 'chauhclse150664@fpt.edu.vn',
+                    value: _appUser.email,
                     padding: const EdgeInsets.all(0),
                     valueBackground: primaryExtraSoft),
                 UserInfoTile(
                     margin: const EdgeInsets.only(bottom: 16),
                     label: 'Full Name',
-                    value: 'Hoang Cac Loan Chau',
+                    value: _appUser.fullName,
                     padding: const EdgeInsets.all(0),
                     valueBackground: primaryExtraSoft),
                 UserInfoTile(
                   margin: const EdgeInsets.only(bottom: 16),
-                  label: 'Deparment Code',
-                  value: 'SE150664',
-                  valueBackground: primaryExtraSoft,
-                  padding: const EdgeInsets.all(0),
-                ),
-                UserInfoTile(
-                  margin: const EdgeInsets.only(bottom: 16),
-                  label: 'DoB',
-                  value: '07 04 2001',
+                  label: 'Department',
+                  value: _appUser.department.name,
                   valueBackground: primaryExtraSoft,
                   padding: const EdgeInsets.all(0),
                 ),
