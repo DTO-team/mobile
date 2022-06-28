@@ -23,27 +23,27 @@ class Student extends User {
   String semester;
 
   factory Student.fromJson(Map<String, dynamic> json) => Student(
-    id: json["id"],
-    email: json["email"],
-    userName: json["userName"],
-    fullName: json["fullName"],
-    code: json["code"],
-    semester: json["semester"],
-    role: json["role"],
-    statusId: json["statusId"],
-    avatarUrl: json["avatarUrl"],
-  );
+        id: json["id"],
+        email: json["email"],
+        userName: json["userName"],
+        fullName: json["fullName"],
+        code: json["code"],
+        semester: json["semester"],
+        role: json["role"],
+        statusId: json["statusId"],
+        avatarUrl: json["avatarUrl"],
+      );
 
   @override
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "email": email,
-    "userName": userName,
-    "fullName": fullName,
-    "code": code,
-    "semester": semester,
-    "role": role,
-    "statusId": statusId,
-    "avatarUrl": avatarUrl,
-  };
+        "id": id,
+        "email": email,
+        "userName": userName,
+        "fullName": fullName,
+        "code": code,
+        "semester": semester,
+        "role": role,
+        "statusId": statusId,
+        "avatarUrl": avatarUrl,
+      };
 }

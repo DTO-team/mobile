@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:capstone_management/amplifyconfiguration.dart';
@@ -6,11 +7,8 @@ import 'package:capstone_management/common/http_client.dart';
 import 'package:capstone_management/common/string_util.dart';
 import 'package:capstone_management/modal/lecturer.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 
 class AppUserProvider extends ChangeNotifier {
-  static final logger = Logger();
-
   bool isSignedIn = false;
   Lecturer? appUser;
 
@@ -23,7 +21,7 @@ class AppUserProvider extends ChangeNotifier {
     try {
       await Amplify.configure(amplifyconfig);
     } catch (e) {
-      logger.e(e);
+      throw Exception(e);
     } finally {
       signOut();
     }
@@ -52,7 +50,7 @@ class AppUserProvider extends ChangeNotifier {
         }
       }
     } catch (e) {
-      logger.e(e);
+      throw Exception(e);
     } finally {
       if (!isSignedIn) {
         _clearSignInState();
@@ -66,7 +64,7 @@ class AppUserProvider extends ChangeNotifier {
       _clearSignInState();
       Amplify.Auth.signOut();
     } on AuthException catch (e) {
-      logger.e(e);
+      throw Exception(e);
     } finally {
       notifyListeners();
     }

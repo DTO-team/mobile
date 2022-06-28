@@ -1,4 +1,3 @@
-import 'package:capstone_management/screen/demo_api.dart';
 import 'package:capstone_management/widget/project_page/team_page.dart';
 import 'package:flutter/material.dart';
 
@@ -16,8 +15,8 @@ class _TabBarProjectState extends State<TabBarProject> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Project Detail'),
-          bottom: TabBar(
+          title: const Text('Project Detail'),
+          bottom: const TabBar(
             tabs: [
               Tab(
                 text: 'Detail',
@@ -26,11 +25,10 @@ class _TabBarProjectState extends State<TabBarProject> {
                 text: 'Team',
               )
             ],
-
           ),
         ),
-        body: TabBarView(
-          children: const [TeamPage()],
+        body: const TabBarView(
+          children: [TeamPage()],
         ),
       ),
     );

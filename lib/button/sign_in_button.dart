@@ -1,5 +1,4 @@
 import 'package:capstone_management/button/button_type.dart';
-import 'package:capstone_management/constant/color.dart';
 import 'package:flutter/material.dart';
 
 class SignInButton extends StatelessWidget {
@@ -37,7 +36,7 @@ class SignInButton extends StatelessWidget {
     );
   }
 
-   buildRow() {
+  buildRow() {
     switch (button) {
       case ButtonType.google:
         return Row(
@@ -60,7 +59,9 @@ class SignInButton extends StatelessWidget {
                 Icons.logout,
                 color: textColor,
               ),
-              const SizedBox(width: 5,),
+              const SizedBox(
+                width: 5,
+              ),
               Text(
                 text,
                 style: TextStyle(color: textColor, fontSize: 15),

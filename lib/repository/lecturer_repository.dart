@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:capstone_management/common/http_client.dart';
 import 'package:capstone_management/modal/lecturer.dart';
 
@@ -23,10 +24,9 @@ class LecturerRepository {
           "userName": lecturer.userName,
           "fullName": lecturer.fullName,
           "avatarUrl": lecturer.avatarUrl,
-          "deparmentId": lecturer.department.id
+          "departmentId": lecturer.department.id
         }));
     if (response.statusCode == 200) {
-      print(jsonDecode(response.body));
       return Lecturer.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to update Lecturer--- ${response.statusCode}');

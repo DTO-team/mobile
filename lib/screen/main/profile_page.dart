@@ -1,8 +1,8 @@
 import 'package:capstone_management/button/button_type.dart';
 import 'package:capstone_management/button/sign_in_button.dart';
+import 'package:capstone_management/constant/color.dart';
 import 'package:capstone_management/modal/lecturer.dart';
 import 'package:capstone_management/provider/app_user_provider.dart';
-import 'package:capstone_management/constant/color.dart';
 import 'package:capstone_management/screen/main/edit_profile_page.dart';
 import 'package:capstone_management/widget/profile_page/user_info_tile.dart';
 import 'package:flutter/material.dart';

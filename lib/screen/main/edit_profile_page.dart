@@ -1,6 +1,6 @@
+import 'package:capstone_management/constant/color.dart';
 import 'package:capstone_management/modal/lecturer.dart';
 import 'package:capstone_management/provider/app_user_provider.dart';
-import 'package:capstone_management/constant/color.dart';
 import 'package:capstone_management/repository/lecturer_repository.dart';
 import 'package:capstone_management/widget/profile_page/edit_user_info_tile.dart';
 import 'package:capstone_management/widget/profile_page/user_info_tile.dart';

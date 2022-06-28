@@ -1,15 +1,14 @@
-import 'package:capstone_management/provider/new_feed.dart';
 import 'package:capstone_management/constant/color.dart';
+import 'package:capstone_management/constant/text_style.dart';
+import 'package:capstone_management/provider/new_feed.dart';
 import 'package:capstone_management/widget/home_page/new_feed_card.dart';
 import 'package:capstone_management/widget/home_page/time_line_card.dart';
 import 'package:capstone_management/widget/home_page/welcome_card.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-import '../../constant/text_style.dart';
-
 class HomePage extends StatefulWidget {
-  const HomePage( {Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -113,8 +112,8 @@ class _HomePageState extends State<HomePage> {
           tweetedAt: 'Oct 4',
           topic: 'Project OnGoing'),
     ];
-    int _currentCard = 0 ;
-    List cardList = [ WelcomeCard(),TimeLineCard()];
+    int _currentCard = 0;
+    List cardList = [WelcomeCard(), TimeLineCard()];
     List<T> map<T>(List list, Function handler) {
       List<T> result = [];
       for (var i = 0; i < list.length; i++) {
@@ -122,6 +121,7 @@ class _HomePageState extends State<HomePage> {
       }
       return result;
     }
+
     return Scaffold(
       ///trao cho th nay
       ///ừ cái key đó, ta hoàn toàn có thể get được tham chiếu của chính Widget đó qua biến
@@ -138,7 +138,10 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: whiteSoft,
 
             flexibleSpace: FlexibleSpaceBar(
-              title: Text('What\'s News',style: TextStyle(color: primary),),
+              title: Text(
+                'What\'s News',
+                style: TextStyle(color: primary),
+              ),
               centerTitle: true,
             ),
           ),
@@ -147,40 +150,39 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-
                   color: whiteSoft,
                   child: CarouselSlider(
                     options: CarouselOptions(
-                      aspectRatio:16/9,
+                        aspectRatio: 16 / 9,
                         viewportFraction: 1,
-                      scrollDirection: Axis.horizontal,
-                     // autoPlay: true,
-                      onPageChanged: (index, reason){
-                        setState(() {
-                          _currentCard = index;
-                        });
-                      }
-                    ),
-                    items: cardList.map((card){
-                      return Builder(
-                          builder:(BuildContext context){
-                            return Container(
-                              width: MediaQuery.of(context).size.width,
-                              child: Container(
-                                child: card,
-                              ),
-                            );
-                          }
-                      );
+                        scrollDirection: Axis.horizontal,
+                        // autoPlay: true,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            _currentCard = index;
+                          });
+                        }),
+                    items: cardList.map((card) {
+                      return Builder(builder: (BuildContext context) {
+                        return Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: Container(
+                            child: card,
+                          ),
+                        );
+                      });
                     }).toList(),
                   ),
-
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 Container(
                   margin: EdgeInsets.only(left: 10),
-                  child: Text('Notifications',style: AppTextSytle.subTitle2TextStyle,),
-
+                  child: Text(
+                    'Notifications',
+                    style: AppTextSytle.subTitle2TextStyle,
+                  ),
                 ),
               ],
             ),

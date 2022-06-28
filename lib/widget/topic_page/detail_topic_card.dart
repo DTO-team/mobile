@@ -25,10 +25,15 @@ class DetailTopicCard extends StatelessWidget {
           backgroundColor: whiteSoft,
           centerTitle: true,
           title: Text(
-            'Topic Detail', style: TextStyle(color: black, fontFamily: 'Roboto', fontWeight: FontWeight.w600, fontSize: 22),
+            'Topic Detail',
+            style: TextStyle(
+                color: black,
+                fontFamily: 'Roboto',
+                fontWeight: FontWeight.w600,
+                fontSize: 22),
           ),
         ),
-        body:SingleChildScrollView(
+        body: SingleChildScrollView(
           child: Container(
             decoration: BoxDecoration(
               color: whiteSoft,
@@ -37,9 +42,16 @@ class DetailTopicCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 10,),
-                Text('Topic Name',style: AppTextSytle.subTitle2TextStyle,),
-                SizedBox(height: 5,),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Topic Name',
+                  style: AppTextSytle.subTitle2TextStyle,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
                 Container(
                     width: MediaQuery.of(context).size.width,
                     padding: EdgeInsets.all(15),
@@ -54,50 +66,75 @@ class DetailTopicCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: Text(topic.topicName,style:AppTextSytle.subTitle1TextStyle,textAlign: TextAlign.left,)),
-               SizedBox(height: 10,),
-                Text('Lecturer',style: AppTextSytle.subTitle2TextStyle,),
-                SizedBox(height: 5,),
+                    child: Text(
+                      topic.topicName,
+                      style: AppTextSytle.subTitle1TextStyle,
+                      textAlign: TextAlign.left,
+                    )),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Lecturer',
+                  style: AppTextSytle.subTitle2TextStyle,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
                 ListView.builder(
                   shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                  physics: NeverScrollableScrollPhysics(),
                   itemCount: topic.lecturersDetails.length,
                   itemBuilder: (BuildContext context, int index) {
-                    if( topic.lecturersDetails.map((e) => e.email).toList()[index] != null){
+                    if (topic.lecturersDetails
+                            .map((e) => e.email)
+                            .toList()[index] !=
+                        null) {
                       return lec_card(
-                        name:    topic.lecturersDetails.map((e) => e.fullName).toList()[index],
+                        name: topic.lecturersDetails
+                            .map((e) => e.fullName)
+                            .toList()[index],
                         avatar: 'assets/chamb.png',
-                        email: topic.lecturersDetails.map((e) => e.email).toList()[index],
+                        email: topic.lecturersDetails
+                            .map((e) => e.email)
+                            .toList()[index],
                       );
-                    }
-                    else{
+                    } else {
                       return Flexible(child: Center(child: Text('Empty')));
                     }
-
-                },
+                  },
                 ),
-                SizedBox(height: 10,),
-                Text('Description',style: AppTextSytle.subTitle2TextStyle,),
-                SizedBox(height: 5,),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Description',
+                  style: AppTextSytle.subTitle2TextStyle,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
                 Container(
-                  margin: EdgeInsets.only(top: 5),
-                  width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.all(15),
-                  decoration: BoxDecoration(
-                    color: whiteSoft,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.2),
-                        spreadRadius: 2,
-                        blurRadius: 2,
-                        offset: Offset(0, 1), // changes position of shadow
-                      ),
-                    ],
-                  ),
-                  child: Text(topic.description,
-                  style: AppTextSytle.bodyTextStyle,textAlign: TextAlign.left,
-                )
-                )],
+                    margin: EdgeInsets.only(top: 5),
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      color: whiteSoft,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.2),
+                          spreadRadius: 2,
+                          blurRadius: 2,
+                          offset: Offset(0, 1), // changes position of shadow
+                        ),
+                      ],
+                    ),
+                    child: Text(
+                      topic.description,
+                      style: AppTextSytle.bodyTextStyle,
+                      textAlign: TextAlign.left,
+                    ))
+              ],
             ),
           ),
         ),
@@ -108,7 +145,10 @@ class DetailTopicCard extends StatelessWidget {
 
 class lec_card extends StatelessWidget {
   const lec_card({
-    Key? key, this.name, this.avatar, this.email,
+    Key? key,
+    this.name,
+    this.avatar,
+    this.email,
   }) : super(key: key);
   final name;
   final avatar;
@@ -147,10 +187,18 @@ class lec_card extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(child: Text(name,style: AppTextSytle.subTitle1TextStyle,)),
-              SizedBox(height: 2,),
               Container(
-                child: Text(email,),
+                  child: Text(
+                name,
+                style: AppTextSytle.subTitle1TextStyle,
+              )),
+              SizedBox(
+                height: 2,
+              ),
+              Container(
+                child: Text(
+                  email,
+                ),
               )
             ],
           ),

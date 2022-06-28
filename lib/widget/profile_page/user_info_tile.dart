@@ -30,18 +30,14 @@ class UserInfoTile extends StatelessWidget {
                 style: const TextStyle(color: primary, fontSize: 12)),
           ),
           Container(
-            decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    spreadRadius: 1,
-                    blurRadius: 2,
-                    offset: const Offset(2, 2), // changes position of shadow
-                  ),
-                ],
-                color: whiteSoft,
-                borderRadius: BorderRadius.circular(5)
-            ),
+            decoration: BoxDecoration(boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 1,
+                blurRadius: 2,
+                offset: const Offset(2, 2), // changes position of shadow
+              ),
+            ], color: whiteSoft, borderRadius: BorderRadius.circular(5)),
             margin: const EdgeInsets.only(top: 6),
             width: MediaQuery.of(context).size.width,
             padding: const EdgeInsets.all(16),

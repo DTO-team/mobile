@@ -1,13 +1,14 @@
+import 'package:capstone_management/constant/color.dart';
 import 'package:capstone_management/screen/main/home_page.dart';
 import 'package:capstone_management/screen/main/profile_page.dart';
 import 'package:capstone_management/screen/main/project_page.dart';
 import 'package:capstone_management/screen/main/topic_page.dart';
-import 'package:capstone_management/constant/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
+
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
@@ -19,7 +20,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
     GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>()
   ];
-
 
   void _onItemTapped(int index) {
     setState(() {
@@ -33,6 +33,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     TopicPage(),
     ProfilePage(),
   ];
+
   Map<String, WidgetBuilder> _routeBuilders(BuildContext context, int index) {
     return {
       '/': (context) {
@@ -45,6 +46,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       },
     };
   }
+
   Widget _buildOffstageNavigator(int index) {
     var routeBuilders = _routeBuilders(context, index);
 
@@ -60,13 +62,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
         final isFirstRouteInCurrentTab =
-        !await _navigatorKeys[_selectedItem].currentState!.maybePop();
+            !await _navigatorKeys[_selectedItem].currentState!.maybePop();
 
         // let system handle back button if we're on the first route
         return isFirstRouteInCurrentTab;
@@ -78,7 +79,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
             _buildOffstageNavigator(1),
             _buildOffstageNavigator(2),
             _buildOffstageNavigator(3),
-
           ],
         ),
         //---------------------------------------------------------
@@ -122,7 +122,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
             icon: ImageIcon(Svg('assets/user.svg')),
             label: 'Profile'),
       ],
-
     );
   }
 }

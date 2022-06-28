@@ -1,6 +1,6 @@
+import 'package:capstone_management/constant/color.dart';
 import 'package:capstone_management/modal/topic.dart';
 import 'package:capstone_management/repository/topic_repository.dart';
-import 'package:capstone_management/constant/color.dart';
 import 'package:capstone_management/widget/search_bar.dart';
 import 'package:capstone_management/widget/topic_page/detail_topic_card.dart';
 import 'package:capstone_management/widget/topic_page/topic_card.dart';
