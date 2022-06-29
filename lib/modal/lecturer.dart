@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'department.dart';
+import 'status.dart';
 import 'user.dart';
 
 Lecturer lecturerFromJson(String str) => Lecturer.fromJson(json.decode(str));
@@ -14,7 +15,7 @@ class Lecturer extends User {
     required super.userName,
     required super.fullName,
     required super.role,
-    required super.statusId,
+    required super.status,
     super.avatarUrl,
     required this.department,
   });
@@ -27,7 +28,7 @@ class Lecturer extends User {
         userName: json["userName"],
         fullName: json["fullName"],
         role: json["role"],
-        statusId: json["statusId"],
+        status: Status.fromJson(json["status"]),
         avatarUrl: json["avatarUrl"],
         department: Department.fromJson(json["department"]),
       );
@@ -39,7 +40,7 @@ class Lecturer extends User {
         "userName": userName,
         "fullName": fullName,
         "role": role,
-        "statusId": statusId,
+        "status": status.toJson(),
         "avatarUrl": avatarUrl,
         "department": department.toJson(),
       };

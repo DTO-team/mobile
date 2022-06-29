@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:capstone_management/modal/user.dart';
 
+import 'status.dart';
+
 Student studentFromJson(String str) => Student.fromJson(json.decode(str));
 
 String studentToJson(Student data) => json.encode(data.toJson());
@@ -15,7 +17,7 @@ class Student extends User {
     required this.code,
     required this.semester,
     required super.role,
-    required super.statusId,
+    required super.status,
     super.avatarUrl,
   });
 
@@ -30,7 +32,7 @@ class Student extends User {
         code: json["code"],
         semester: json["semester"],
         role: json["role"],
-        statusId: json["statusId"],
+        status: Status.fromJson(json["status"]),
         avatarUrl: json["avatarUrl"],
       );
 
@@ -43,7 +45,7 @@ class Student extends User {
         "code": code,
         "semester": semester,
         "role": role,
-        "statusId": statusId,
+        "status": status.toJson(),
         "avatarUrl": avatarUrl,
       };
 }
