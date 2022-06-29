@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:capstone_management/modal/status.dart';
+
 User userFromJson(String str) => User.fromJson(json.decode(str));
 
 String userToJson(User data) => json.encode(data.toJson());
@@ -11,7 +13,7 @@ class User {
     required this.userName,
     required this.fullName,
     required this.role,
-    required this.statusId,
+    required this.status,
     this.avatarUrl,
   });
 
@@ -20,7 +22,7 @@ class User {
   String userName;
   String fullName;
   String role;
-  int statusId;
+  Status status;
   String? avatarUrl;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -29,7 +31,7 @@ class User {
         userName: json["userName"],
         fullName: json["fullName"],
         role: json["role"],
-        statusId: json["statusId"],
+        status: Status.fromJson(json["status"]),
         avatarUrl: json["avatarUrl"],
       );
 
@@ -39,7 +41,7 @@ class User {
         "userName": userName,
         "fullName": fullName,
         "role": role,
-        "statusId": statusId,
+        "status": status.toJson(),
         "avatarUrl": avatarUrl,
       };
 }
