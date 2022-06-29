@@ -7,6 +7,7 @@ import 'package:capstone_management/common/http_client.dart';
 import 'package:capstone_management/common/string_util.dart';
 import 'package:capstone_management/modal/lecturer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class AppUserProvider extends ChangeNotifier {
   bool isSignedIn = false;
@@ -47,9 +48,11 @@ class AppUserProvider extends ChangeNotifier {
           httpClient.token = body['accessToken'];
           appUser = Lecturer.fromJson(body);
           isSignedIn = true;
+          EasyLoading.showSuccess('Login success!');
         }
       }
     } catch (e) {
+      EasyLoading.showError('Login fail!');
       throw Exception(e);
     } finally {
       if (!isSignedIn) {
@@ -63,7 +66,9 @@ class AppUserProvider extends ChangeNotifier {
     try {
       _clearSignInState();
       Amplify.Auth.signOut();
+      EasyLoading.showSuccess('Sign out success!');
     } on AuthException catch (e) {
+      EasyLoading.showError('Sign out fail!');
       throw Exception(e);
     } finally {
       notifyListeners();
