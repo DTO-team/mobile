@@ -1,13 +1,14 @@
 import 'package:capstone_management/constant/color.dart';
+import 'package:capstone_management/modal/project.dart';
 import 'package:capstone_management/provider/new_feed.dart';
 import 'package:flutter/material.dart';
 
 class ProjectCard extends StatelessWidget {
-  const ProjectCard({Key? key, required this.feed, required this.onPress})
+  const ProjectCard({Key? key, required this.project, required this.onPress})
       : super(key: key);
 
   //final User users;
-  final NewFeed feed;
+  final Project project;
   final VoidCallback onPress;
 
   @override
@@ -32,8 +33,8 @@ class ProjectCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Recipe title
-              const Text(
-                'Name',
+               Text(
+                project.topicsResponse.topicName ?? '',
                 style: TextStyle(fontWeight: FontWeight.w700, fontSize: 15),
               ),
               const Padding(padding: EdgeInsets.only(top: 10)),

@@ -9,18 +9,18 @@ String userToJson(User data) => json.encode(data.toJson());
 class User {
   User({
     required this.id,
-    required this.email,
-    required this.userName,
-    required this.fullName,
+     this.email,
+     this.userName,
+     this.fullName,
     required this.role,
     required this.status,
     this.avatarUrl,
   });
 
   String id;
-  String email;
-  String userName;
-  String fullName;
+  String? email;
+  String? userName;
+  String? fullName;
   String role;
   Status status;
   String? avatarUrl;

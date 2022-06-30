@@ -33,7 +33,7 @@ class TopicCard extends StatelessWidget {
             children: [
               // Recipe title
               Text(
-                topic.topicName,
+                topic.topicName?? '',
                 style: AppTextSytle.tittleTextStyle,
               ),
               const Padding(padding: EdgeInsets.only(top: 10)),
@@ -46,7 +46,7 @@ class TopicCard extends StatelessWidget {
                         children: [
                           TextSpan(
                               text: topic.lecturersDetails
-                                  .map((e) => e.email)
+                                  ?.map((e) => e.email)
                                   .toList()
                                   .join(', '),
                               style: AppTextSytle.bodyTextStyle)
@@ -67,8 +67,8 @@ class TopicCard extends StatelessWidget {
                       style: AppTextSytle.subTitle1TextStyle,
                       children: [
                         TextSpan(
-                            text: topic.description.length > 100
-                                ? '${topic.description.substring(0, 100)}...'
+                            text: (topic.description?.length ?? 0) > 100
+                                ? '${topic.description?.substring(0, 100)}...'
                                 : topic.description,
                             style: AppTextSytle.bodyTextStyle),
                       ]),

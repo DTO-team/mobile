@@ -10,35 +10,39 @@ String topicToJson(Topic data) => json.encode(data.toJson());
 class Topic {
   Topic({
     required this.id,
-    required this.topicName,
-    required this.description,
+     this.topicName,
+     this.description,
+     this.isRegistered,
     this.companyDetail,
-    required this.lecturersDetails,
+     this.lecturersDetails,
   });
 
   String id;
-  String topicName;
-  String description;
+  String? topicName;
+  String? description;
+  bool? isRegistered;
   User? companyDetail;
-  List<Lecturer> lecturersDetails;
+  List<Lecturer>? lecturersDetails;
 
   factory Topic.fromJson(Map<String, dynamic> json) => Topic(
         id: json["topicId"],
         topicName: json["topicName"],
-        description: json["description"],
-        companyDetail: (json["companyDetail"] != null)
+    description: json["description"],
+    isRegistered: json["isRegistered"],
+    companyDetail: (json["companyDetail"] != null)
             ? User.fromJson(json["companyDetail"])
             : null,
         lecturersDetails: List<Lecturer>.from(
-            json["lecturersDetails"].map((x) => Lecturer.fromJson(x))),
+            json["lecturersDetails"]?.map((x) => Lecturer.fromJson(x))?.toList()?? []),
       );
 
   Map<String, dynamic> toJson() => {
         "topicId": id,
         "topicName": topicName,
         "description": description,
-        "companyDetail": companyDetail?.toJson(),
+    "isRegistered": isRegistered,
+    "companyDetail": companyDetail?.toJson(),
         "lecturersDetails":
-            List<dynamic>.from(lecturersDetails.map((x) => x.toJson())),
+            List<dynamic>.from(lecturersDetails!.map((x) => x.toJson())),
       };
 }

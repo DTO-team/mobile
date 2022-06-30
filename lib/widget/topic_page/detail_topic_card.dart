@@ -67,7 +67,7 @@ class DetailTopicCard extends StatelessWidget {
                       ],
                     ),
                     child: Text(
-                      topic.topicName,
+                      topic.topicName?? '',
                       style: AppTextSytle.subTitle1TextStyle,
                       textAlign: TextAlign.left,
                     )),
@@ -84,19 +84,19 @@ class DetailTopicCard extends StatelessWidget {
                 ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  itemCount: topic.lecturersDetails.length,
+                  itemCount: topic.lecturersDetails?.length,
                   itemBuilder: (BuildContext context, int index) {
                     if (topic.lecturersDetails
-                            .map((e) => e.email)
+                            !.map((e) => e.email)
                             .toList()[index] !=
                         null) {
                       return lec_card(
                         name: topic.lecturersDetails
-                            .map((e) => e.fullName)
+                            !.map((e) => e.fullName)
                             .toList()[index],
                         avatar: 'assets/chamb.png',
                         email: topic.lecturersDetails
-                            .map((e) => e.email)
+                            !.map((e) => e.email)
                             .toList()[index],
                       );
                     } else {
@@ -130,7 +130,7 @@ class DetailTopicCard extends StatelessWidget {
                       ],
                     ),
                     child: Text(
-                      topic.description,
+                      topic.description?? '',
                       style: AppTextSytle.bodyTextStyle,
                       textAlign: TextAlign.left,
                     ))
