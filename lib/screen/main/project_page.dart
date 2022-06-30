@@ -1,8 +1,5 @@
 import 'package:capstone_management/constant/color.dart';
-import 'package:capstone_management/modal/lecturer.dart';
 import 'package:capstone_management/modal/project.dart';
-import 'package:capstone_management/modal/user.dart';
-import 'package:capstone_management/provider/new_feed.dart';
 import 'package:capstone_management/repository/project_repository.dart';
 import 'package:capstone_management/widget/project_page/detail_project_card.dart';
 import 'package:capstone_management/widget/project_page/project_card.dart';

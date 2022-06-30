@@ -1,6 +1,5 @@
 import 'package:capstone_management/modal/teamdetail.dart';
 import 'package:capstone_management/modal/topic.dart';
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 Project projectFromJson(String str) => Project.fromJson(json.decode(str));

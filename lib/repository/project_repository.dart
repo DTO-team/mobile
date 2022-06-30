@@ -8,7 +8,6 @@ class ProjectRepository {
     final httpClient = HttpClient();
     final response = await httpClient.get('/projects');
     if (response.statusCode == 200) {
-      print('----- status ${response.statusCode}');
       return List<Project>.from(
           jsonDecode(response.body)['data'].map((x) => Project.fromJson(x)));
     } else {
