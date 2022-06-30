@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 
 import 'constant/color.dart';
@@ -25,7 +26,8 @@ class CapstoneOngoingApp extends StatelessWidget {
               primary: primary,
             ),
           ),
-          home: const LandingPage()),
+          home: const LandingPage(),
+          builder: EasyLoading.init()),
     );
   }
 }

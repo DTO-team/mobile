@@ -7,6 +7,7 @@ import 'package:capstone_management/widget/profile_page/edit_user_info_tile.dart
 import 'package:capstone_management/widget/profile_page/user_info_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
@@ -156,15 +157,20 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               .then((value) => Provider.of<AppUserProvider>(
                                       context,
                                       listen: false)
-                                  .appUser = value);
+                                  .appUser = value)
+                              .then((value) =>
+                                  EasyLoading.showSuccess('Save success!'))
+                              .onError((error, stackTrace) =>
+                                  EasyLoading.showError('Save fail!'));
                         }
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ProfilePage())).then(
-                                (value) => setState(() => _appUser =
-                            Provider.of<AppUserProvider>(context, listen: false)
-                                .appUser!));
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ProfilePage()))
+                            .then((value) => setState(() => _appUser =
+                                Provider.of<AppUserProvider>(context,
+                                        listen: false)
+                                    .appUser!));
                       },
                       child: const Text('Save'),
                     ),
