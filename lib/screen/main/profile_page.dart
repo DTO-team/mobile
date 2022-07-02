@@ -123,19 +123,19 @@ class _ProfilePage extends State<ProfilePage> {
                 UserInfoTile(
                     margin: const EdgeInsets.only(bottom: 16),
                     label: 'Username',
-                    value: _appUser.userName,
+                    value: _appUser.userName?? '',
                     padding: const EdgeInsets.all(0),
                     valueBackground: primaryExtraSoft),
                 UserInfoTile(
                     margin: const EdgeInsets.only(bottom: 16),
                     label: 'Email',
-                    value: _appUser.email,
+                    value: _appUser.email?? '',
                     padding: const EdgeInsets.all(0),
                     valueBackground: primaryExtraSoft),
                 UserInfoTile(
                     margin: const EdgeInsets.only(bottom: 16),
                     label: 'Full Name',
-                    value: _appUser.fullName,
+                    value: _appUser.fullName?? '',
                     padding: const EdgeInsets.all(0),
                     valueBackground: primaryExtraSoft),
                 UserInfoTile(

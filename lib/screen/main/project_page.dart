@@ -1,7 +1,6 @@
 import 'package:capstone_management/constant/color.dart';
-import 'package:capstone_management/modal/lecturer.dart';
-import 'package:capstone_management/modal/user.dart';
-import 'package:capstone_management/provider/new_feed.dart';
+import 'package:capstone_management/modal/project.dart';
+import 'package:capstone_management/repository/project_repository.dart';
 import 'package:capstone_management/widget/project_page/detail_project_card.dart';
 import 'package:capstone_management/widget/project_page/project_card.dart';
 import 'package:capstone_management/widget/search_bar.dart';
@@ -15,30 +14,19 @@ class ProjectPage extends StatefulWidget {
 }
 
 class _ProjectPageState extends State<ProjectPage> {
-  List<User>? users;
-  List<Lecturer>? lecturers;
+  List<Project>? prjs;
   var isLoaded = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getUser();
-    //  getLec();
+    getProject();
   }
 
-  // getLec() async {
-  //   lecturers = await Remote().getLectures();
-  //   if (users != null) {
-  //     setState(() {
-  //       isLoaded = true;
-  //     });
-  //   }
-  // }
-
-  getUser() async {
-    //users = (await TopicRepository().getUsers()) as List<User>?;
-    if (users != null) {
+  getProject() async {
+    prjs = await ProjectRepository().getAllProject();
+    if (prjs != null) {
       setState(() {
         isLoaded = true;
       });
@@ -47,98 +35,6 @@ class _ProjectPageState extends State<ProjectPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<NewFeed> nfs = [
-      NewFeed(
-          id: '1',
-          userFirstName: 'chamber th france',
-          team: 'DTOOOOOOOOOOOOOOO',
-          userProfilePic: 'assets/chamb.png',
-          tweet:
-              'Do not worry, with me this will be easy. C\'est simple comme bonjour',
-          tweetedAt: 'Oct 2',
-          topic: 'Project OnGoinggggg'),
-      NewFeed(
-          id: '2',
-          userFirstName: 'Lute',
-          team: 'Lute100',
-          userProfilePic: 'assets/chamb.png',
-          tweet:
-              'This killing is terrible business but I always say if I must do something, be the best',
-          tweetedAt: 'Oct 4',
-          topic: 'Project OnGoing'),
-      NewFeed(
-          id: '3',
-          userFirstName: 'Lute',
-          team: 'Lute100',
-          userProfilePic: 'assets/chamb.png',
-          tweet:
-              'Our guests have arrived. Let\'s make a good first impression, shall we?',
-          tweetedAt: 'Oct 4',
-          topic: 'Project OnGoing'),
-      NewFeed(
-          id: '4',
-          userFirstName: 'Lute',
-          team: 'Lute100',
-          userProfilePic: 'assets/chamb.png',
-          tweet:
-              'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
-          tweetedAt: 'Oct 4',
-          topic: 'Project OnGoing'),
-      NewFeed(
-          id: '5',
-          userFirstName: 'Lute',
-          team: 'Lute100',
-          userProfilePic: 'assets/chamb.png',
-          tweet:
-              'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
-          tweetedAt: 'Oct 4',
-          topic: 'Project OnGoing'),
-      NewFeed(
-          id: '6',
-          userFirstName: 'Lute',
-          team: 'Lute100',
-          userProfilePic: 'assets/chamb.png',
-          tweet:
-              'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
-          tweetedAt: 'Oct 4',
-          topic: 'Project OnGoing'),
-      NewFeed(
-          id: '7',
-          userFirstName: 'Lute',
-          team: 'Lute100',
-          userProfilePic: 'assets/chamb.png',
-          tweet:
-              'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
-          tweetedAt: 'Oct 4',
-          topic: 'Project OnGoing'),
-      NewFeed(
-          id: '8',
-          userFirstName: 'Lute',
-          team: 'Lute100',
-          userProfilePic: 'assets/chamb.png',
-          tweet:
-              'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
-          tweetedAt: 'Oct 4',
-          topic: 'Project OnGoing'),
-      NewFeed(
-          id: '9',
-          userFirstName: 'Lute',
-          team: 'Lute100',
-          userProfilePic: 'assets/chamb.png',
-          tweet:
-              'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
-          tweetedAt: 'Oct 4',
-          topic: 'Project OnGoing'),
-      NewFeed(
-          id: '10',
-          userFirstName: 'Lute',
-          team: 'Lute100',
-          userProfilePic: 'assets/chamb.png',
-          tweet:
-              'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
-          tweetedAt: 'Oct 4',
-          topic: 'Project OnGoing'),
-    ];
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -162,7 +58,7 @@ class _ProjectPageState extends State<ProjectPage> {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ProjectCard(
-                  feed: nfs[index],
+                  project: prjs![index],
                   onPress: () {
                     Navigator.push(
                         context,
@@ -172,7 +68,7 @@ class _ProjectPageState extends State<ProjectPage> {
                 ),
               );
             },
-            childCount: nfs.length,
+            childCount: prjs?.length ?? 0,
           ))
         ],
       ),

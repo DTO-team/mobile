@@ -114,19 +114,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   UserInfoTile(
                       margin: const EdgeInsets.only(bottom: 16),
                       label: 'Username',
-                      value: _appUser.userName,
+                      value: _appUser.userName?? '',
                       padding: const EdgeInsets.all(0),
                       valueBackground: primaryExtraSoft),
                   UserInfoTile(
                       margin: const EdgeInsets.only(bottom: 16),
                       label: 'Email',
-                      value: _appUser.email,
+                      value: _appUser.email?? '',
                       padding: const EdgeInsets.all(0),
                       valueBackground: primaryExtraSoft),
                   EditUserInfoTile(
                     margin: const EdgeInsets.only(bottom: 16),
                     label: 'Full name',
-                    value: _appUser.fullName,
+                    value: _appUser.fullName ?? '',
                     padding: const EdgeInsets.all(0),
                     valueBackground: primaryExtraSoft,
                     validator: (value) {
