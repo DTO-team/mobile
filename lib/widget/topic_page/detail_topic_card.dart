@@ -1,3 +1,4 @@
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import '../../constant/color.dart';
 import '../../constant/text_style.dart';
@@ -82,31 +83,45 @@ class DetailTopicCard extends StatelessWidget {
                   height: 5,
                 ),
 
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: topic.lecturersDetails?.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    if (topic.lecturersDetails
-                            !.map((e) => e.email)
-                            .toList()[index] !=
-                        null) {
-                      return lec_card(
+                Card(
+                    child: ExpandablePanel(
+                      header:lec_card(
                         name: topic.lecturersDetails
-                            !.map((e) => e.fullName)
-                            .toList()[index],
+                            .map((e) => e.fullName)
+                            .toList().first,
                         avatar: 'assets/chamb.png',
                         email: topic.lecturersDetails
-                            !.map((e) => e.email)
-                            .toList()[index],
+                            .map((e) => e.email)
+                            .toList().first,
                         icon: '',
 
-                      );
-                    } else {
-                      return Flexible(child: Center(child: Text('Empty')));
-                    }
-                  },
+                      ),
+
+                      collapsed: Text(''),
+
+                      expanded: ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: topic.lecturersDetails.length > 0 ? topic.lecturersDetails.length -1 : topic.lecturersDetails.length,
+                        itemBuilder: (BuildContext context, int index) {
+
+                          return lec_card(
+                            name: topic.lecturersDetails
+                                .map((e) => e.fullName)
+                                .toList()[index],
+                            avatar: 'assets/chamb.png',
+                            email: topic.lecturersDetails
+                                .map((e) => e.email)
+                                .toList()[index],
+                            icon: '',
+
+                          );
+                        },
+                      ),
+
+                    )
                 ),
+
                 SizedBox(
                   height: 10,
                 ),
