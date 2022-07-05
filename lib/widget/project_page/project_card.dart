@@ -1,7 +1,6 @@
 import 'package:capstone_management/constant/color.dart';
 import 'package:capstone_management/constant/text_style.dart';
 import 'package:capstone_management/modal/project.dart';
-import 'package:capstone_management/provider/new_feed.dart';
 import 'package:flutter/material.dart';
 
 class ProjectCard extends StatelessWidget {
@@ -16,7 +15,6 @@ class ProjectCard extends StatelessWidget {
     return GestureDetector(
       onTap: onPress,
       child: Container(
-        height: MediaQuery.of(context).size.height / 4,
         padding: const EdgeInsets.fromLTRB(0, 5, 5, 0),
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
@@ -50,6 +48,7 @@ class ProjectCard extends StatelessWidget {
                 padding: const EdgeInsets.all(5),
 
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
@@ -65,23 +64,20 @@ class ProjectCard extends StatelessWidget {
                       ],
 
                     ),
-                    Row(
-                      children: [
-                        RichText(
+                    Container(
+                        child: RichText(
                           text: TextSpan(
-                              text: 'Lecturer: ',
+                              text: 'Mentor: ',
                               style: AppTextSytle.subTitle2TextStyle,
                               children: [
                                 TextSpan(
-                                    text: project.teamDetailResponse.mentors.map((e) => e.fullName)
+                                    text: project.teamDetailResponse.mentors
+                                        .map((e) => e.fullName)
                                         .toList()
                                         .join(', '),
                                     style: AppTextSytle.bodyTextStyle)
                               ]),
-                        )
-                      ],
-
-                    ),
+                        )),
                   ],
                 )
               ),

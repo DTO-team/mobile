@@ -63,7 +63,9 @@ class _ProjectPageState extends State<ProjectPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const DetailProject()));
+                            builder: (context) =>  DetailProject(project: prjs![index],
+
+                            )));
                   },
                 ),
               );

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
 import '../../constant/color.dart';
 import '../../constant/text_style.dart';
 import '../../modal/topic.dart';
+import '../Lecture_card.dart';
 
 class DetailTopicCard extends StatelessWidget {
   const DetailTopicCard({Key? key, required this.topic}) : super(key: key);
@@ -81,6 +81,7 @@ class DetailTopicCard extends StatelessWidget {
                 SizedBox(
                   height: 5,
                 ),
+
                 ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
@@ -98,6 +99,8 @@ class DetailTopicCard extends StatelessWidget {
                         email: topic.lecturersDetails
                             !.map((e) => e.email)
                             .toList()[index],
+                        icon: '',
+
                       );
                     } else {
                       return Flexible(child: Center(child: Text('Empty')));
@@ -138,71 +141,6 @@ class DetailTopicCard extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class lec_card extends StatelessWidget {
-  const lec_card({
-    Key? key,
-    this.name,
-    this.avatar,
-    this.email,
-  }) : super(key: key);
-  final name;
-  final avatar;
-  final email;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 5),
-      padding: EdgeInsets.all(15),
-      decoration: BoxDecoration(
-        color: whiteSoft,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 2,
-            offset: Offset(0, 1), // changes position of shadow
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Container(
-            margin: EdgeInsets.only(right: 5),
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-                color: blue,
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage(avatar),
-                )),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                  child: Text(
-                name,
-                style: AppTextSytle.subTitle1TextStyle,
-              )),
-              SizedBox(
-                height: 2,
-              ),
-              Container(
-                child: Text(
-                  email,
-                ),
-              )
-            ],
-          ),
-        ],
       ),
     );
   }
