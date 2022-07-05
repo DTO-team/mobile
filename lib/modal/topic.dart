@@ -14,7 +14,7 @@ class Topic {
      this.description,
      this.isRegistered,
     this.companyDetail,
-     this.lecturersDetails,
+     required this.lecturersDetails,
   });
 
   String id;
@@ -22,7 +22,7 @@ class Topic {
   String? description;
   bool? isRegistered;
   User? companyDetail;
-  List<Lecturer>? lecturersDetails;
+  List<Lecturer> lecturersDetails;
 
   factory Topic.fromJson(Map<String, dynamic> json) => Topic(
         id: json["topicId"],
