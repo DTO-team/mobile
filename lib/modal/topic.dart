@@ -43,6 +43,6 @@ class Topic {
     "isRegistered": isRegistered,
     "companyDetail": companyDetail?.toJson(),
         "lecturersDetails":
-            List<dynamic>.from(lecturersDetails!.map((x) => x.toJson())),
+            List<dynamic>.from(lecturersDetails.map((x) => x.toJson())),
       };
 }

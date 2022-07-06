@@ -71,7 +71,7 @@ class DetailProject extends StatelessWidget {
                     ),
                     child: Text(
                       project.topicsResponse.topicName?? '',
-                      style: AppTextSytle.tittleTextStyle,
+                      style: AppTextSytle.subTitle1TextStyle,
                       textAlign: TextAlign.left,
                     )),
                 SizedBox(
