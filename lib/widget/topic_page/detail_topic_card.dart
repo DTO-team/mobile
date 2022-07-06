@@ -121,7 +121,17 @@ class DetailTopicCard extends StatelessWidget {
 
                     )
                 ),
-
+                SizedBox(height: 10,),
+                Text(
+                  'Company',
+                  style: AppTextSytle.subTitle2TextStyle,
+                ),
+                SizedBox(height: 5,),
+                lec_card(
+                  name: topic.companyDetail?.fullName ?? 'This Topic is not belong to comany',
+                  avatar: 'assets/flag.svg',
+                  email: topic.companyDetail?.email ?? '',
+                ),
                 SizedBox(
                   height: 10,
                 ),

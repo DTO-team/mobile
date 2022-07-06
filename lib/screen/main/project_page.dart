@@ -3,8 +3,10 @@ import 'package:capstone_management/modal/project.dart';
 import 'package:capstone_management/repository/project_repository.dart';
 import 'package:capstone_management/widget/project_page/detail_project_card.dart';
 import 'package:capstone_management/widget/project_page/project_card.dart';
-import 'package:capstone_management/widget/search_bar.dart';
+import 'package:capstone_management/widget/topic_page/topic_search_bar.dart';
 import 'package:flutter/material.dart';
+
+import '../../widget/project_page/project_search_bar.dart';
 
 class ProjectPage extends StatefulWidget {
   const ProjectPage({Key? key}) : super(key: key);
@@ -14,19 +16,19 @@ class ProjectPage extends StatefulWidget {
 }
 
 class _ProjectPageState extends State<ProjectPage> {
-  List<Project>? prjs;
+  List<Project>? _projects;
   var isLoaded = false;
+  ProjectRepository _fetchTopic = ProjectRepository();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    getProject();
+    loadTopics();
   }
 
-  getProject() async {
-    prjs = await ProjectRepository().getAllProject();
-    if (prjs != null) {
+  Future<void> loadTopics() async {
+    _projects = await ProjectRepository().getAllProject();
+    if (_projects != null) {
       setState(() {
         isLoaded = true;
       });
@@ -35,45 +37,49 @@ class _ProjectPageState extends State<ProjectPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          const SliverAppBar(
-            centerTitle: true,
-            title: Text(
-              'Project',
-              style: TextStyle(color: primary),
-            ),
-            floating: true,
-            backgroundColor: whiteSoft,
+    return SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
             elevation: 0,
-          ),
-          SliverToBoxAdapter(
-              child: SearchBar(
-            routeTo: () {},
-          )),
-          SliverList(
-              delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ProjectCard(
-                  project: prjs![index],
-                  onPress: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>  DetailProject(project: prjs![index],
-
-                            )));
+            backgroundColor: whiteSoft,
+            centerTitle: true,
+            title: Text('Project', style: TextStyle(color: primary, fontFamily: 'Roboto', fontWeight: FontWeight.w600, fontSize: 25),),
+            actions: [
+              IconButton(
+                  onPressed: (){
+                    showSearch(context: context, delegate: Search_project());
                   },
-                ),
-              );
-            },
-            childCount: prjs?.length ?? 0,
-          ))
-        ],
-      ),
-    );
+                  icon: Icon(Icons.search, color:  black,)),
+            ],
+          ),
+          body: Container(
+            padding: const EdgeInsets.all(8.0),
+            child: FutureBuilder<List<Project>?>(
+                future: _fetchTopic.getAllProject(),
+                builder: (context, snapshot) {
+                  var data = snapshot.data;
+                  if(!snapshot.hasData){
+                    return Center(child: CircularProgressIndicator(),);
+                  }
+                  return ListView.builder(
+                    itemCount: data?.length?? 0,
+                    itemBuilder: ( context,  index) {
+                      return ProjectCard(
+                        project: data![index],
+                        onPress: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DetailProject(
+                                    project: data[index],
+                                  )));
+                        },
+                      );
+                    },
+                  );
+                }
+            ),
+          ),
+        ));
   }
 }

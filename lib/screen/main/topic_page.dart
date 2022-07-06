@@ -1,10 +1,12 @@
 import 'package:capstone_management/constant/color.dart';
+import 'package:capstone_management/constant/text_style.dart';
 import 'package:capstone_management/modal/topic.dart';
 import 'package:capstone_management/repository/topic_repository.dart';
-import 'package:capstone_management/widget/search_bar.dart';
 import 'package:capstone_management/widget/topic_page/detail_topic_card.dart';
 import 'package:capstone_management/widget/topic_page/topic_card.dart';
 import 'package:flutter/material.dart';
+
+import '../../widget/topic_page/topic_search_bar.dart';
 
 class TopicPage extends StatefulWidget {
   const TopicPage({Key? key}) : super(key: key);
@@ -16,6 +18,7 @@ class TopicPage extends StatefulWidget {
 class _TopicPageState extends State<TopicPage> {
   List<Topic>? _topics;
   var isLoaded = false;
+  TopicRepository _fetchTopic = TopicRepository();
 
   @override
   void initState() {
@@ -34,51 +37,57 @@ class _TopicPageState extends State<TopicPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          const SliverAppBar(
-            centerTitle: true,
-            title: Text(
-              'Topic',
-              style: TextStyle(color: primary),
-            ),
-            floating: true,
-            backgroundColor: whiteSoft,
+    return SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
             elevation: 0,
+            backgroundColor: whiteSoft,
+            centerTitle: true,
+            title: Text('Topic', style: TextStyle(color: primary, fontFamily: 'Roboto', fontWeight: FontWeight.w600, fontSize: 25),),
+            actions: [
+              IconButton(
+                  onPressed: (){
+                    showSearch(context: context, delegate: Search_Topic());
+                  },
+                  icon: Icon(Icons.search, color:  black,)),
+            ],
           ),
-          SliverToBoxAdapter(
-              child: SearchBar(
-            routeTo: () {},
-          )),
-          SliverList(
-              delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              return Visibility(
-                replacement: const Center(
-                  child: CircularProgressIndicator(),
-                ),
-                visible: isLoaded,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TopicCard(
-                    topic: _topics![index],
-                    onPress: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => DetailTopicCard(
-                                    topic: _topics![index],
-                                  )));
-                    },
-                  ),
-                ),
-              );
-            },
-            childCount: _topics?.length ?? 0,
-          ))
-        ],
+      body: Container(
+        decoration: BoxDecoration(boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 2,
+            blurRadius: 5,
+            offset:  Offset(3, 3), // changes position of shadow
+          ),
+        ], color: whiteSoft, borderRadius: BorderRadius.circular(5)),
+        padding: const EdgeInsets.all(10),
+        child: FutureBuilder<List<Topic>?>(
+          future: _fetchTopic.getAllTopic(),
+          builder: (context, snapshot) {
+            var data = snapshot.data;
+            if(!snapshot.hasData){
+              return Center(child: CircularProgressIndicator(),);
+            }
+            return ListView.builder(
+              itemCount: data?.length?? 0,
+              itemBuilder: ( context,  index) {
+                return TopicCard(
+                  topic: data![index],
+                  onPress: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DetailTopicCard(
+                                  topic: data[index],
+                                )));
+                  },
+                );
+              },
+            );
+          }
+        ),
       ),
-    );
+    ));
   }
 }

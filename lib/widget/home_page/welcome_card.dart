@@ -1,8 +1,13 @@
 import 'package:capstone_management/constant/color.dart';
+import 'package:capstone_management/modal/user.dart';
 import 'package:flutter/material.dart';
 
+import '../../modal/lecturer.dart';
+
 class WelcomeCard extends StatelessWidget {
-  const WelcomeCard({Key? key}) : super(key: key);
+
+  const WelcomeCard({Key? key, required this.name}) : super(key: key);
+  final String name;
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +24,14 @@ class WelcomeCard extends StatelessWidget {
                 child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: RichText(
-                text: const TextSpan(
+                text:  TextSpan(
                     text: 'WELCOME BACK,\n',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 15,
                         color: kTitleTextColor),
                     children: [
-                      TextSpan(text: 'Hoàng Các Loan Châu!\n'),
+                      TextSpan(text: '${name}!'),
                     ]),
               ),
             )),

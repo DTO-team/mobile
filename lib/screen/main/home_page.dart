@@ -6,6 +6,10 @@ import 'package:capstone_management/widget/home_page/time_line_card.dart';
 import 'package:capstone_management/widget/home_page/welcome_card.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../modal/lecturer.dart';
+import '../../provider/app_user_provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,7 +19,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  /// tạo ra 1 key để toàn app có thể access vào get state hay Widget
+   late Lecturer _appUser;
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() => _appUser =
+    Provider.of<AppUserProvider>(context, listen: false).appUser!);
+  }
+
+        /// tạo ra 1 key để toàn app có thể access vào get state hay Widget
 //  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -113,14 +126,8 @@ class _HomePageState extends State<HomePage> {
           topic: 'Project OnGoing'),
     ];
     int _currentCard = 0;
-    List cardList = [WelcomeCard(), TimeLineCard()];
-    List<T> map<T>(List list, Function handler) {
-      List<T> result = [];
-      for (var i = 0; i < list.length; i++) {
-        result.add(handler(i, list[i]));
-      }
-      return result;
-    }
+    List cardList = [WelcomeCard( name: _appUser.fullName?? '',), TimeLineCard()];
+
 
     return Scaffold(
       ///trao cho th nay
@@ -156,7 +163,7 @@ class _HomePageState extends State<HomePage> {
                         aspectRatio: 16 / 9,
                         viewportFraction: 1,
                         scrollDirection: Axis.horizontal,
-                        // autoPlay: true,
+                        autoPlay: true,
                         onPageChanged: (index, reason) {
                           setState(() {
                             _currentCard = index;

@@ -15,7 +15,8 @@ class ProjectCard extends StatelessWidget {
     return GestureDetector(
       onTap: onPress,
       child: Container(
-        padding: const EdgeInsets.fromLTRB(0, 5, 5, 0),
+        padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+        margin: EdgeInsets.all(10),
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),
@@ -40,7 +41,7 @@ class ProjectCard extends StatelessWidget {
               const Padding(padding: EdgeInsets.only(top: 10)),
 
               const Divider(
-                thickness: 0.7,
+                thickness: 1,
                 color: primary,
                 height: 10,
               ),
@@ -82,7 +83,7 @@ class ProjectCard extends StatelessWidget {
                 )
               ),
               const Divider(
-                thickness: 0.7,
+                thickness: 1,
                 color: primary,
                 height: 10,
               ),
