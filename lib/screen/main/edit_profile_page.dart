@@ -4,9 +4,9 @@ import 'package:capstone_management/constant/color.dart';
 import 'package:capstone_management/modal/lecturer.dart';
 import 'package:capstone_management/provider/app_user_provider.dart';
 import 'package:capstone_management/repository/lecturer_repository.dart';
-import 'package:capstone_management/screen/main/profile_page.dart';
 import 'package:capstone_management/widget/profile_page/edit_user_info_tile.dart';
 import 'package:capstone_management/widget/profile_page/user_info_tile.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker/image_picker.dart';
@@ -22,24 +22,23 @@ class EditProfilePage extends StatefulWidget {
 class _EditProfilePageState extends State<EditProfilePage> {
   static const _defaultImage = AssetImage('assets/chamb.png');
 
+  final storageRef = FirebaseStorage.instance.ref();
   final _formKey = GlobalKey<FormState>();
   final _repository = LecturerRepository();
   final _picker = ImagePicker();
 
   late Lecturer _appUser;
-  ImageProvider _avatarProvider = _defaultImage;
+  late Reference _userAvatarRef;
+  File? _imageFile;
 
   @override
   void initState() {
     super.initState();
     setState(() {
       _appUser = Provider.of<AppUserProvider>(context, listen: false).appUser!;
-      if (_appUser.avatarUrl != null) {
-        _avatarProvider = NetworkImage(_appUser.avatarUrl!);
-      }
+      _userAvatarRef = storageRef.child('users/${_appUser.id}/avatar');
     });
   }
-
 
   @override
   void dispose() {
@@ -81,7 +80,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 child: Stack(children: <Widget>[
                   CircleAvatar(
                     radius: 70.0,
-                    backgroundImage: _avatarProvider,
+                    backgroundImage: _getAvatarProvider(),
                   ),
                   Positioned(
                     bottom: 10.0,
@@ -149,28 +148,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       alignment: Alignment.center,
                       child: ElevatedButton(
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            _formKey.currentState?.save();
-                            _repository
-                                .updateLecturer(_appUser.id, _appUser)
-                                .then((value) => Provider.of<AppUserProvider>(
-                                        context,
-                                        listen: false)
-                                    .appUser = value)
-                                .then((value) =>
-                                    EasyLoading.showSuccess('Save success!'))
-                                .onError((error, stackTrace) =>
-                                    EasyLoading.showError('Save fail!'));
-                          }
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const ProfilePage())).then((value) =>
-                              setState(() => _appUser =
-                                  Provider.of<AppUserProvider>(context,
-                                          listen: false)
-                                      .appUser!));
+                          saveUserInfo().whenComplete(() => Navigator.pop(context));
                         },
                         child: const Text('Save'),
                       ),
@@ -207,11 +185,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton.icon(
-                    onPressed: () => setPhoto(ImageSource.camera),
+                    onPressed: () => _setPhoto(ImageSource.camera),
                     icon: const Icon(Icons.camera),
                     label: const Text('Camera')),
                 ElevatedButton.icon(
-                    onPressed: () => setPhoto(ImageSource.gallery),
+                    onPressed: () => _setPhoto(ImageSource.gallery),
                     icon: const Icon(Icons.image),
                     label: const Text('Gallery')),
               ],
@@ -220,11 +198,39 @@ class _EditProfilePageState extends State<EditProfilePage> {
         ));
   }
 
-  void setPhoto(ImageSource source) async {
+  void _setPhoto(ImageSource source) async {
     final pickedFile = await _picker.pickImage(source: source);
     if (pickedFile != null) {
-      setState(() => _avatarProvider = FileImage(File(pickedFile.path)));
+      setState(() => _imageFile = File(pickedFile.path));
     }
   }
 
+  ImageProvider _getAvatarProvider() {
+    if (_imageFile != null) {
+      return FileImage(_imageFile!);
+    }
+    if (_appUser.avatarUrl == null) {
+      return _defaultImage;
+    }
+    return NetworkImage(_appUser.avatarUrl!);
+  }
+
+  Future<void> saveUserInfo() async {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState?.save();
+
+      if (_imageFile != null) {
+        await _userAvatarRef
+            .putFile(_imageFile!)
+            .then((value) => _userAvatarRef.getDownloadURL())
+            .then((value) => setState(() => _appUser.avatarUrl = value));
+        _imageFile = null;
+      }
+
+      await _repository
+          .updateLecturer(_appUser.id, _appUser)
+          .then((value) => EasyLoading.showSuccess('Save success!'))
+          .onError((error, stackTrace) => EasyLoading.showError('Save fail!'));
+    }
+  }
 }
