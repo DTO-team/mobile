@@ -18,6 +18,7 @@ class TopicPage extends StatefulWidget {
 class _TopicPageState extends State<TopicPage> {
   List<Topic>? _topics;
   var isLoaded = false;
+  var isDescending = false;
   TopicRepository _fetchTopic = TopicRepository();
 
   @override
@@ -62,30 +63,45 @@ class _TopicPageState extends State<TopicPage> {
           ),
         ], color: whiteSoft, borderRadius: BorderRadius.circular(5)),
         padding: const EdgeInsets.all(10),
-        child: FutureBuilder<List<Topic>?>(
-          future: _fetchTopic.getAllTopic(),
-          builder: (context, snapshot) {
-            var data = snapshot.data;
-            if(!snapshot.hasData){
-              return Center(child: CircularProgressIndicator(),);
-            }
-            return ListView.builder(
-              itemCount: data?.length?? 0,
-              itemBuilder: ( context,  index) {
-                return TopicCard(
-                  topic: data![index],
-                  onPress: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => DetailTopicCard(
-                                  topic: data[index],
-                                )));
-                  },
-                );
-              },
-            );
-          }
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextButton.icon(onPressed:()=> setState(()
+            => isDescending = !isDescending), icon: RotatedBox(quarterTurns: 1,
+                child: Icon(Icons.compare_arrows_rounded)), label: Text(isDescending ? 'Z-A' : 'A-Z')),
+            Expanded(
+              child: FutureBuilder<List<Topic>?>(
+                future: _fetchTopic.getAllTopic(),
+                builder: (context, snapshot) {
+                  var data = snapshot.data;
+                  if(!snapshot.hasData){
+                    return Center(child: CircularProgressIndicator(),);
+                  }
+                  if(snapshot.hasError){
+                    print(snapshot.error);
+                  }
+                  return ListView.builder(
+                    itemCount: data?.length?? 0,
+                    itemBuilder: ( context,  index) {
+                      final sort = data?..sort((a, b) => isDescending ? b.topicName!.compareTo(a.topicName!) : a.topicName!.compareTo(b.topicName!));
+                      final sortedTopic = sort![index];
+                      return TopicCard(
+                        topic: sortedTopic,
+                        onPress: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => DetailTopicCard(
+                                        topic: sortedTopic,
+                                      )));
+                        },
+                      );
+                    },
+                  );
+                }
+              ),
+            ),
+          ],
         ),
       ),
     ));
