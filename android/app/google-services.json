@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "352156804018",
+    "project_id": "dtocodes",
+    "storage_bucket": "dtocodes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:352156804018:android:2c255b35c3eb022d88faab",
+        "android_client_info": {
+          "package_name": "com.example.capstone_management_dto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "352156804018-m4ten0cimbba368ie0452aqsva7iu0i7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8bjJL3wtN9Nwp1Cx1f5iUm--CimK8E6c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "352156804018-m4ten0cimbba368ie0452aqsva7iu0i7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "352156804018-p591rmhltlogra330oruir56aocb2vgt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.capstoneManagementDto"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

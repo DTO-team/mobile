@@ -30,26 +30,14 @@ class _ProfilePage extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onVerticalDragUpdate: (details) {},
-      onHorizontalDragUpdate: (details) {
-        if (details.delta.direction <= 0) {
-          Navigator.pop(context);
-        }
-      },
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           elevation: 0,
           backgroundColor: whiteSoft,
           centerTitle: true,
-          title: const Text(
-            'My Profile',
-            style: TextStyle(
-                color: black,
-                fontFamily: 'Roboto',
-                fontWeight: FontWeight.w600,
-                fontSize: 22),
-          ),
+          title: Text('My Profile', style: TextStyle(color: primary, fontFamily: 'Roboto', fontWeight: FontWeight.w600, fontSize: 25),),
+
           actions: [
             TextButton(
               onPressed: () {
