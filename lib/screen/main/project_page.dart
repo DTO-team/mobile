@@ -66,12 +66,13 @@ class _ProjectPageState extends State<ProjectPage> {
                       future: _fetchTopic.getAllProject(),
                       builder: (context, snapshot) {
                         var data = snapshot.data;
-                        if(!snapshot.hasData){
-                          return Center(child: CircularProgressIndicator(),);
-                        }
                         if(snapshot.hasError){
                           print(snapshot.error);
                         }
+                        if(!snapshot.hasData){
+                          return Center(child: CircularProgressIndicator(),);
+                        }
+
                         return ListView.builder(
                           itemCount: data?.length?? 0,
                           itemBuilder: ( context,  index) {

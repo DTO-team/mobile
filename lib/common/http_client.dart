@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:capstone_management/modal/current_semester.dart';
 import 'package:http/http.dart' as http;
 
 class HttpClient {
@@ -11,12 +12,17 @@ class HttpClient {
     'Accept': 'application/json; charset=UTF-8',
   };
 
+
   static final HttpClient _singletonHttpClient =
       HttpClient._privateConstructor();
 
   HttpClient._privateConstructor();
 
   factory HttpClient() => _singletonHttpClient;
+
+  set currentsemester(CurrentSemester currSemester){
+    _defaultHeaders['currentsemester'] = '$currSemester.id,$currSemester.year,$currSemester.season,$currSemester.status';
+  }
 
   set token(String? token) {
     _defaultHeaders['Authorization'] = 'Bearer $token';
