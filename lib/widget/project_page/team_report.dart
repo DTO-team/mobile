@@ -1,10 +1,6 @@
 import 'package:capstone_management/constant/color.dart';
 import 'package:capstone_management/constant/text_style.dart';
 import 'package:capstone_management/modal/project.dart';
-import 'package:capstone_management/modal/weekly_report.dart';
-import 'package:capstone_management/provider/current_semester_provider.dart';
-import 'package:capstone_management/repository/report_repository.dart';
-import 'package:capstone_management/screen/main/edit_profile_page.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 

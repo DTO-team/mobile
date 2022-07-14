@@ -1,5 +1,4 @@
 import 'package:capstone_management/provider/app_user_provider.dart';
-import 'package:capstone_management/provider/semester_provider.dart';
 import 'package:capstone_management/screen/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
