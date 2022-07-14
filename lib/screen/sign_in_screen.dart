@@ -41,8 +41,11 @@ class SignInPage extends StatelessWidget {
           ),
           SignInButton(
             button: ButtonType.google,
-            onPressed: () async =>
-                await context.read<AppUserProvider>().signIn(AuthProvider.google),
+            onPressed: () => context
+                .read<AppUserProvider>()
+                .signIn(AuthProvider.google)
+                .whenComplete(
+                    () => context.read<SemestersProvider>().loadSemesters()),
             color: Colors.white,
             text: 'Sign in with Google',
             textColor: Colors.black87,

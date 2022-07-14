@@ -12,9 +12,9 @@ class SemestersProvider extends ChangeNotifier {
   Future<void> loadSemesters() async {
     _semesters = await _semesterRepository.getAllSemester();
     if (_semesters != null && _semesters!.isNotEmpty) {
-      print(_semesters);
       currentSemester = _semesters![0];
     }
+    notifyListeners();
   }
 
   List<Semester>? get semesters {

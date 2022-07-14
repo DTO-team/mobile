@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
         tweetedAt: 'Oct 4',
         topic: 'Project OnGoing'),
   ];
-  List<Semester>? ListSemester;
+  List<Semester>? listSemester;
    Semester? _selectedSemester;
   late Lecturer _appUser;
   @override
@@ -122,22 +122,16 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
     setState(() {
-      loadSemester();
       _appUser =
       Provider
           .of<AppUserProvider>(context, listen: false)
           .appUser!;
+      listSemester = Provider.of<SemestersProvider>(context, listen:  false).semesters;
       _selectedSemester = Provider.of<SemestersProvider>(context, listen:  false).currentSemester;
-      print('home ${ListSemester}');
     });
 
   }
 
-  void loadSemester() async{
-    await Provider.of<SemestersProvider>(context,listen: false).loadSemesters();
-    ListSemester = Provider.of<SemestersProvider>(context, listen:  false).semesters;
-
-  }
   @override
   Widget build(BuildContext context) {
 
@@ -161,7 +155,7 @@ class _HomePageState extends State<HomePage> {
 
               value: _selectedSemester,
             items:
-            ListSemester?.map<DropdownMenuItem<Semester?>>((Semester? sem) {
+            listSemester?.map<DropdownMenuItem<Semester?>>((Semester? sem) {
                 return DropdownMenuItem<Semester?>(
                     child: Text('${sem?.season}'),
                 value: sem,
