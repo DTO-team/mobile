@@ -7,17 +7,17 @@ class SemestersProvider extends ChangeNotifier {
   final _semesterRepository = SemesterRepository();
 
   late List<Semester> semesters;
-  late int _currentSemesterIndex;
+  late int currentSemesterIndex;
 
   SemestersProvider() {
     _semesterRepository.getAllSemester().then((value) {
       semesters = value;
-      _currentSemesterIndex = 0;
+      currentSemesterIndex = 0;
     });
   }
 
   Semester getCurrentSemester() {
-    return semesters[_currentSemesterIndex];
+    return semesters[currentSemesterIndex];
   }
 
   Future<Week> getCurrentWeek() async {
