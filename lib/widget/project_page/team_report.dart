@@ -14,7 +14,7 @@ class TeamReport extends StatelessWidget {
     return Container(
       child: ListView(
         children: [
-          FutureBuilder<WeeklyReport>(
+          /*FutureBuilder<WeeklyReport>(
               future: ReportRepository()
                   .getTeamWeeklyReport(project.teamDetailResponse.teamId),
               builder: (context, snapshot) {
@@ -35,7 +35,7 @@ class TeamReport extends StatelessWidget {
                         header: Text(data?.completedTasks ?? ''),
                         collapsed: Text(''),
                         expanded: Text('expanded')));
-              }),
+              }),*/
         ],
       ),
     );

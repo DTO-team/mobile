@@ -12,7 +12,7 @@ class SemesterRepository {
     final response = await httpClient.get(resourcePath);
     if (response.statusCode == 200) {
       return List<Semester>.from(
-          jsonDecode(response.body)['data'].map((x) => Semester.fromJson(x)));
+          jsonDecode(response.body).map((x) => Semester.fromJson(x)));
     } else {
       throw Exception('Failed to load Semester --- ${response.statusCode}');
     }
@@ -23,7 +23,7 @@ class SemesterRepository {
     final response = await httpClient.get('$resourcePath/$semesterId/weeks');
     if (response.statusCode == 200) {
       return List<Week>.from(
-          jsonDecode(response.body)['data'].map((x) => Week.fromJson(x)));
+          jsonDecode(response.body).map((x) => Week.fromJson(x)));
     } else {
       throw Exception('Failed to load Week --- ${response.statusCode}');
     }
