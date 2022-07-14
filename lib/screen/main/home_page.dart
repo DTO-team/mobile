@@ -1,8 +1,8 @@
 import 'package:capstone_management/constant/color.dart';
 import 'package:capstone_management/constant/text_style.dart';
 import 'package:capstone_management/modal/semesters.dart';
-import 'package:capstone_management/provider/current_semester_provider.dart';
 import 'package:capstone_management/provider/new_feed.dart';
+import 'package:capstone_management/provider/semester_provider.dart';
 import 'package:capstone_management/widget/home_page/new_feed_card.dart';
 import 'package:capstone_management/widget/home_page/time_line_card.dart';
 import 'package:capstone_management/widget/home_page/welcome_card.dart';
@@ -114,18 +114,30 @@ class _HomePageState extends State<HomePage> {
         tweetedAt: 'Oct 4',
         topic: 'Project OnGoing'),
   ];
-   NewFeed? _selectedvalue;
+  List<Semester>? ListSemester;
+   Semester? _selectedSemester;
   late Lecturer _appUser;
   @override
   void initState() {
     super.initState();
-    setState(() => _appUser =
-    Provider.of<AppUserProvider>(context, listen: false).appUser!);
+
+    setState(() {
+      loadSemester();
+      _appUser =
+      Provider
+          .of<AppUserProvider>(context, listen: false)
+          .appUser!;
+      _selectedSemester = Provider.of<SemestersProvider>(context, listen:  false).currentSemester;
+      print('home ${ListSemester}');
+    });
+
   }
 
-        /// tạo ra 1 key để toàn app có thể access vào get state hay Widget
-//  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  void loadSemester() async{
+    await Provider.of<SemestersProvider>(context,listen: false).loadSemesters();
+    ListSemester = Provider.of<SemestersProvider>(context, listen:  false).semesters;
 
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -145,19 +157,19 @@ class _HomePageState extends State<HomePage> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            DropdownButton(
-              hint: Text('Choose Semester'),
-              value: _selectedvalue,
+            DropdownButton<Semester?>(
+
+              value: _selectedSemester,
             items:
-              nfs.map<DropdownMenuItem<NewFeed>>((NewFeed nf) {
-                return DropdownMenuItem<NewFeed>(
-                    child: Text(nf.team + ' ' + nf.tweetedAt),
-                value: nf,
+            ListSemester?.map<DropdownMenuItem<Semester?>>((Semester? sem) {
+                return DropdownMenuItem<Semester?>(
+                    child: Text('${sem?.season}'),
+                value: sem,
                 );
               } ).toList(),
-              onChanged: (NewFeed? value) {
+              onChanged: (Semester? value) {
                 setState(() {
-                  _selectedvalue = value;
+                  Provider.of<SemestersProvider>(context, listen:  false).currentSemester  = value ;
                 });
               },
 
