@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:capstone_management/modal/current_semester.dart';
+import 'package:capstone_management/modal/semesters.dart';
 import 'package:http/http.dart' as http;
 
 class HttpClient {
@@ -12,7 +12,6 @@ class HttpClient {
     'Accept': 'application/json; charset=UTF-8',
   };
 
-
   static final HttpClient _singletonHttpClient =
       HttpClient._privateConstructor();
 
@@ -20,18 +19,19 @@ class HttpClient {
 
   factory HttpClient() => _singletonHttpClient;
 
-  set currentsemester(CurrentSemester currSemester){
-    _defaultHeaders['currentsemester'] = '$currSemester.id,$currSemester.year,$currSemester.season,$currSemester.status';
-  }
-
   set token(String? token) {
     _defaultHeaders['Authorization'] = 'Bearer $token';
   }
 
   Future<http.Response> get(String endpoint,
-      {Map<String, String>? queryParams}) {
+      {Map<String, String>? queryParams, Semester? currentSemester}) {
     Uri url = Uri.https(_host, '/api$_version$endpoint', queryParams);
-    return http.get(url, headers: _defaultHeaders);
+    final currentSemesterHeader =
+        (currentSemester != null) ? {"currentsemester": currentSemester} : {};
+    return http.get(url, headers: {
+      ..._defaultHeaders,
+      ...currentSemesterHeader
+    });
   }
 
   Future<http.Response> post(String endpoint,

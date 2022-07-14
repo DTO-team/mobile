@@ -5,12 +5,12 @@
 import 'package:meta/meta.dart';
 import 'dart:convert';
 
-CurrentSemester currentSemesterFromJson(String str) => CurrentSemester.fromJson(json.decode(str));
+Semester currentSemesterFromJson(String str) => Semester.fromJson(json.decode(str));
 
-String currentSemesterToJson(CurrentSemester data) => json.encode(data.toJson());
+String currentSemesterToJson(Semester data) => json.encode(data.toJson());
 
-class CurrentSemester {
-  CurrentSemester({
+class Semester {
+  Semester({
     required this.id,
     required this.year,
     required this.season,
@@ -22,7 +22,7 @@ class CurrentSemester {
   String season;
   int status;
 
-  factory CurrentSemester.fromJson(Map<String, dynamic> json) => CurrentSemester(
+  factory Semester.fromJson(Map<String, dynamic> json) => Semester(
     id: json["id"],
     year: json["year"],
     season: json["season"],
