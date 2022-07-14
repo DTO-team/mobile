@@ -120,7 +120,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-
     setState(() {
       _appUser =
       Provider
@@ -129,7 +128,6 @@ class _HomePageState extends State<HomePage> {
       listSemester = Provider.of<SemestersProvider>(context, listen:  false).semesters;
       _selectedSemester = Provider.of<SemestersProvider>(context, listen:  false).currentSemester;
     });
-
   }
 
   @override
@@ -151,22 +149,35 @@ class _HomePageState extends State<HomePage> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            DropdownButton<Semester?>(
+            Icon(Icons.info, size: 20,color: primary,),
+            SizedBox(width: 5,),
+            Text('Current Semester:', style: AppTextSytle.subTitle1_1TextStyle,),
+            SizedBox(width: 5,),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10),
+              padding: EdgeInsets.symmetric(horizontal: 5),
 
-              value: _selectedSemester,
-            items:
-            listSemester?.map<DropdownMenuItem<Semester?>>((Semester? sem) {
-                return DropdownMenuItem<Semester?>(
-                    child: Text('${sem?.season}'),
-                value: sem,
-                );
-              } ).toList(),
-              onChanged: (Semester? value) {
-                setState(() {
-                  Provider.of<SemestersProvider>(context, listen:  false).currentSemester  = value ;
-                });
-              },
+              child: DropdownButton<Semester?>(
+                underline: SizedBox(),
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+                value: _selectedSemester,
+              items:
+              listSemester?.map<DropdownMenuItem<Semester?>>((Semester? sem) {
+                  return DropdownMenuItem<Semester?>(
 
+                      child: Text('${sem?.season} _ ${sem?.year.toString()}',style: AppTextSytle.subTitle1TextStyle,),
+                  value: sem,
+
+                  );
+                } ).toList(),
+                onChanged: (Semester? value) {
+                  setState(() {
+                    Provider.of<SemestersProvider>(context, listen:  false).currentSemester = value;
+                    _selectedSemester = value;
+                  });
+                },
+
+              ),
             ),
           ],
         ),

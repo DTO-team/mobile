@@ -21,20 +21,21 @@ class SemestersProvider extends ChangeNotifier {
     return _semesters;
   }
 
-
   Future<List<Week>?> getCurrentSemesterWeek() async {
     if (currentSemester != null) {
-      return _semesterRepository.getAllSemesterWeek(currentSemester!.id);
+      return  _semesterRepository.getAllSemesterWeek(currentSemester!.id);
     } else {
       return null;
     }
   }
 
+
   Future<Week?> getCurrentWeek() async {
     if (currentSemester != null) {
-      return _semesterRepository.getCurrentWeek(currentSemester!.id);
+     return _semesterRepository.getCurrentWeek(currentSemester!.id);
     } else {
       return null;
     }
+
   }
 }

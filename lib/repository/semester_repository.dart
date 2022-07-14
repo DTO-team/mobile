@@ -33,7 +33,7 @@ class SemesterRepository {
     final httpClient = HttpClient();
     final response = await httpClient.get('$resourcePath/$semesterId/weeks/current');
     if (response.statusCode == 200) {
-      return jsonDecode(response.body).map((x) => Week.fromJson(x));
+      return Week.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to load week --- ${response.statusCode}');
     }

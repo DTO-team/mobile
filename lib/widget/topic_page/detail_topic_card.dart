@@ -24,6 +24,10 @@ class DetailTopicCard extends StatelessWidget {
           automaticallyImplyLeading: false,
           elevation: 0,
           backgroundColor: whiteSoft,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
           centerTitle: true,
           title: Text(
             'Topic Detail',

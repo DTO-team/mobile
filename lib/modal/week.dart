@@ -1,4 +1,8 @@
+import 'dart:convert';
 
+Week weekFromJson(String str) => Week.fromJson(json.decode(str));
+
+String weekToJson(Week data) => json.encode(data.toJson());
 class Week {
   Week({
     required this.id,

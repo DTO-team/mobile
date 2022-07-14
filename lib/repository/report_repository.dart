@@ -5,7 +5,7 @@ import 'package:capstone_management/modal/semesters.dart';
 import 'package:capstone_management/modal/weekly_report.dart';
 
 class ReportRepository {
-  Future<WeeklyReport> getTeamWeeklyReport(String teamId, int week, Semester currentSemester) async {
+  Future<WeeklyReport> getTeamWeeklyReport(String teamId, int week, Semester? currentSemester) async {
     final httpClient = HttpClient();
     final response = await httpClient.get('/teams/$teamId/reports', queryParams: {'week': week.toString()}, currentSemester: currentSemester);
     if (response.statusCode == 200) {

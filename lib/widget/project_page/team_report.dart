@@ -1,14 +1,20 @@
 import 'package:capstone_management/constant/color.dart';
 import 'package:capstone_management/constant/text_style.dart';
 import 'package:capstone_management/modal/project.dart';
+import 'package:capstone_management/modal/semesters.dart';
+import 'package:capstone_management/modal/week.dart';
+import 'package:capstone_management/modal/weekly_report.dart';
+import 'package:capstone_management/repository/report_repository.dart';
+import 'package:capstone_management/repository/semester_repository.dart';
 import 'package:expandable/expandable.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 import '../../provider/new_feed.dart';
+import '../../provider/semester_provider.dart';
 
 class TeamReport extends StatefulWidget {
   const TeamReport({Key? key, required this.project}) : super(key: key);
-
   final Project project;
 
   @override
@@ -16,6 +22,7 @@ class TeamReport extends StatefulWidget {
 }
 
 class _TeamReportState extends State<TeamReport> {
+  NewFeed? nf;
   List<NewFeed> nfs = [
     NewFeed(
         id: '1',
@@ -108,135 +115,127 @@ class _TeamReportState extends State<TeamReport> {
         tweetedAt: 'Oct 4',
         topic: 'Project OnGoing'),
   ];
-  NewFeed? _selectedvalue;
+
+  SemesterRepository _fetchSemester = SemesterRepository();
+  Week? week;
+  Semester? curentSemester;
+  var isLoaded = false;
+  @override
+  void initState() {
+    super.initState();
+    curentSemester = Provider.of<SemestersProvider>(context, listen:  false).currentSemester;
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
-
     return Container(
       child: ListView(
         children: [
-          Container(
-            alignment: Alignment.center,
-            margin: EdgeInsets.symmetric(horizontal: 50,vertical: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15.0),
-              border: Border.all(
-                  color: primary, style: BorderStyle.solid, width: 0.80),
-            ),
-            child: DropdownButton(
+        Container(
+        alignment: Alignment.center,
+        margin: EdgeInsets.symmetric(horizontal: 120,vertical: 10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15.0),
+          border: Border.all(
+              color: primary, style: BorderStyle.solid, width: 0.80),
+        ),
+        child: DropdownButton(
               borderRadius: BorderRadius.all(Radius.circular(15)),
-              hint:  Container(
-                child: Text(
-                  "Select Week",
-                  style: AppTextSytle.subTitle2TextStyle,
-                ),
-              ),
-              value: _selectedvalue,
+              value: nf,
+              hint: Text('Week 1'),
               underline: SizedBox(),
               isExpanded: false,
               items:
-              nfs.map<DropdownMenuItem<NewFeed>>((NewFeed nf) {
+              nfs.map<DropdownMenuItem<NewFeed>>((NewFeed week) {
                 return DropdownMenuItem<NewFeed>(
-                  child: Text(nf.team + ' ' + nf.tweetedAt),
-                  value: nf,
+                  child: Text('Week ${week.id}'),
+                  value: week,
                 );
               } ).toList(),
               onChanged: (NewFeed? value) {
                 setState(() {
-                  _selectedvalue = value;
+                  nf = value!;
                 });
               },
+              ),),
 
-            ),
-          ),
+        Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Card(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: ExpandablePanel(
+                              header: Text('completedTasks',
+                                  style: AppTextSytle.subTitle1_1TextStyle),
+                              collapsed: Text(''),
+                              expanded: Text('A paragraph is a short collection of well-organized sentences which revolve around a single theme and is coherent. But in this article, we have written Top 10 long paragraphs that Teach You a Lesson.')),
+                        )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Card(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: ExpandablePanel(
+                              header: Text('Task in-progress',
+                                style: AppTextSytle.subTitle1_1TextStyle,),
+                              collapsed: Text(''),
+                              expanded: Text('A paragraph is a short collection of well-organized sentences which revolve around a single theme and is coherent. But in this article, we have written Top 10 long paragraphs that Teach You a Lesson.')),
+                        )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Card(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: ExpandablePanel(
+                              header: Text('Tasks to begin next week',
+                                  style: AppTextSytle.subTitle1_1TextStyle),
+                              collapsed: Text(''),
+                              expanded: Text('A paragraph is a short collection of well-organized sentences which revolve around a single theme and is coherent. But in this article, we have written Top 10 long paragraphs that Teach You a Lesson.')),
+                        )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Card(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: ExpandablePanel(
+                              header: Text('Urgent issues',
+                                  style: AppTextSytle.subTitle1_1TextStyle),
+                              collapsed: Text(''),
+                              expanded: Text('A paragraph is a short collection of well-organized sentences which revolve around a single theme and is coherent. But in this article, we have written Top 10 long paragraphs that Teach You a Lesson.')),
+                        )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Card(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: ExpandablePanel(
+                              header: Text('Self-assessments',
+                                  style: AppTextSytle.subTitle1_1TextStyle),
+                              collapsed: Text(''),
+                              expanded: Text('A paragraph is a short collection of well-organized sentences which revolve around a single theme and is coherent. But in this article, we have written Top 10 long paragraphs that Teach You a Lesson.')),
+                        )),
+                  ),
 
+                ],
+              ),
 
-          // FutureBuilder<WeeklyReport>(
-          //     future: ReportRepository()
-          //         .getTeamWeeklyReport(project.teamDetailResponse.teamId, 9, SemestersProvider().getCurrentSemester()),
-          //     builder: (context, snapshot) {
-          //       var data = snapshot.data;
-          //       if (snapshot.connectionState == ConnectionState.done) {
-          //         if (snapshot.hasError) {
-          //           print(snapshot.error);
-          //         }
-          //       }
-          //       if (!snapshot.hasData) {
-          //         print(snapshot.data?.completedTasks ?? '');
-          //         return Center(
-          //           child: CircularProgressIndicator(),
-          //         );
-          //       }
-          //       return
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Card(
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            child: ExpandablePanel(
-                                header: Text('Task Completed ',style: AppTextSytle.subTitle1_1TextStyle),
-                                collapsed: Text(''),
-                                expanded: Text('expanded')),
-                          )),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Card(
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            child: ExpandablePanel(
-                                header: Text('Task in-progress',style: AppTextSytle.subTitle1_1TextStyle,),
-                                collapsed: Text(''),
-                                expanded: Text('expanded')),
-                          )),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Card(
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            child: ExpandablePanel(
-                                header: Text('Tasks to begin next week',style: AppTextSytle.subTitle1_1TextStyle),
-                                collapsed: Text(''),
-                                expanded: Text('expanded')),
-                          )),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Card(
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            child: ExpandablePanel(
-                                header: Text('Urgent issues',style: AppTextSytle.subTitle1_1TextStyle),
-                                collapsed: Text(''),
-                                expanded: Text('expanded')),
-                          )),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Card(
-                          child: Container(
-                            padding: EdgeInsets.all(10),
-                            child: ExpandablePanel(
-                                header: Text('Self-assessments',style: AppTextSytle.subTitle1_1TextStyle),
-                                collapsed: Text(''),
-                                expanded: Text('expanded')),
-                          )),
-                    ),
-
-                  ],
-                ),
           Divider(color: primary, thickness: 1,),
           Container(
             margin: EdgeInsets.all(10),
             child: TextField(
-             decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'FeedBack',
-                suffixIcon: Icon(Icons.edit),
-               suffixIconColor: primary
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'FeedBack',
+                  suffixIcon: Icon(Icons.edit),
+                  suffixIconColor: primary
               ),
               onSubmitted: (String value) async {
                 await showDialog<void>(
@@ -260,8 +259,11 @@ class _TeamReportState extends State<TeamReport> {
               },
             ),
           )
-              ]
+        ]
       ),
     );
+
   }
+
+
 }

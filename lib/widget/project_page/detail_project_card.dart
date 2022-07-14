@@ -47,7 +47,7 @@ class DetailProject extends StatelessWidget {
             ),
           ),
           body: TabBarView(children: [
-            TeamReport(project: project),
+            TeamReport(project: project,),
             ProjectInfo(project: project),
 
           ]),
