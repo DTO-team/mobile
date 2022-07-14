@@ -12,7 +12,7 @@ class SemesterRepository {
     final response = await httpClient.get(resourcePath);
     if (response.statusCode == 200) {
       return List<Semester>.from(
-          jsonDecode(response.body)['data'].map((x) => Semester.fromJson(x)));
+          jsonDecode(response.body).map((x) => Semester.fromJson(x)));
     } else {
       throw Exception('Failed to load Semester --- ${response.statusCode}');
     }
