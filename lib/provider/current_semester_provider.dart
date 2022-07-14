@@ -20,6 +20,10 @@ class SemestersProvider extends ChangeNotifier {
     return semesters[currentSemesterIndex];
   }
 
+  Future<List<Week>> getCurrentSemesterWeek() async {
+    return _semesterRepository.getAllSemesterWeek(getCurrentSemester().id);
+  }
+
   Future<Week> getCurrentWeek() async {
     return await _semesterRepository.getCurrentWeek(getCurrentSemester().id);
   }
