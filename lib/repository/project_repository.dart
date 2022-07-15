@@ -15,6 +15,7 @@ class ProjectRepository {
         if( query != null){
           result = result.where((element) => element.topicsResponse.topicName!.toLowerCase().contains(query.toLowerCase())).toList();
         }
+
       } else {
         throw Exception('Failed to load topics--- ${response.statusCode}');
       }

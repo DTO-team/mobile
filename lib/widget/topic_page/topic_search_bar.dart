@@ -58,9 +58,34 @@ String get searchFieldLabel => 'Topic name';
 
   @override
   Widget buildSuggestions(BuildContext context) {
-   return Center(
-     child: Text(''),
-   );
+    return  Container(
+      padding: EdgeInsets.all(10),
+      child: FutureBuilder<List<Topic>?>(
+          future: _fetchTopic.getAllTopic(query:  query),
+          builder: (context, snapshot) {
+            var data = snapshot.data;
+            if(!snapshot.hasData){
+              return Center(child: CircularProgressIndicator(),);
+            }
+            return ListView.builder(
+              itemCount: data?.length?? 0,
+              itemBuilder: ( context,  index) {
+                return TopicCard(
+                  topic: data![index],
+                  onPress: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DetailTopicCard(
+                              topic: data[index],
+                            )));
+                  },
+                );
+              },
+            );
+          }
+      ),
+    );
   }
   
 }
