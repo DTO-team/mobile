@@ -37,4 +37,16 @@ class Week {
     "toDate": toDate,
     "deadline": deadline,
   };
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Week &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          number == other.number &&
+          semesterId == other.semesterId;
+
+  @override
+  int get hashCode => id.hashCode ^ number.hashCode ^ semesterId.hashCode;
 }
