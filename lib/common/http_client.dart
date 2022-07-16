@@ -26,12 +26,13 @@ class HttpClient {
   Future<http.Response> get(String endpoint,
       {Map<String, String>? queryParams, Semester? currentSemester}) {
     Uri url = Uri.https(_host, '/api$_version$endpoint', queryParams);
-    final currentSemesterHeader =
-        (currentSemester != null) ? {"currentsemester": currentSemester} : {};
-    return http.get(url, headers: {
-      ..._defaultHeaders,
-      ...currentSemesterHeader
-    });
+    final Map<String, String> headers = (currentSemester != null)
+        ? {
+            "currentsemester": jsonEncode(currentSemester),
+            ..._defaultHeaders
+          }
+        : _defaultHeaders;
+    return http.get(url, headers: headers);
   }
 
   Future<http.Response> post(String endpoint,
