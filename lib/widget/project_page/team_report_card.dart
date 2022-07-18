@@ -19,7 +19,7 @@ class TeamReportCard extends StatelessWidget {
       onTap: onPress,
       child: Container(
         padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),

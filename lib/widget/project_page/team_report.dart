@@ -1,7 +1,8 @@
 import 'package:capstone_management/constant/color.dart';
 import 'package:capstone_management/modal/project.dart';
 import 'package:capstone_management/modal/week.dart';
-import 'package:capstone_management/widget/project_page/detail_team_report.dart';
+import 'package:capstone_management/modal/weekly_report.dart';
+import 'package:capstone_management/repository/report_repository.dart';
 import 'package:capstone_management/widget/project_page/team_report_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,19 +11,26 @@ import 'package:provider/provider.dart';
 import '../../modal/semesters.dart';
 import '../../provider/new_feed.dart';
 import '../../provider/semester_provider.dart';
+import 'detail_team_report.dart';
 
 class TeamReport extends StatefulWidget {
   const TeamReport({Key? key, required this.project}) : super(key: key);
   final Project project;
 
   @override
-  State<TeamReport> createState() => _TeamReportState();
+  State<TeamReport> createState() => _TeamReportState(project);
 }
 
 class _TeamReportState extends State<TeamReport> {
+  final _reportRepository = ReportRepository();
+
+  Project project;
+
   List<Week>? weeks;
   Week? selectedWeek;
   Semester? currentSemester;
+
+  _TeamReportState(this.project);
 
   @override
   void initState() {
@@ -42,150 +50,70 @@ class _TeamReportState extends State<TeamReport> {
     return sort;
   }
 
-  ///test data
-  List<NewFeed> nfs = [
-    NewFeed(
-        id: '1',
-        userFirstName: 'chamber th france',
-        team: 'DTOOOOOOOOOOOOOOO',
-        userProfilePic: 'assets/chamb.png',
-        tweet:
-            'Do not worry, with me this will be easy. C\'est simple comme bonjour',
-        tweetedAt: 'Oct 2',
-        topic: 'Project OnGoinggggg'),
-    NewFeed(
-        id: '2',
-        userFirstName: 'Lute',
-        team: 'Lute100',
-        userProfilePic: 'assets/chamb.png',
-        tweet:
-            'This killing is terrible business but I always say if I must do something, be the best',
-        tweetedAt: 'Oct 4',
-        topic: 'Project OnGoing'),
-    NewFeed(
-        id: '3',
-        userFirstName: 'Lute',
-        team: 'Lute100',
-        userProfilePic: 'assets/chamb.png',
-        tweet:
-            'Our guests have arrived. Let\'s make a good first impression, shall we?',
-        tweetedAt: 'Oct 4',
-        topic: 'Project OnGoing'),
-    NewFeed(
-        id: '4',
-        userFirstName: 'Lute',
-        team: 'Lute100',
-        userProfilePic: 'assets/chamb.png',
-        tweet:
-            'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
-        tweetedAt: 'Oct 4',
-        topic: 'Project OnGoing'),
-    NewFeed(
-        id: '5',
-        userFirstName: 'Lute',
-        team: 'Lute100',
-        userProfilePic: 'assets/chamb.png',
-        tweet:
-            'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
-        tweetedAt: 'Oct 4',
-        topic: 'Project OnGoing'),
-    NewFeed(
-        id: '6',
-        userFirstName: 'Lute',
-        team: 'Lute100',
-        userProfilePic: 'assets/chamb.png',
-        tweet:
-            'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
-        tweetedAt: 'Oct 4',
-        topic: 'Project OnGoing'),
-    NewFeed(
-        id: '7',
-        userFirstName: 'Lute',
-        team: 'Lute100',
-        userProfilePic: 'assets/chamb.png',
-        tweet:
-            'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
-        tweetedAt: 'Oct 4',
-        topic: 'Project OnGoing'),
-    NewFeed(
-        id: '8',
-        userFirstName: 'Lute',
-        team: 'Lute100',
-        userProfilePic: 'assets/chamb.png',
-        tweet:
-            'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
-        tweetedAt: 'Oct 4',
-        topic: 'Project OnGoing'),
-    NewFeed(
-        id: '9',
-        userFirstName: 'Lute',
-        team: 'Lute100',
-        userProfilePic: 'assets/chamb.png',
-        tweet:
-            'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
-        tweetedAt: 'Oct 4',
-        topic: 'Project OnGoing'),
-    NewFeed(
-        id: '10',
-        userFirstName: 'Lute',
-        team: 'Lute100',
-        userProfilePic: 'assets/chamb.png',
-        tweet:
-            'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
-        tweetedAt: 'Oct 4',
-        topic: 'Project OnGoing'),
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListView(
-        children: [
-          Container(
-            alignment: Alignment.center,
-            margin: const EdgeInsets.symmetric(horizontal: 120, vertical: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15.0),
-              border: Border.all(
-                  color: primary, style: BorderStyle.solid, width: 0.80),
-            ),
-            child: DropdownButton<Week?>(
-              borderRadius: const BorderRadius.all(Radius.circular(15)),
-              value: selectedWeek,
-              underline: const SizedBox(),
-              isExpanded: false,
-              items:
-                  sortList(weeks)?.map<DropdownMenuItem<Week?>>((Week? week) {
-                return DropdownMenuItem<Week?>(
-                  value: week,
-                  child: Text('Week ${week!.number}'),
-                );
-              }).toList(),
-              onChanged: (Week? value) {
-                setState(() {
-                  selectedWeek = value;
-                });
-              },
-            ),
+    return ListView(
+      children: [
+        Container(
+          alignment: Alignment.center,
+          margin: const EdgeInsets.symmetric(horizontal: 120, vertical: 10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15.0),
+            border: Border.all(
+                color: primary, style: BorderStyle.solid, width: 0.80),
           ),
-          ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: 8,
-              itemBuilder: (context, index) {
-                return TeamReportCard(
-                    onPress: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => DetailReport(
-                                    newFeed: nfs[index],
-                                  )));
-                    },
-                    newfeed: nfs[index]);
-              })
-        ],
-      ),
+          child: DropdownButton<Week?>(
+            borderRadius: const BorderRadius.all(Radius.circular(15)),
+            value: selectedWeek,
+            underline: const SizedBox(),
+            isExpanded: false,
+            items:
+                sortList(weeks)?.map<DropdownMenuItem<Week?>>((Week? week) {
+              return DropdownMenuItem<Week?>(
+                value: week,
+                child: Text('Week ${week!.number}'),
+              );
+            }).toList(),
+            onChanged: (Week? value) {
+              setState(() {
+                selectedWeek = value;
+              });
+            },
+          ),
+        ),
+        FutureBuilder<List<WeeklyReport>?>(
+          future: _reportRepository.getTeamWeeklyReport(
+              project.teamDetailResponse.teamId,
+              selectedWeek!.number,
+              currentSemester),
+          builder: (context, snapshot) {
+            var data = snapshot.data;
+            if (!snapshot.hasData) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+
+            return ListView.builder(
+                physics: const NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: 1,
+                itemBuilder: (context, index) {
+                  return TeamReportCard(
+                      onPress: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    DetailReport(
+                                      report: data![index],
+                                    )));
+                      },
+                      newfeed: NewFeed(id: id, userFirstName: userFirstName, team: team, userProfilePic: userProfilePic, tweet: tweet, tweetedAt: tweetedAt, topic: topic));
+                });
+          },
+        ),
+      ],
     );
   }
 }

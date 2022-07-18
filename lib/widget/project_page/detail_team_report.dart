@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 import '../../constant/text_style.dart';
 import '../../modal/weekly_report.dart';
 class DetailReport extends StatelessWidget {
-  const DetailReport({Key? key, required this.newFeed
+  const DetailReport({Key? key, required this.report
    // , required this.weeklyReport
   })
       : super(key: key);
 
 //  final WeeklyReport? weeklyReport;
- final NewFeed newFeed;
+ final WeeklyReport report;
 
 
   @override
@@ -26,27 +26,27 @@ class DetailReport extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Detail Report'),
+          title: const Text('Detail Report'),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.black),
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () => Navigator.of(context).pop(),
           ),
         ),
         body: Container(
-          margin: EdgeInsets.symmetric(vertical: 10),
-          padding: EdgeInsets.all(5),
+          margin: const EdgeInsets.symmetric(vertical: 10),
+          padding: const EdgeInsets.all(5),
           child: ListView(
             children: [
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Card(
                     child: Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: ExpandablePanel(
-                          header: Text('completed Tasks',
+                          header: const Text('completed Tasks',
                               style: AppTextSytle.subTitle1_1TextStyle),
-                          collapsed: Text(''),
-                          expanded: Text(newFeed.tweet
+                          collapsed: const Text(''),
+                          expanded: Text(report.completedTasks
                              // ?? 'task is not added'
                           )),
                     )),
@@ -55,14 +55,14 @@ class DetailReport extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 child: Card(
                     child: Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: ExpandablePanel(
-                          header: Text(
+                          header: const Text(
                             'Task in-progress',
                             style: AppTextSytle.subTitle1_1TextStyle,
                           ),
-                          collapsed: Text(''),
-                          expanded: Text(newFeed.tweet
+                          collapsed: const Text(''),
+                          expanded: Text(report.inProgressTasks
                             //  ?? 'task is not added'
                           )),
                     )),
@@ -71,12 +71,12 @@ class DetailReport extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 child: Card(
                     child: Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: ExpandablePanel(
-                          header: Text('Tasks to begin next week',
+                          header: const Text('Tasks to begin next week',
                               style: AppTextSytle.subTitle1_1TextStyle),
-                          collapsed: Text(''),
-                          expanded: Text(newFeed.tweet
+                          collapsed: const Text(''),
+                          expanded: Text(report.nextWeekTasks
                               //?? 'task is not added'
                           )),
                     )),
@@ -85,12 +85,12 @@ class DetailReport extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 child: Card(
                     child: Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: ExpandablePanel(
-                          header: Text('Urgent issues',
+                          header: const Text('Urgent issues',
                               style: AppTextSytle.subTitle1_1TextStyle),
-                          collapsed: Text(''),
-                          expanded: Text(newFeed.tweet
+                          collapsed: const Text(''),
+                          expanded: Text(report.urgentIssues
                               //?? 'task is not added'
                           )),
                     )),
@@ -99,21 +99,21 @@ class DetailReport extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 child: Card(
                     child: Container(
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: ExpandablePanel(
-                          header: Text('Self-assessments',
+                          header: const Text('Self-assessments',
                               style: AppTextSytle.subTitle1_1TextStyle),
-                          collapsed: Text(''),
-                          expanded: Text(newFeed.tweet
+                          collapsed: const Text(''),
+                          expanded: Text(report.selfAssessments
                              // ?? 'task is not added'
                           )),
                     )),
               ),
-              Divider(thickness: 1,color: primary,),
+              const Divider(thickness: 1,color: primary,),
               Container(
-                margin: EdgeInsets.all(10),
+                margin: const EdgeInsets.all(10),
                 child: TextField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'FeedBack',
                       suffixIcon: Icon(Icons.edit),
@@ -124,7 +124,7 @@ class DetailReport extends StatelessWidget {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: const Text('Thanks!'),
-                          content: Text('Your Feedback has been submitted'),
+                          content: const Text('Your Feedback has been submitted'),
                           actions: <Widget>[
                             TextButton(
                               onPressed: () {
