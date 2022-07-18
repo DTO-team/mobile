@@ -88,28 +88,28 @@ class _TeamReportState extends State<TeamReport> {
               currentSemester),
           builder: (context, snapshot) {
             var data = snapshot.data;
-            if (!snapshot.hasData) {
+            if (!snapshot.hasData){
               return const Center(
                 child: CircularProgressIndicator(),
               );
             }
+            print(data?.length??0);
 
             return ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: 1,
+                itemCount: data?.length?? 0,
                 itemBuilder: (context, index) {
-                  return TeamReportCard(
-                      onPress: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    DetailReport(
-                                      report: data![index],
-                                    )));
-                      },
-                      newfeed: NewFeed(id: id, userFirstName: userFirstName, team: team, userProfilePic: userProfilePic, tweet: tweet, tweetedAt: tweetedAt, topic: topic));
+                  return TeamReportCard(onPress: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  DetailReport(
+                                    report: data![index],
+                                  )));
+                  }, report: data![index],);
+
                 });
           },
         ),

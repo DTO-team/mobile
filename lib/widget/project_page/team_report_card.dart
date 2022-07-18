@@ -1,18 +1,22 @@
 import 'package:capstone_management/constant/color.dart';
 import 'package:capstone_management/constant/text_style.dart';
 import 'package:capstone_management/modal/project.dart';
+import 'package:capstone_management/modal/weekly_report.dart';
 import 'package:capstone_management/provider/new_feed.dart';
 import 'package:flutter/material.dart';
+import 'package:html/parser.dart';
 
 class TeamReportCard extends StatelessWidget {
-  const TeamReportCard({Key? key
-    //, required this.project
-    , required this.onPress, required this.newfeed})
+  const TeamReportCard({Key? key, required this.onPress, required this.report})
       : super(key: key);
 
- // final Project project;
+  final WeeklyReport report;
   final VoidCallback onPress;
-  final NewFeed newfeed;
+  String _parseHtmlString(String htmlString) {
+    final document = parse(htmlString);
+    final String parsedString = parse(document.body!.text).documentElement!.text;
+    return parsedString;
+  }
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -34,20 +38,7 @@ class TeamReportCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Recipe title
-              Center(
-                child: Text(
-                  newfeed.userFirstName ,
-                  style: AppTextSytle.tittleTextStyle,
-                ),
-              ),
-              const Padding(padding: EdgeInsets.only(top: 10)),
 
-              const Divider(
-                thickness: 1,
-                color: primary,
-                height: 10,
-              ),
               Container(
                   padding: const EdgeInsets.all(5),
 
@@ -56,44 +47,26 @@ class TeamReportCard extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.work,size: 16,),
+                          Icon(Icons.info,size: 16,),
                           SizedBox(width: 5,),
-                          Text('Team: ',style: AppTextSytle.subTitle2TextStyle,),
-                          Text(newfeed.userFirstName, style:  AppTextSytle.bodyTextStyle,),
+                          Text('Member: ',style: AppTextSytle.subTitle2TextStyle,),
+                          Text( _parseHtmlString(report.reporter.fullName ?? ''), style:AppTextSytle.bodyTextStyle,),
                         ],
 
                       ),
                       Row(
                         children: [
-                          Icon(Icons.flag, size: 16,),
+                          Icon(Icons.pending_actions, size: 16,),
                           SizedBox(width: 5,),
-                          Text('Leader: ',style: AppTextSytle.subTitle2TextStyle,),
-                          Text(newfeed.userFirstName , style:  AppTextSytle.bodyTextStyle,),
+                          Text('total feedback: ',style: AppTextSytle.subTitle2TextStyle,),
+                          Text( '${report.feedback.length}' , style:  AppTextSytle.bodyTextStyle,),
                         ],
 
                       )
                     ],
                   )
               ),
-              const Divider(
-                thickness: 1,
-                color: primary,
-                height: 10,
-              ),
-              Container(
-                  padding: const EdgeInsets.all(5),
 
-                  child: RichText(
-                    text: TextSpan(
-                        text: 'Description: ',
-                        style: AppTextSytle.subTitle2TextStyle,
-                        children: [
-                          TextSpan(
-                              text: newfeed.userFirstName,
-                              style: AppTextSytle.bodyTextStyle)
-                        ]),
-                  )
-              )
             ],
           ),
         ),
