@@ -1,7 +1,5 @@
 import 'package:capstone_management/constant/color.dart';
-import 'package:capstone_management/widget/Lecture_card.dart';
 import 'package:capstone_management/widget/topic_page/leader_card.dart';
-import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 
@@ -31,7 +29,10 @@ class DetailReport extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title:  Text('Detail Report Week ${report.week.number}',style: AppTextSytle.subTitle2TextStyle,),
+          title: Text(
+            'Detail Report Week ${report.week.number}',
+            style: AppTextSytle.subTitle2TextStyle,
+          ),
           elevation: 0.5,
           backgroundColor: whiteSoft,
           leading: IconButton(
@@ -44,31 +45,37 @@ class DetailReport extends StatelessWidget {
           padding: const EdgeInsets.all(5),
           child: ListView(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Text('Reporter '),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text('Reporter'),
               ),
               leader_card(
-                email: report.reporter.email ,
+                email: report.reporter.email,
                 avatar: 'assets/chamb.png',
                 name: report.reporter.fullName,
                 icon: '',
               ),
-              Divider(thickness: 1,),
+              const Divider(
+                thickness: 1,
+              ),
               Card(
                 child: Container(
                   padding: const EdgeInsets.all(10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Task completed',
+                      const Text('Task completed',
                           style: AppTextSytle.subTitle1_1TextStyle),
-                      SizedBox(height: 10,),
-
-                      Text(_parseHtmlString(report.urgentIssues),
-                        style: AppTextSytle.bodyTextStyle,),
-                      SizedBox(height: 10,),
-
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        _parseHtmlString(report.urgentIssues),
+                        style: AppTextSytle.bodyTextStyle,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                     ],
                   ),
                 ),
@@ -79,14 +86,18 @@ class DetailReport extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Tasks in-progress',
+                      const Text('Tasks in-progress',
                           style: AppTextSytle.subTitle1_1TextStyle),
-                      SizedBox(height: 10,),
-
-                      Text(_parseHtmlString(report.inProgressTasks),
-                        style: AppTextSytle.bodyTextStyle,),
-                      SizedBox(height: 10,),
-
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        _parseHtmlString(report.inProgressTasks),
+                        style: AppTextSytle.bodyTextStyle,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                     ],
                   ),
                 ),
@@ -97,14 +108,18 @@ class DetailReport extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Tasks to begin next week',
+                      const Text('Tasks to begin next week',
                           style: AppTextSytle.subTitle1_1TextStyle),
-                      SizedBox(height: 10,),
-
-                      Text(_parseHtmlString(report.nextWeekTasks),
-                        style: AppTextSytle.bodyTextStyle,),
-                      SizedBox(height: 10,),
-
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        _parseHtmlString(report.nextWeekTasks),
+                        style: AppTextSytle.bodyTextStyle,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                     ],
                   ),
                 ),
@@ -115,13 +130,18 @@ class DetailReport extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Urgent issues',
+                      const Text('Urgent issues',
                           style: AppTextSytle.subTitle1_1TextStyle),
-                    SizedBox(height: 10,),
-
-                      Text(_parseHtmlString(report.urgentIssues),
-                        style: AppTextSytle.bodyTextStyle,),
-                      SizedBox(height: 10,),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        _parseHtmlString(report.urgentIssues),
+                        style: AppTextSytle.bodyTextStyle,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                     ],
                   ),
                 ),
@@ -132,55 +152,61 @@ class DetailReport extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Self-assessments',
+                      const Text('Self-assessments',
                           style: AppTextSytle.subTitle1_1TextStyle),
-                      SizedBox(height: 10,),
-
-                      Text(_parseHtmlString(report.selfAssessments),
-                        style: AppTextSytle.bodyTextStyle,),
-                      SizedBox(height: 10,),
-
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        _parseHtmlString(report.selfAssessments),
+                        style: AppTextSytle.bodyTextStyle,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                     ],
                   ),
                 ),
               ),
-
               Card(
                 child: Container(
                   padding: const EdgeInsets.all(10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Self-assessments',
+                      const Text('Self-assessments',
                           style: AppTextSytle.subTitle1_1TextStyle),
-                      SizedBox(height: 10,),
-
-                      Text(_parseHtmlString(report.selfAssessments),
-                        style: AppTextSytle.bodyTextStyle,),
-                      SizedBox(height: 10,),
-
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        _parseHtmlString(report.selfAssessments),
+                        style: AppTextSytle.bodyTextStyle,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                     ],
                   ),
                 ),
               ),
-
               const Divider(
                 thickness: 1,
                 color: primary,
               ),
               Column(
                 children: [
-                  // Container(
-                  //     padding: EdgeInsets.all(10),
-                  //     child: ListView.builder(
-                  //       itemBuilder: (BuildContext context, int index) {
-                  //         return lec_card(
-                  //           name: report.feedback.map((e) => e.author.fullName),
-                  //           avatar: 'assets/chamb.png',
-                  //           email: report.feedback.map((e) => e.author.email),
-                  //         );
-                  //       },
-                  //     )),
+                  /*Container(
+                      padding: const EdgeInsets.all(10),
+                      child: ListView.builder(
+                        itemBuilder: (BuildContext context, int index) {
+                          return lec_card(
+                            name: report.feedback.map((e) => e.author.fullName),
+                            avatar: 'assets/chamb.png',
+                            email: report.feedback.map((e) => e.author.email),
+                          );
+                        },
+                      )),*/
                   Container(
                     margin: const EdgeInsets.all(10),
                     child: TextField(

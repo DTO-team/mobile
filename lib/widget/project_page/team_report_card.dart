@@ -1,8 +1,6 @@
 import 'package:capstone_management/constant/color.dart';
 import 'package:capstone_management/constant/text_style.dart';
-import 'package:capstone_management/modal/project.dart';
 import 'package:capstone_management/modal/weekly_report.dart';
-import 'package:capstone_management/provider/new_feed.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 
@@ -17,6 +15,7 @@ class TeamReportCard extends StatelessWidget {
     final String parsedString = parse(document.body!.text).documentElement!.text;
     return parsedString;
   }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -38,35 +37,30 @@ class TeamReportCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               Container(
                   padding: const EdgeInsets.all(5),
-
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.info,size: 16,),
-                          SizedBox(width: 5,),
-                          Text('Member: ',style: AppTextSytle.subTitle2TextStyle,),
+                          const Icon(Icons.info,size: 16,),
+                          const SizedBox(width: 5,),
+                          const Text('Member: ',style: AppTextSytle.subTitle2TextStyle,),
                           Text( _parseHtmlString(report.reporter.fullName ?? ''), style:AppTextSytle.bodyTextStyle,),
                         ],
-
                       ),
                       Row(
                         children: [
-                          Icon(Icons.pending_actions, size: 16,),
-                          SizedBox(width: 5,),
-                          Text('total feedback: ',style: AppTextSytle.subTitle2TextStyle,),
+                          const Icon(Icons.pending_actions, size: 16,),
+                          const SizedBox(width: 5,),
+                          const Text('total feedback: ',style: AppTextSytle.subTitle2TextStyle,),
                           Text( '${report.feedback.length}' , style:  AppTextSytle.bodyTextStyle,),
                         ],
-
                       )
                     ],
                   )
               ),
-
             ],
           ),
         ),
