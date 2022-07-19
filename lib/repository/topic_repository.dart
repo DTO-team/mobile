@@ -12,7 +12,7 @@ class TopicRepository {
     try {
       if (response.statusCode == 200) {
         result = List<Topic>.from(
-            jsonDecode(response.body)['data'].map((x) => Topic.fromJson(x)));
+            jsonDecode(response.body).map((x) => Topic.fromJson(x)));
         if (query != null) {
           result = result
               .where((element) => element.topicName!

@@ -97,7 +97,6 @@ class DetailTopicCard extends StatelessWidget {
                         email: topic.lecturersDetails
                             .map((e) => e.email)
                             .toList().first,
-                        icon: '',
 
                       ),
 
@@ -117,7 +116,6 @@ class DetailTopicCard extends StatelessWidget {
                             email: topic.lecturersDetails
                                 .map((e) => e.email)
                                 .toList()[index],
-                            icon: '',
 
                           );
                         },

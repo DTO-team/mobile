@@ -1,16 +1,25 @@
 import 'package:capstone_management/constant/color.dart';
-import 'package:capstone_management/widget/topic_page/leader_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 
 import '../../constant/text_style.dart';
 import '../../modal/weekly_report.dart';
+import '../Lecture_card.dart';
+import 'feedback_add.dart';
 
-class DetailReport extends StatelessWidget {
+class DetailReport extends StatefulWidget {
   const DetailReport({Key? key, required this.report}) : super(key: key);
 
   final WeeklyReport report;
 
+  @override
+  State<DetailReport> createState() => _DetailReportState();
+}
+
+class _DetailReportState extends State<DetailReport> {
+  bool _isEnable = false;
+  String title = '';
   String _parseHtmlString(String htmlString) {
     final document = parse(htmlString);
     final String parsedString =
@@ -30,7 +39,7 @@ class DetailReport extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Detail Report Week ${report.week.number}',
+            'Detail Report Week ${widget.report.week.number}',
             style: AppTextSytle.subTitle2TextStyle,
           ),
           elevation: 0.5,
@@ -49,11 +58,10 @@ class DetailReport extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: Text('Reporter'),
               ),
-              leader_card(
-                email: report.reporter.email,
+              lec_card(
+                email: widget.report.reporter.email,
                 avatar: 'assets/chamb.png',
-                name: report.reporter.fullName,
-                icon: '',
+                name: widget.report.reporter.fullName,
               ),
               const Divider(
                 thickness: 1,
@@ -70,7 +78,7 @@ class DetailReport extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        _parseHtmlString(report.urgentIssues),
+                        _parseHtmlString(widget.report.urgentIssues),
                         style: AppTextSytle.bodyTextStyle,
                       ),
                       const SizedBox(
@@ -92,7 +100,7 @@ class DetailReport extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        _parseHtmlString(report.inProgressTasks),
+                        _parseHtmlString(widget.report.inProgressTasks),
                         style: AppTextSytle.bodyTextStyle,
                       ),
                       const SizedBox(
@@ -114,7 +122,7 @@ class DetailReport extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        _parseHtmlString(report.nextWeekTasks),
+                        _parseHtmlString(widget.report.nextWeekTasks),
                         style: AppTextSytle.bodyTextStyle,
                       ),
                       const SizedBox(
@@ -136,7 +144,7 @@ class DetailReport extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        _parseHtmlString(report.urgentIssues),
+                        _parseHtmlString(widget.report.urgentIssues),
                         style: AppTextSytle.bodyTextStyle,
                       ),
                       const SizedBox(
@@ -158,7 +166,7 @@ class DetailReport extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        _parseHtmlString(report.selfAssessments),
+                        _parseHtmlString(widget.report.selfAssessments),
                         style: AppTextSytle.bodyTextStyle,
                       ),
                       const SizedBox(
@@ -180,7 +188,7 @@ class DetailReport extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        _parseHtmlString(report.selfAssessments),
+                        _parseHtmlString(widget.report.selfAssessments),
                         style: AppTextSytle.bodyTextStyle,
                       ),
                       const SizedBox(
@@ -194,55 +202,54 @@ class DetailReport extends StatelessWidget {
                 thickness: 1,
                 color: primary,
               ),
-              Column(
-                children: [
-                  /*Container(
-                      padding: const EdgeInsets.all(10),
-                      child: ListView.builder(
-                        itemBuilder: (BuildContext context, int index) {
-                          return lec_card(
-                            name: report.feedback.map((e) => e.author.fullName),
-                            avatar: 'assets/chamb.png',
-                            email: report.feedback.map((e) => e.author.email),
-                          );
-                        },
-                      )),*/
-                  Container(
-                    margin: const EdgeInsets.all(10),
-                    child: TextField(
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'FeedBack',
-                          suffixIcon: Icon(Icons.edit),
-                          suffixIconColor: primary),
-                      onSubmitted: (String value) async {
-                        await showDialog<void>(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: const Text('Thanks!'),
-                              content: const Text(
-                                  'Your Feedback has been submitted'),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text('OK'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              )
-            ],
-          ),
+             ListView.builder(
+               physics: NeverScrollableScrollPhysics(),
+               shrinkWrap: true,
+               itemCount:  1,
+               itemBuilder: (context, index) {
+
+               return Row(
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                 children: [
+
+                   IconButton(onPressed: () {
+                     Navigator.push(
+                         context,
+                         MaterialPageRoute(
+                             builder: (context) => AddFeedBack(
+                               report: widget.report,
+                             )));
+
+                   }
+                        ,icon: Icon(Icons.add)),
+
+                   Expanded(
+                     child: Container(
+                       margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+                       padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 5),
+
+                       decoration: BoxDecoration(
+                         border: Border.all(color: Colors.grey),
+                         borderRadius: BorderRadius.all(Radius.circular(10))
+
+                       ),
+                       child:  Row(
+                           children: [
+                          Column(children: [
+                            Text('${widget.report.feedback[index].author.fullName}'),
+                            Text('${widget.report.feedback[index].content}'),
+
+                          ],),
+                       ]),
+
+                     ),
+                   )
+                 ],
+          );}
         ),
-      ),
-    );
+      ]),
+    )));
   }
+
+
 }

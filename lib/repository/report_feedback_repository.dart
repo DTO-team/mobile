@@ -5,7 +5,6 @@ class ReportFeedbackRepository {
 
   Future<bool> postFeedback(String teamId, String reportId, String content) async {
     final httpClient = HttpClient();
-    
     final body = HttpPatchBody(op: 'add', path: '/feedbacks', value: content);
     final response = await httpClient.patch('teams/$teamId/reports/$reportId', body: body);
 

@@ -74,7 +74,6 @@ class ProjectInfo extends StatelessWidget {
                     email: project.teamDetailResponse.mentors
                         .map((e) => e.email)
                         .toList().first,
-                    icon: '',
 
                   ),
 
@@ -94,7 +93,6 @@ class ProjectInfo extends StatelessWidget {
                         email: project.teamDetailResponse.mentors
                             .map((e) => e.email)
                             .toList()[index],
-                        icon:  '',
 
                       );
                     },
@@ -135,7 +133,6 @@ class ProjectInfo extends StatelessWidget {
                         email: project.teamDetailResponse.members
                             .map((e) => e.email)
                             .toList()[index],
-                        icon:  '',
 
                       );
                     },
