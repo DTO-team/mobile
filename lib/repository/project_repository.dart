@@ -11,7 +11,7 @@ class ProjectRepository {
     final response = await httpClient.get('/projects');
     try{
       if (response.statusCode == 200) {
-        result = List<Project>.from(jsonDecode(response.body)['data'].map((x) => Project.fromJson(x)));
+        result = List<Project>.from(jsonDecode(response.body).map((x) => Project.fromJson(x)));
         if( query != null){
           result = result.where((element) => element.topicsResponse.topicName!.toLowerCase().contains(query.toLowerCase())).toList();
         }

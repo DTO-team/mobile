@@ -11,7 +11,7 @@ class LecturerRepository {
     final response = await httpClient.get(resourcePath);
     if (response.statusCode == 200) {
       return List<Lecturer>.from(
-          jsonDecode(response.body)['data'].map((x) => Lecturer.fromJson(x)));
+          jsonDecode(response.body).map((x) => Lecturer.fromJson(x)));
     } else {
       throw Exception('Failed to load Lecturer--- ${response.statusCode}');
     }
