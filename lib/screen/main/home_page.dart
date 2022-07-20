@@ -136,7 +136,7 @@ class _HomePageState extends State<HomePage> {
 
     int _currentCard = 0;
 
-    List cardList = [WelcomeCard( name: _appUser.fullName?? '',), TimeLineCard()];
+    List cardList = [WelcomeCard( name: _appUser.fullName?? '',), TimeLineCard(currentSemester: _selectedSemester,)];
     return Scaffold(
       ///trao cho th nay
       ///ừ cái key đó, ta hoàn toàn có thể get được tham chiếu của chính Widget đó qua biến

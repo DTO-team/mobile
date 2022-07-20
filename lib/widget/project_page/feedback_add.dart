@@ -14,7 +14,7 @@ class AddFeedBack extends StatefulWidget {
 
 
 class _AddFeedBackState extends State<AddFeedBack> {
-  final TextEditingController _controller = TextEditingController();
+  final TextEditingController controller = TextEditingController();
   Future<bool>?  _futureFeedBack;
   @override
   Widget build(BuildContext context) {
@@ -39,16 +39,16 @@ class _AddFeedBackState extends State<AddFeedBack> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         TextField(
-          controller: _controller,
+          controller: controller,
           decoration: const InputDecoration(hintText: 'Enter Title'),
         ),
         ElevatedButton(
           onPressed: () {
             setState(() {
-              _futureFeedBack = ReportFeedbackRepository().postFeedback(widget.report.reporter.teamDetail!.teamId,widget.report.id,_controller.text);
+              _futureFeedBack = ReportFeedbackRepository().postFeedback(widget.report.reporter.teamDetail!.teamId,widget.report.id,controller.text);
             });
           },
-          child: const Text('Add feed back '),
+          child: const Text('Add feed back'),
         ),
       ],
     );
@@ -57,9 +57,15 @@ class _AddFeedBackState extends State<AddFeedBack> {
     return FutureBuilder(
       future: _futureFeedBack,
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          return Text(snapshot.data!.title);
-        } else if (snapshot.hasError) {
+        var data = snapshot.data;
+        if (data == true) {
+          return Text(controller.text);
+        }
+        if(data == false){
+          return Text('false');
+        }
+
+        else if (snapshot.hasError) {
           return Text('${snapshot.error}');
         }
 

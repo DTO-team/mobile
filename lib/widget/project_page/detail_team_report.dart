@@ -202,26 +202,27 @@ class _DetailReportState extends State<DetailReport> {
                 thickness: 1,
                 color: primary,
               ),
+              IconButton(onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AddFeedBack(
+                          report: widget.report,
+                        )));
+
+              }
+                  ,icon: Icon(Icons.add)),
              ListView.builder(
                physics: NeverScrollableScrollPhysics(),
                shrinkWrap: true,
-               itemCount:  1,
+               itemCount:  widget.report.feedback.length,
                itemBuilder: (context, index) {
 
                return Row(
                  crossAxisAlignment: CrossAxisAlignment.start,
                  children: [
 
-                   IconButton(onPressed: () {
-                     Navigator.push(
-                         context,
-                         MaterialPageRoute(
-                             builder: (context) => AddFeedBack(
-                               report: widget.report,
-                             )));
 
-                   }
-                        ,icon: Icon(Icons.add)),
 
                    Expanded(
                      child: Container(
