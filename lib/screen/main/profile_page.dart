@@ -19,7 +19,6 @@ class _ProfilePage extends State<ProfilePage> {
   static const _defaultImage = AssetImage('assets/chamb.png');
 
   late Lecturer _appUser;
-
   @override
   void initState() {
     super.initState();

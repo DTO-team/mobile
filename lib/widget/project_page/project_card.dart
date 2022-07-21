@@ -83,11 +83,11 @@ class ProjectCard extends StatelessWidget {
                                     children: [
                                       TextSpan(
                                           text: project.teamDetailResponse.mentors.length > 1
-                                          ? '\n- ${
+                                          ? '\n${
                                               project.teamDetailResponse.mentors
                                                   .map((e) => e.fullName)
                                                   .toList()
-                                                  .join('\n- ')
+                                                  .join('\n')
                                           }':
                                           project.teamDetailResponse.mentors
                                               .map((e) => e.fullName)

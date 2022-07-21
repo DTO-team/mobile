@@ -31,17 +31,22 @@ class _TeamReportState extends State<TeamReport> {
   Semester? currentSemester;
 
   _TeamReportState(this.project);
-
+  late Future<List<WeeklyReport>?> dataFuture;
   @override
   void initState() {
     super.initState();
     setState(() {
+
       currentSemester = Provider.of<SemestersProvider>(context, listen: false)
           .currentSemester;
       selectedWeek =
           Provider.of<SemestersProvider>(context, listen: false).currentWeek;
       weeks = Provider.of<SemestersProvider>(context, listen: false)
           .currentSemesterWeek;
+      dataFuture =_reportRepository.getTeamWeeklyReport(
+          project.teamDetailResponse.teamId,
+          selectedWeek!.number,
+          currentSemester);
     });
   }
 
@@ -83,9 +88,9 @@ class _TeamReportState extends State<TeamReport> {
         ),
         FutureBuilder<List<WeeklyReport>?>(
           future: _reportRepository.getTeamWeeklyReport(
-              project.teamDetailResponse.teamId,
-              selectedWeek!.number,
-              currentSemester),
+    project.teamDetailResponse.teamId,
+    selectedWeek!.number,
+    currentSemester),
           builder: (context, snapshot) {
             var data = snapshot.data;
             if (!snapshot.hasData){

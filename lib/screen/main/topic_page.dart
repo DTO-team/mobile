@@ -17,10 +17,9 @@ class TopicPage extends StatefulWidget {
 }
 
 class _TopicPageState extends State<TopicPage> {
-  List<Topic>? _topics;
   var isLoaded = false;
   var isDescending = false;
-  final TopicRepository _fetchTopic = TopicRepository();
+  late Future<List<Topic>?>? dataFuture;
   Semester? currentSemester;
 
   @override
@@ -28,18 +27,11 @@ class _TopicPageState extends State<TopicPage> {
     super.initState();
     setState(() {
       currentSemester = Provider.of<SemestersProvider>(context, listen: false).currentSemester;
-      loadTopics();
+      dataFuture = TopicRepository().getAllTopic(currentSemester);
     });
   }
 
-  Future<void> loadTopics() async {
-    _topics = await TopicRepository().getAllTopic(currentSemester);
-    if (_topics != null) {
-      setState(() {
-        isLoaded = true;
-      });
-    }
-  }
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -68,61 +60,70 @@ class _TopicPageState extends State<TopicPage> {
               )),
         ],
       ),
-      body: Container(
-        decoration: BoxDecoration(boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 2,
-            blurRadius: 5,
-            offset: Offset(3, 3), // changes position of shadow
-          ),
-        ], color: whiteSoft, borderRadius: BorderRadius.circular(5)),
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextButton.icon(
-                onPressed: () => setState(() => isDescending = !isDescending),
-                icon: RotatedBox(
-                    quarterTurns: 1, child: Icon(Icons.compare_arrows_rounded)),
-                label: Text(isDescending ? 'Z-A' : 'A-Z')),
-            Expanded(
-              child: FutureBuilder<List<Topic>?>(
-                  future: _fetchTopic.getAllTopic(currentSemester),
-                  builder: (context, snapshot) {
-                    var data = snapshot.data;
-                    if (!snapshot.hasData) {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                    if (snapshot.hasError) {
-                      print(snapshot.error);
-                    }
-                    return ListView.builder(
-                      itemCount: data?.length ?? 0,
-                      itemBuilder: (context, index) {
+      body: RefreshIndicator(
+        onRefresh: (){
+         return Future(()async{
+           await Future.delayed(Duration(seconds: 2));
+            setState(() {
+              dataFuture = TopicRepository().getAllTopic(currentSemester);
+            });
+          });
+        },
+        child: Container(
+          decoration: BoxDecoration(boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(3, 3), // changes position of shadow
+            ),
+          ], color: whiteSoft, borderRadius: BorderRadius.circular(5)),
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextButton.icon(
+                  onPressed: () => setState(() => isDescending = !isDescending),
+                  icon: RotatedBox(
+                      quarterTurns: 1, child: Icon(Icons.compare_arrows_rounded)),
+                  label: Text(isDescending ? 'Z-A' : 'A-Z')),
+              Expanded(
+                child: FutureBuilder<List<Topic>?>(
+                    future: dataFuture,
+                    builder: (context, snapshot) {
+                      var data = snapshot.data;
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      if (snapshot.hasError) {
+                        print(snapshot.error);
+                      }
+                      return ListView.builder(
+                        itemCount: data?.length ?? 0,
+                        itemBuilder: (context, index) {
                         final sort = data
                           ?..sort((a, b) => isDescending
-                              ? b.topicName!.compareTo(a.topicName!)
-                              : a.topicName!.compareTo(b.topicName!));
-                        final sortedTopic = sort![index];
-                        return TopicCard(
-                          topic: sortedTopic,
-                          onPress: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DetailTopicCard(
-                                          topic: sortedTopic,
-                                        )));
-                          },
-                        );
-                      },
-                    );
-                  }),
-            ),
-          ],
+                                ? b.topicName!.compareTo(a.topicName!)
+                                : a.topicName!.compareTo(b.topicName!));
+                          return TopicCard(
+                            topic: sort![index],
+                            onPress: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DetailTopicCard(
+                                            topic: data![index],
+                                          )));
+                            },
+                          );
+                        },
+                      );
+                    }),
+              ),
+            ],
+          ),
         ),
       ),
     ));

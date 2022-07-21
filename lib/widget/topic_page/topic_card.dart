@@ -59,10 +59,10 @@ class TopicCard extends StatelessWidget {
                             children: [
                               TextSpan(
                                   text: topic.lecturersDetails.length > 1 ?
-                                  '\n- ${topic.lecturersDetails
+                                  '\n${topic.lecturersDetails
                                       .map((e) => e.email)
                                       .toList()
-                                      .join('\n- ')}' :
+                                      .join('\n')}' :
                                   topic.lecturersDetails
                                       .map((e) => e.email)
                                       .toList()

@@ -182,7 +182,8 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: ListView(
+      body:
+      ListView(
         children: [
           Container(
             color: whiteSoft,
