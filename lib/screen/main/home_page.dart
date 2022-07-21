@@ -3,15 +3,17 @@ import 'package:capstone_management/constant/text_style.dart';
 import 'package:capstone_management/modal/semesters.dart';
 import 'package:capstone_management/provider/new_feed.dart';
 import 'package:capstone_management/provider/semester_provider.dart';
-import 'package:capstone_management/widget/home_page/new_feed_card.dart';
 import 'package:capstone_management/widget/home_page/time_line_card.dart';
 import 'package:capstone_management/widget/home_page/welcome_card.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../modal/lecturer.dart';
+import '../../modal/report_notification.dart';
 import '../../provider/app_user_provider.dart';
+import '../../widget/home_page/report_notification_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,7 +23,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   List<NewFeed> nfs = [
     NewFeed(
         id: '1',
@@ -29,7 +30,7 @@ class _HomePageState extends State<HomePage> {
         team: 'DTOOOOOOOOOOOOOOO',
         userProfilePic: 'assets/chamb.png',
         tweet:
-        'Do not worry, with me this will be easy. C\'est simple comme bonjour',
+            'Do not worry, with me this will be easy. C\'est simple comme bonjour',
         tweetedAt: 'Oct 2',
         topic: 'Project OnGoinggggg'),
     NewFeed(
@@ -38,7 +39,7 @@ class _HomePageState extends State<HomePage> {
         team: 'Lute100',
         userProfilePic: 'assets/chamb.png',
         tweet:
-        'This killing is terrible business but I always say if I must do something, be the best',
+            'This killing is terrible business but I always say if I must do something, be the best',
         tweetedAt: 'Oct 4',
         topic: 'Project OnGoing'),
     NewFeed(
@@ -47,7 +48,7 @@ class _HomePageState extends State<HomePage> {
         team: 'Lute100',
         userProfilePic: 'assets/chamb.png',
         tweet:
-        'Our guests have arrived. Let\'s make a good first impression, shall we?',
+            'Our guests have arrived. Let\'s make a good first impression, shall we?',
         tweetedAt: 'Oct 4',
         topic: 'Project OnGoing'),
     NewFeed(
@@ -56,7 +57,7 @@ class _HomePageState extends State<HomePage> {
         team: 'Lute100',
         userProfilePic: 'assets/chamb.png',
         tweet:
-        'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
+            'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
         tweetedAt: 'Oct 4',
         topic: 'Project OnGoing'),
     NewFeed(
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
         team: 'Lute100',
         userProfilePic: 'assets/chamb.png',
         tweet:
-        'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
+            'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
         tweetedAt: 'Oct 4',
         topic: 'Project OnGoing'),
     NewFeed(
@@ -74,7 +75,7 @@ class _HomePageState extends State<HomePage> {
         team: 'Lute100',
         userProfilePic: 'assets/chamb.png',
         tweet:
-        'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
+            'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
         tweetedAt: 'Oct 4',
         topic: 'Project OnGoing'),
     NewFeed(
@@ -83,7 +84,7 @@ class _HomePageState extends State<HomePage> {
         team: 'Lute100',
         userProfilePic: 'assets/chamb.png',
         tweet:
-        'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
+            'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
         tweetedAt: 'Oct 4',
         topic: 'Project OnGoing'),
     NewFeed(
@@ -92,7 +93,7 @@ class _HomePageState extends State<HomePage> {
         team: 'Lute100',
         userProfilePic: 'assets/chamb.png',
         tweet:
-        'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
+            'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
         tweetedAt: 'Oct 4',
         topic: 'Project OnGoing'),
     NewFeed(
@@ -101,7 +102,7 @@ class _HomePageState extends State<HomePage> {
         team: 'Lute100',
         userProfilePic: 'assets/chamb.png',
         tweet:
-        'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
+            'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
         tweetedAt: 'Oct 4',
         topic: 'Project OnGoing'),
     NewFeed(
@@ -110,33 +111,53 @@ class _HomePageState extends State<HomePage> {
         team: 'Lute100',
         userProfilePic: 'assets/chamb.png',
         tweet:
-        'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
+            'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
         tweetedAt: 'Oct 4',
         topic: 'Project OnGoing'),
   ];
   List<Semester>? listSemester;
-   Semester? _selectedSemester;
+  Semester? _selectedSemester;
   late Lecturer _appUser;
+
   @override
   void initState() {
     super.initState();
     setState(() {
-      _appUser =
-      Provider
-          .of<AppUserProvider>(context, listen: false)
-          .appUser!;
-      listSemester = Provider.of<SemestersProvider>(context, listen:  false).semesters;
-      _selectedSemester = Provider.of<SemestersProvider>(context, listen:  false).currentSemester;
+      _appUser = Provider.of<AppUserProvider>(context, listen: false).appUser!;
+      listSemester =
+          Provider.of<SemestersProvider>(context, listen: false).semesters;
+      _selectedSemester = Provider.of<SemestersProvider>(context, listen: false)
+          .currentSemester;
     });
+  }
+
+  Future<List<ReportNotification>> loadNotification() async {
+    List<ReportNotification> notifications = [];
+    await FirebaseFirestore.instance
+        .collection('reports')
+        .doc(_appUser.id)
+        .collection('mentors')
+        .get()
+        .then((value) {
+      for (var doc in value.docs) {
+        notifications.add(ReportNotification.fromJson(doc.data()));
+      }
+    });
+    return notifications;
   }
 
   @override
   Widget build(BuildContext context) {
-
-
     int _currentCard = 0;
 
-    List cardList = [WelcomeCard( name: _appUser.fullName?? '',), TimeLineCard(currentSemester: _selectedSemester,)];
+    List cardList = [
+      WelcomeCard(
+        name: _appUser.fullName ?? '',
+      ),
+      TimeLineCard(
+        currentSemester: _selectedSemester,
+      )
+    ];
     return Scaffold(
       ///trao cho th nay
       ///ừ cái key đó, ta hoàn toàn có thể get được tham chiếu của chính Widget đó qua biến
@@ -149,41 +170,51 @@ class _HomePageState extends State<HomePage> {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(Icons.info, size: 20,color: primary,),
-            SizedBox(width: 5,),
-            Text('Current Semester:', style: AppTextSytle.subTitle1_1TextStyle,),
-            SizedBox(width: 5,),
+            const Icon(
+              Icons.info,
+              size: 20,
+              color: primary,
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            const Text(
+              'Current Semester:',
+              style: AppTextSytle.subTitle1_1TextStyle,
+            ),
+            const SizedBox(
+              width: 5,
+            ),
             Container(
-              margin: EdgeInsets.symmetric(vertical: 10),
-              padding: EdgeInsets.symmetric(horizontal: 5),
-
+              margin: const EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 5),
               child: DropdownButton<Semester?>(
-                underline: SizedBox(),
-                borderRadius: BorderRadius.all(Radius.circular(15)),
+                underline: const SizedBox(),
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
                 value: _selectedSemester,
-              items:
-              listSemester?.map<DropdownMenuItem<Semester?>>((Semester? sem) {
+                items: listSemester
+                    ?.map<DropdownMenuItem<Semester?>>((Semester? sem) {
                   return DropdownMenuItem<Semester?>(
-
-                      child: Text('${sem?.season} _ ${sem?.year.toString()}',style: AppTextSytle.subTitle1TextStyle,),
-                  value: sem,
-
+                    value: sem,
+                    child: Text(
+                      '${sem?.season} _ ${sem?.year.toString()}',
+                      style: AppTextSytle.subTitle1TextStyle,
+                    ),
                   );
-                } ).toList(),
+                }).toList(),
                 onChanged: (Semester? value) {
                   setState(() {
-                    Provider.of<SemestersProvider>(context, listen:  false).currentSemester = value;
+                    Provider.of<SemestersProvider>(context, listen: false)
+                        .currentSemester = value;
                     _selectedSemester = value;
                   });
                 },
-
               ),
             ),
           ],
         ),
       ),
-      body:
-      ListView(
+      body: ListView(
         children: [
           Container(
             color: whiteSoft,
@@ -200,7 +231,7 @@ class _HomePageState extends State<HomePage> {
                   }),
               items: cardList.map((card) {
                 return Builder(builder: (BuildContext context) {
-                  return Container(
+                  return SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: Container(
                       child: card,
@@ -210,25 +241,37 @@ class _HomePageState extends State<HomePage> {
               }).toList(),
             ),
           ),
-          /// NOTIFICATION
-          SizedBox(height: 10,),
-          Container(
-            padding: EdgeInsets.only(left: 10),
-            child: Text('Notification',style: AppTextSytle.subTitle1_1TextStyle,),
-          ),
 
-          ListView.builder(
-          physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: nfs.length, itemBuilder: (context, index) => NewFeedCard(feed: nfs[index]))
+          /// NOTIFICATION
+          const SizedBox(
+            height: 10,
+          ),
+          Container(
+            padding: const EdgeInsets.only(left: 10),
+            child: const Text(
+              'Notification',
+              style: AppTextSytle.subTitle1_1TextStyle,
+            ),
+          ),
+          FutureBuilder<List<ReportNotification>>(
+            future: loadNotification(),
+            builder: (context, snapshot) {
+              var data = snapshot.data;
+              if (!snapshot.hasData){
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
+              return ListView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: data?.length,
+                  itemBuilder: (context, index) => ReportNotificationCard(notification: data![index]));
+            },
+          ),
         ],
       ),
-
-
-
     );
-
-
   }
-
 }

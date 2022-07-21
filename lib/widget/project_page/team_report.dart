@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../modal/semesters.dart';
-import '../../provider/new_feed.dart';
 import '../../provider/semester_provider.dart';
 import 'detail_team_report.dart';
 
@@ -98,7 +97,6 @@ class _TeamReportState extends State<TeamReport> {
                 child: CircularProgressIndicator(),
               );
             }
-            print(data?.length??0);
 
             return ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),

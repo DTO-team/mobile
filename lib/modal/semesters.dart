@@ -2,7 +2,6 @@
 //
 //     final currentSemester = currentSemesterFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 Semester currentSemesterFromJson(String str) => Semester.fromJson(json.decode(str));
