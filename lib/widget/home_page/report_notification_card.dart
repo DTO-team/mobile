@@ -23,14 +23,15 @@ class ReportNotificationCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
+                margin: EdgeInsets.only(right: 5),
                 height: 60,
                 width: 60,
-                decoration: const BoxDecoration(
-                    color: blue,
+                decoration: BoxDecoration(
+                    color: Colors.white,
                     shape: BoxShape.circle,
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage("assets/chamb.png"),
+                      image: NetworkImage(notification.avatarUrl ?? 'https://pbs.twimg.com/profile_images/1455185376876826625/s1AjSxph_400x400.jpg')
                     )),
               ),
               Expanded(
@@ -61,9 +62,9 @@ class ReportNotificationCard extends StatelessWidget {
                         const SizedBox(width: 5),
                         Flexible(
                           child: Text(
-                            notification.displayName.length > 10
-                                ? '${notification.displayName.substring(0, 10)}...'
-                                : notification.displayName,
+                            notification.email.length > 10
+                                ? '${notification.email.substring(0, 10)}...'
+                                : notification.email,
                             style: const TextStyle(
                                 color: kTeamColor, fontSize: 15),
                             overflow: TextOverflow.ellipsis,
@@ -79,27 +80,13 @@ class ReportNotificationCard extends StatelessWidget {
                               color: gray, shape: BoxShape.circle),
                         ),
                         const SizedBox(width: 5),
-                        Text(
-                          notification.displayName,
-                          style:
-                              const TextStyle(color: kTeamColor, fontSize: 15),
-                        ),
                       ]),
-
-                      ///Topic
                       const SizedBox(
                         height: 5,
                       ),
-                      // Text('Topic: ${feed.topic}', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17,color: kTextColor),),
                       const SizedBox(
                         height: 2,
                       ),
-                      Text(notification.displayName),
-                      const SizedBox(
-                        height: 6,
-                      ),
-
-                      ///Picture
                     ],
                   )),
                 ),

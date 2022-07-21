@@ -262,6 +262,11 @@ class _HomePageState extends State<HomePage> {
                   child: CircularProgressIndicator(),
                 );
               }
+              if(data?.length ==0){
+                return Center(child:
+                  Text('You have no message')
+                  );
+              }
 
               return ListView.builder(
                   physics: const NeverScrollableScrollPhysics(),
