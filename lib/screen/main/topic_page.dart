@@ -63,7 +63,7 @@ class _TopicPageState extends State<TopicPage> {
       body: RefreshIndicator(
         onRefresh: (){
          return Future(()async{
-           await Future.delayed(Duration(seconds: 2));
+           await Future.delayed(Duration(seconds: 1));
             setState(() {
               dataFuture = TopicRepository().getAllTopic(currentSemester);
             });
@@ -93,6 +93,11 @@ class _TopicPageState extends State<TopicPage> {
                     builder: (context, snapshot) {
                       var data = snapshot.data;
                       if (!snapshot.hasData) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      if(data?.length == 0){
                         return Center(
                           child: CircularProgressIndicator(),
                         );

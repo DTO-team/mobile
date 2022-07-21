@@ -27,6 +27,7 @@ class Semester {
     year: json["year"],
     season: json["season"],
     status: json["status"],
+
   );
 
   Map<String, dynamic> toJson() => {
@@ -34,5 +35,6 @@ class Semester {
     "year": year,
     "season": season,
     "status": status,
+
   };
 }

@@ -1,4 +1,5 @@
 import 'package:capstone_management/constant/color.dart';
+import 'package:capstone_management/constant/text_style.dart';
 import 'package:capstone_management/modal/project.dart';
 import 'package:capstone_management/modal/week.dart';
 import 'package:capstone_management/modal/weekly_report.dart';
@@ -45,7 +46,7 @@ class _TeamReportState extends State<TeamReport> {
           .currentSemesterWeek;
       dataFuture =_reportRepository.getTeamWeeklyReport(
           project.teamDetailResponse.teamId,
-          selectedWeek!.number,
+          selectedWeek?.number??0,
           currentSemester);
     });
   }
@@ -89,13 +90,21 @@ class _TeamReportState extends State<TeamReport> {
         FutureBuilder<List<WeeklyReport>?>(
           future: _reportRepository.getTeamWeeklyReport(
     project.teamDetailResponse.teamId,
-    selectedWeek!.number,
+    selectedWeek?.number??0,
     currentSemester),
           builder: (context, snapshot) {
             var data = snapshot.data;
             if (!snapshot.hasData){
-              return const Center(
+              return  Center(
                 child: CircularProgressIndicator(),
+              );
+            }
+            if(data?.length == 0){
+              return Center(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 25),
+                  child: Text('Week ${selectedWeek?.number?? 0} - ${currentSemester!.season} has no report!!',style:AppTextSytle.subTitle1TextStyle),
+                ),
               );
             }
             print(data?.length??0);

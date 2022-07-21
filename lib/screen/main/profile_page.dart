@@ -16,7 +16,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePage extends State<ProfilePage> {
-  static const _defaultImage = AssetImage('assets/chamb.png');
+  static const _defaultImage = AssetImage('assets/avatar.jpg');
 
   late Lecturer _appUser;
   @override

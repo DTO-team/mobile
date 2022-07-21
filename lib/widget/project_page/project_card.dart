@@ -65,7 +65,7 @@ class ProjectCard extends StatelessWidget {
                         Icon(Icons.flag, size: 16,),
                         SizedBox(width: 5,),
                         Text('Leader: ',style: AppTextSytle.subTitle2TextStyle,),
-                        Text(project.teamDetailResponse.leader.fullName ?? '', style:  AppTextSytle.bodyTextStyle,),
+                        Text(project.teamDetailResponse.leader.fullName ?? 'No Name' , style:  AppTextSytle.bodyTextStyle,),
                       ],
 
                     ),

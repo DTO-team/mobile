@@ -8,18 +8,25 @@ Lecturer lecturerFromJson(String str) => Lecturer.fromJson(json.decode(str));
 
 String lecturerToJson(Lecturer data) => json.encode(data.toJson());
 
-class Lecturer extends User {
+class Lecturer  {
   Lecturer({
-    required super.id,
-    required super.email,
-    required super.userName,
-    required super.fullName,
-    required super.role,
-    required super.status,
-    super.avatarUrl,
+    required this.id,
+    required this.email,
+    required this.userName,
+    required this.fullName,
+    required this.role,
+    required this.status,
+    this.avatarUrl,
     required this.department,
   });
 
+  String id;
+  String? email;
+  String? userName;
+  String? fullName;
+  String role;
+  Status status;
+  String? avatarUrl;
   Department department;
 
   factory Lecturer.fromJson(Map<String, dynamic> json) => Lecturer(

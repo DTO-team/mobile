@@ -72,6 +72,11 @@ class _ProjectPageState extends State<ProjectPage> {
                           if(snapshot.hasError){
                             print(snapshot.error);
                           }
+                          if(data?.length == 0){
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
                           if(!snapshot.hasData){
                             return Center(child: CircularProgressIndicator(),);
                           }

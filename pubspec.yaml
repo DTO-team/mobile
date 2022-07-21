@@ -89,6 +89,7 @@ flutter:
     - assets/laptop.svg
     - assets/fpt_logo.png
     - assets/think.png
+    - assets/avatar.jpg
     - assets/flag.svg
   #   - images/a_dot_ham.jpeg
 
