@@ -53,6 +53,8 @@ class ProjectCard extends StatelessWidget {
                   children: [
                     Row(
                       children: [
+                        Icon(Icons.work,size: 16,),
+                        SizedBox(width: 5,),
                         Text('Team: ',style: AppTextSytle.subTitle2TextStyle,),
                         Text(project.teamDetailResponse.teamName, style:  AppTextSytle.bodyTextStyle,),
                       ],
@@ -60,24 +62,46 @@ class ProjectCard extends StatelessWidget {
                     ),
                     Row(
                       children: [
+                        Icon(Icons.flag, size: 16,),
+                        SizedBox(width: 5,),
                         Text('Leader: ',style: AppTextSytle.subTitle2TextStyle,),
                         Text(project.teamDetailResponse.leader.fullName ?? '', style:  AppTextSytle.bodyTextStyle,),
                       ],
 
                     ),
                     Container(
-                        child: RichText(
-                          text: TextSpan(
-                              text: 'Mentor: ',
-                              style: AppTextSytle.subTitle2TextStyle,
-                              children: [
-                                TextSpan(
-                                    text: project.teamDetailResponse.mentors
-                                        .map((e) => e.fullName)
-                                        .toList()
-                                        .join(', '),
-                                    style: AppTextSytle.bodyTextStyle)
-                              ]),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Icon(Icons.people_alt,size: 16,),
+                            SizedBox(width: 5,),
+                            Expanded(
+                              child: RichText(
+                                text: TextSpan(
+                                    text: 'Mentor: ',
+                                    style: AppTextSytle.subTitle2TextStyle,
+                                    children: [
+                                      TextSpan(
+                                          text: project.teamDetailResponse.mentors.length > 1
+                                          ? '\n${
+                                              project.teamDetailResponse.mentors
+                                                  .map((e) => e.fullName)
+                                                  .toList()
+                                                  .join('\n')
+                                          }':
+                                          project.teamDetailResponse.mentors
+                                              .map((e) => e.fullName)
+                                              .toList()
+                                              .join(''),
+
+
+
+
+                                          style: AppTextSytle.bodyTextStyle)
+                                    ]),
+                              ),
+                            ),
+                          ],
                         )),
                   ],
                 )

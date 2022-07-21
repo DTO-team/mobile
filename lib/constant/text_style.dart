@@ -13,7 +13,7 @@ class AppTextSytle {
       color: kTeamColor,
       fontSize: 14,
       fontWeight: FontWeight.normal,
-      letterSpacing: 0.25);
+      letterSpacing: 0.15);
   static const TextStyle subTitle2TextStyle = TextStyle(
       fontFamily: 'Roboto',
       color: kTextColor,

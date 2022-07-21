@@ -47,20 +47,35 @@ class TopicCard extends StatelessWidget {
                 height: 10,
               ),
               const Padding(padding: EdgeInsets.only(top: 10)),
-              Container(
-                  child: RichText(
-                    text: TextSpan(
-                        text: 'Lecturer: ',
-                        style: AppTextSytle.subTitle1TextStyle,
-                        children: [
-                          TextSpan(
-                              text: topic.lecturersDetails
-                                  .map((e) => e.email)
-                                  .toList()
-                                  .join(', '),
-                              style: AppTextSytle.bodyTextStyle)
-                        ]),
-                  )),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(Icons.people_alt,size: 16,),
+                    SizedBox(width: 5,),
+                    Expanded(child: RichText(
+                        text: TextSpan(
+                            text: 'Lecturer: ',
+                            style: AppTextSytle.subTitle1TextStyle,
+                            children: [
+                              TextSpan(
+                                  text: topic.lecturersDetails.length > 1 ?
+                                  '\n${topic.lecturersDetails
+                                      .map((e) => e.email)
+                                      .toList()
+                                      .join('\n')}' :
+                                  topic.lecturersDetails
+                                      .map((e) => e.email)
+                                      .toList()
+                                      .join(''),
+
+
+
+
+                                  style: AppTextSytle.bodyTextStyle)
+                            ]),
+                      )),
+                ],
+              ),
 
               const Divider(
                 thickness: 1,

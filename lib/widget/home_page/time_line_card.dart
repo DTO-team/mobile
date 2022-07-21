@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:timelines/timelines.dart';
 
+import '../../modal/semesters.dart';
+
 class TimeLineCard extends StatelessWidget {
-  const TimeLineCard({Key? key}) : super(key: key);
+  final Semester? currentSemester;
+  const TimeLineCard({Key? key, this.currentSemester}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +17,8 @@ class TimeLineCard extends StatelessWidget {
       children: [
         Container(
           padding: EdgeInsets.all(9),
-          child: const Text(
-            'Time Flow: 2022 SUMMER SEMESTER',
+          child:  Text(
+            'Time Flow: ${currentSemester!.season} - ${currentSemester!.year} ',
             style: AppTextSytle.subTitle1_1TextStyle,
           ),
         ),

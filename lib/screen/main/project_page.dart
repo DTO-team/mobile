@@ -16,25 +16,19 @@ class ProjectPage extends StatefulWidget {
 }
 
 class _ProjectPageState extends State<ProjectPage> {
-  List<Project>? _projects;
   var isLoaded = false;
   var isDescending = false;
+  late Future<List<Project>?>? dataFuture;
+
   ProjectRepository _fetchTopic = ProjectRepository();
 
   @override
   void initState() {
     super.initState();
-    loadTopics();
+    dataFuture = ProjectRepository().getAllProject();
   }
 
-  Future<void> loadTopics() async {
-    _projects = await ProjectRepository().getAllProject();
-    if (_projects != null) {
-      setState(() {
-        isLoaded = true;
-      });
-    }
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -53,48 +47,59 @@ class _ProjectPageState extends State<ProjectPage> {
                   icon: Icon(Icons.search, color:  black,)),
             ],
           ),
-          body: Container(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                TextButton.icon(onPressed:()=> setState(()
-                => isDescending = !isDescending), icon: RotatedBox(quarterTurns: 1,
-                child: Icon(Icons.compare_arrows_rounded)), label: Text(isDescending ? 'Z-A' : 'A-Z')),
-                Expanded(
-                  child: FutureBuilder<List<Project>?>(
-                      future: _fetchTopic.getAllProject(),
-                      builder: (context, snapshot) {
-                        var data = snapshot.data;
-                        if(!snapshot.hasData){
-                          return Center(child: CircularProgressIndicator(),);
+          body: RefreshIndicator(
+            onRefresh: (){
+              return Future(()async{
+                await Future.delayed(Duration(seconds: 2));
+                setState(() {
+                  dataFuture = ProjectRepository().getAllProject();
+                });
+              });
+            },
+            child: Container(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextButton.icon(onPressed:()=> setState(()
+                  => isDescending = !isDescending), icon: RotatedBox(quarterTurns: 1,
+                  child: Icon(Icons.compare_arrows_rounded)), label: Text(isDescending ? 'Z-A' : 'A-Z')),
+                  Expanded(
+                    child: FutureBuilder<List<Project>?>(
+                        future: dataFuture,
+                        builder: (context, snapshot) {
+                          var data = snapshot.data;
+                          if(snapshot.hasError){
+                            print(snapshot.error);
+                          }
+                          if(!snapshot.hasData){
+                            return Center(child: CircularProgressIndicator(),);
+                          }
+
+                          return ListView.builder(
+                            itemCount: data?.length?? 0,
+                            itemBuilder: ( context,  index) {
+                              final sort = data?..sort((a,b)=> isDescending ? b.topicsResponse.topicName!.compareTo(a.topicsResponse.topicName!) :
+                              a.topicsResponse.topicName!.compareTo(b.topicsResponse.topicName!) );
+                              final sortedProjects = sort![index];
+                              return ProjectCard(
+                                project: sortedProjects,
+                                onPress: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => DetailProject(
+                                            project: data![index],
+                                          )));
+                                },
+                              );
+                            },
+                          );
                         }
-                        if(snapshot.hasError){
-                          print(snapshot.error);
-                        }
-                        return ListView.builder(
-                          itemCount: data?.length?? 0,
-                          itemBuilder: ( context,  index) {
-                            final sort = data?..sort((a,b)=> isDescending ? b.topicsResponse.topicName!.compareTo(a.topicsResponse.topicName!) :
-                            a.topicsResponse.topicName!.compareTo(b.topicsResponse.topicName!) );
-                            final sortedProjects = sort![index];
-                            return ProjectCard(
-                              project: sortedProjects,
-                              onPress: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => DetailProject(
-                                          project: data![index],
-                                        )));
-                              },
-                            );
-                          },
-                        );
-                      }
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ));

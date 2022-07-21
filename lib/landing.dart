@@ -1,4 +1,5 @@
 import 'package:capstone_management/provider/app_user_provider.dart';
+import 'package:capstone_management/provider/semester_provider.dart';
 import 'package:capstone_management/screen/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,10 +14,13 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+
+
+
   @override
   Widget build(BuildContext context) {
     return (context.watch<AppUserProvider>().isSignedIn &&
-            context.watch<AppUserProvider>().appUser != null)
+            context.watch<SemestersProvider>().currentSemester != null)
         ? const BottomNavBar()
         : const SignInPage();
   }

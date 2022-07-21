@@ -9,6 +9,8 @@ class Search_project extends SearchDelegate{
   ProjectRepository _fetchTopic = ProjectRepository();
   @override
   String get searchFieldLabel => 'Project name';
+
+
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
@@ -59,8 +61,33 @@ class Search_project extends SearchDelegate{
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return Center(
-      child: Text(''),
+    return  Container(
+      padding: EdgeInsets.all(10),
+      child: FutureBuilder<List<Project>?>(
+          future: _fetchTopic.getAllProject(query:  query),
+          builder: (context, snapshot) {
+            var data = snapshot.data;
+            if(!snapshot.hasData){
+              return Center(child: CircularProgressIndicator(),);
+            }
+            return ListView.builder(
+              itemCount: data?.length?? 0,
+              itemBuilder: ( context,  index) {
+                return ProjectCard(
+                  project: data![index],
+                  onPress: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DetailProject(
+                              project: data[index],
+                            )));
+                  },
+                );
+              },
+            );
+          }
+      ),
     );
   }
 

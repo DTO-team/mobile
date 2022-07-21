@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:capstone_management/modal/semesters.dart';
 import 'package:http/http.dart' as http;
 
 class HttpClient {
@@ -23,9 +24,15 @@ class HttpClient {
   }
 
   Future<http.Response> get(String endpoint,
-      {Map<String, String>? queryParams}) {
+      {Map<String, String>? queryParams, Semester? currentSemester}) {
     Uri url = Uri.https(_host, '/api$_version$endpoint', queryParams);
-    return http.get(url, headers: _defaultHeaders);
+    final Map<String, String> headers = (currentSemester != null)
+        ? {
+            "currentsemester": jsonEncode(currentSemester),
+            ..._defaultHeaders
+          }
+        : _defaultHeaders;
+    return http.get(url, headers: headers);
   }
 
   Future<http.Response> post(String endpoint,

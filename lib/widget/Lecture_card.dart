@@ -8,12 +8,11 @@ class lec_card extends StatelessWidget {
     Key? key,
     this.name,
     this.avatar,
-    this.email, this.icon,
+    this.email,
   }) : super(key: key);
   final name;
   final avatar;
   final email;
-  final icon;
 
   @override
   Widget build(BuildContext context) {

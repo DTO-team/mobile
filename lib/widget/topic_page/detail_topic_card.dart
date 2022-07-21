@@ -24,6 +24,10 @@ class DetailTopicCard extends StatelessWidget {
           automaticallyImplyLeading: false,
           elevation: 0,
           backgroundColor: whiteSoft,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
           centerTitle: true,
           title: Text(
             'Topic Detail',
@@ -93,7 +97,6 @@ class DetailTopicCard extends StatelessWidget {
                         email: topic.lecturersDetails
                             .map((e) => e.email)
                             .toList().first,
-                        icon: '',
 
                       ),
 
@@ -113,7 +116,6 @@ class DetailTopicCard extends StatelessWidget {
                             email: topic.lecturersDetails
                                 .map((e) => e.email)
                                 .toList()[index],
-                            icon: '',
 
                           );
                         },
