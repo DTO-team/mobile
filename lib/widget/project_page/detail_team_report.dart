@@ -76,7 +76,7 @@ class _DetailReportState extends State<DetailReport> {
             ),
             lec_card(
               email: widget.report.reporter.email,
-              avatar: 'assets/chamb.png',
+              avatar: widget.report.reporter.avatarUrl != null ? NetworkImage('${widget.report.reporter.avatarUrl}') : AssetImage('assets/google-logo.png'),
               name: widget.report.reporter.fullName,
             ),
             const Divider(
@@ -238,11 +238,11 @@ class _DetailReportState extends State<DetailReport> {
                               height: 45,
                               width: 45,
                               decoration: BoxDecoration(
-                                  color: blue,
+                                  color: white,
                                   shape: BoxShape.circle,
                                   image: DecorationImage(
                                     fit: BoxFit.cover,
-                                    image: AssetImage('assets/chamb.png'),
+                                    image: AssetImage('assets/google-logo.png'),
                                   )),
                             ),
                             Expanded(
@@ -290,7 +290,7 @@ class _DetailReportState extends State<DetailReport> {
                                     /// content
                                  Padding(
                                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                                   child: Text('${widget.report.feedback[index].content}'
+                                   child: Text('${_parseHtmlString(widget.report.feedback[index].content)}'
                                    ),
                                  )
                                   ],

@@ -26,7 +26,7 @@ class NewFeedCard extends StatelessWidget {
                 height: 60,
                 width: 60,
                 decoration: BoxDecoration(
-                    color: blue,
+                    color: Colors.white,
                     shape: BoxShape.circle,
                     image: DecorationImage(
                       fit: BoxFit.cover,

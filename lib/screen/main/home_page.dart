@@ -48,9 +48,9 @@ class _HomePageState extends State<HomePage> {
   List<NewFeed> nfs = [
     NewFeed(
         id: '1',
-        userFirstName: 'chamber th france',
-        team: 'DTOOOOOOOOOOOOOOO',
-        userProfilePic: 'assets/chamb.png',
+        userFirstName: 'th france',
+        team: 'DTOOOO',
+        userProfilePic: 'assets/google-logo.png',
         tweet:
         'Do not worry, with me this will be easy. C\'est simple comme bonjour',
         tweetedAt: 'Oct 2',
@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
         id: '2',
         userFirstName: 'Lute',
         team: 'Lute100',
-        userProfilePic: 'assets/chamb.png',
+        userProfilePic: 'assets/google-logo.png',
         tweet:
         'This killing is terrible business but I always say if I must do something, be the best',
         tweetedAt: 'Oct 4',
@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
         id: '3',
         userFirstName: 'Lute',
         team: 'Lute100',
-        userProfilePic: 'assets/chamb.png',
+        userProfilePic: 'assets/google-logo.png',
         tweet:
         'Our guests have arrived. Let\'s make a good first impression, shall we?',
         tweetedAt: 'Oct 4',
@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
         id: '4',
         userFirstName: 'Lute',
         team: 'Lute100',
-        userProfilePic: 'assets/chamb.png',
+        userProfilePic: 'assets/google-logo.png',
         tweet:
         'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
         tweetedAt: 'Oct 4',
@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
         id: '5',
         userFirstName: 'Lute',
         team: 'Lute100',
-        userProfilePic: 'assets/chamb.png',
+        userProfilePic: 'assets/google-logo.png',
         tweet:
         'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
         tweetedAt: 'Oct 4',
@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
         id: '6',
         userFirstName: 'Lute',
         team: 'Lute100',
-        userProfilePic: 'assets/chamb.png',
+        userProfilePic: 'assets/google-logo.png',
         tweet:
         'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
         tweetedAt: 'Oct 4',
@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
         id: '7',
         userFirstName: 'Lute',
         team: 'Lute100',
-        userProfilePic: 'assets/chamb.png',
+        userProfilePic: 'assets/google-logo.png',
         tweet:
         'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
         tweetedAt: 'Oct 4',
@@ -113,7 +113,7 @@ class _HomePageState extends State<HomePage> {
         id: '8',
         userFirstName: 'Lute',
         team: 'Lute100',
-        userProfilePic: 'assets/chamb.png',
+        userProfilePic: 'assets/google-logo.png',
         tweet:
         'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
         tweetedAt: 'Oct 4',
@@ -122,7 +122,7 @@ class _HomePageState extends State<HomePage> {
         id: '9',
         userFirstName: 'Lute',
         team: 'Lute100',
-        userProfilePic: 'assets/chamb.png',
+        userProfilePic: 'assets/google-logo.png',
         tweet:
         'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
         tweetedAt: 'Oct 4',
@@ -131,7 +131,7 @@ class _HomePageState extends State<HomePage> {
         id: '10',
         userFirstName: 'Lute',
         team: 'Lute100',
-        userProfilePic: 'assets/chamb.png',
+        userProfilePic: 'assets/google-logo.png',
         tweet:
         'I still don\'t understand why teachers used to beat the shit out of 4th graders who forgot their notebook.',
         tweetedAt: 'Oct 4',

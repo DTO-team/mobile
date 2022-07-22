@@ -7,7 +7,7 @@ class ReportFeedbackRepository {
 
   Future<bool> postFeedback(String teamId, String reportId, String content) async {
     final httpClient = HttpClient();
-    final body = HttpPatchBody(op: 'add', path: 'feedbacks', value: content);
+    final body = HttpPatchBody(op: 'add', path: 'feedback', value: content);
     final response = await httpClient.patch('/teams/$teamId/reports/$reportId', body: jsonEncode(body));
 
     return response.statusCode == 200;
