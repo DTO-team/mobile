@@ -10,6 +10,7 @@ class LecturerRepository {
     final httpClient = HttpClient();
     final response = await httpClient.get(resourcePath);
     if (response.statusCode == 200) {
+      print(response.body);
       return List<Lecturer>.from(
           jsonDecode(response.body).map((x) => Lecturer.fromJson(x)));
     } else {

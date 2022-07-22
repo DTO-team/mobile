@@ -70,7 +70,7 @@ class ProjectInfo extends StatelessWidget {
                     name: project.teamDetailResponse.mentors
                         .map((e) => e.fullName)
                         .toList().first,
-                    avatar: 'assets/chamb.png',
+                    avatar: project.teamDetailResponse.mentors.map((e) => e.avatarUrl).toList().first != null ? NetworkImage('${project.teamDetailResponse.mentors.map((e) => e.avatarUrl).toList().first}') :AssetImage('assets/google-logo.png'),
                     email: project.teamDetailResponse.mentors
                         .map((e) => e.email)
                         .toList().first,
@@ -89,7 +89,7 @@ class ProjectInfo extends StatelessWidget {
                         name: project.teamDetailResponse.mentors
                             .map((e) => e.fullName)
                             .toList()[index],
-                        avatar: 'assets/chamb.png',
+                        avatar:project.teamDetailResponse.mentors.map((e) => e.avatarUrl).toList().first != null ? NetworkImage('${project.teamDetailResponse.mentors.map((e) => e.avatarUrl).toList().first}') :AssetImage('assets/google-logo.png'),
                         email: project.teamDetailResponse.mentors
                             .map((e) => e.email)
                             .toList()[index],
@@ -112,7 +112,8 @@ class ProjectInfo extends StatelessWidget {
                 child: ExpandablePanel(
                   header:leader_card(
                     name: project.teamDetailResponse.leader.fullName,
-                    avatar: 'assets/chamb.png',
+                    avatar: project.teamDetailResponse.leader.avatarUrl != null ? NetworkImage(
+                        '${project.teamDetailResponse.leader.avatarUrl}') : AssetImage('assets/google-logo.png'),
                     email: project.teamDetailResponse.leader.email ,
                     icon: 'assets/flag.svg',
                   ),
@@ -129,7 +130,7 @@ class ProjectInfo extends StatelessWidget {
                         name: project.teamDetailResponse.members
                             .map((e) => e.fullName)
                             .toList()[index],
-                        avatar: 'assets/chamb.png',
+                        avatar: project.teamDetailResponse.members.map((e) => e.avatarUrl).toList()[index] != null ? NetworkImage('${project.teamDetailResponse.members.map((e) => e.avatarUrl).toList()[index]}'): AssetImage('assets/google-logo.png'),
                         email: project.teamDetailResponse.members
                             .map((e) => e.email)
                             .toList()[index],

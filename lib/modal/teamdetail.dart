@@ -3,9 +3,7 @@
 //     final teamDetail = teamDetailFromJson(jsonString);
 
 import 'package:capstone_management/modal/lecturer.dart';
-import 'package:capstone_management/modal/status.dart';
 import 'package:capstone_management/modal/student.dart';
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 import 'department.dart';

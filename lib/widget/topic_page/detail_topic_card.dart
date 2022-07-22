@@ -5,10 +5,18 @@ import '../../constant/text_style.dart';
 import '../../modal/topic.dart';
 import '../Lecture_card.dart';
 
-class DetailTopicCard extends StatelessWidget {
+class DetailTopicCard extends StatefulWidget {
   const DetailTopicCard({Key? key, required this.topic}) : super(key: key);
 
   final Topic topic;
+
+  @override
+  State<DetailTopicCard> createState() => _DetailTopicCardState();
+}
+
+class _DetailTopicCardState extends State<DetailTopicCard> {
+  static const _defaultImage = AssetImage('assets/google-logo.png');
+
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +80,7 @@ class DetailTopicCard extends StatelessWidget {
                       ],
                     ),
                     child: Text(
-                      topic.topicName?? '',
+                      widget.topic.topicName?? '',
                       style: AppTextSytle.subTitle1TextStyle,
                       textAlign: TextAlign.left,
                     )),
@@ -90,11 +98,11 @@ class DetailTopicCard extends StatelessWidget {
                 Card(
                     child: ExpandablePanel(
                       header:lec_card(
-                        name: topic.lecturersDetails
+                        name: widget.topic.lecturersDetails
                             .map((e) => e.fullName)
                             .toList().first,
-                        avatar: 'assets/chamb.png',
-                        email: topic.lecturersDetails
+                        avatar: widget.topic.lecturersDetails.map((e) => e.avatarUrl).toList().first!= null ?NetworkImage('${widget.topic.lecturersDetails.map((e) => e.avatarUrl).toList().first}'): _defaultImage,
+                        email: widget.topic.lecturersDetails
                             .map((e) => e.email)
                             .toList().first,
 
@@ -105,15 +113,14 @@ class DetailTopicCard extends StatelessWidget {
                       expanded: ListView.builder(
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
-                        itemCount: topic.lecturersDetails.length > 0 ? topic.lecturersDetails.length -1 : topic.lecturersDetails.length,
+                        itemCount: widget.topic.lecturersDetails.length > 0 ? widget.topic.lecturersDetails.length -1 : widget.topic.lecturersDetails.length,
                         itemBuilder: (BuildContext context, int index) {
 
                           return lec_card(
-                            name: topic.lecturersDetails
-                                .map((e) => e.fullName)
-                                .toList()[index],
-                            avatar: 'assets/chamb.png',
-                            email: topic.lecturersDetails
+                            name: widget.topic.lecturersDetails
+                                .map((e) => e.fullName).toList()[index],
+                            avatar: widget.topic.lecturersDetails.map((e) => e.avatarUrl).toList()[index]!= null ?NetworkImage('${widget.topic.lecturersDetails.map((e) => e.avatarUrl).toList()[index]}'): _defaultImage,
+                            email: widget.topic.lecturersDetails
                                 .map((e) => e.email)
                                 .toList()[index],
 
@@ -130,9 +137,9 @@ class DetailTopicCard extends StatelessWidget {
                 ),
                 SizedBox(height: 5,),
                 lec_card(
-                  name: topic.companyDetail?.fullName ?? 'This Topic is not belong to comany',
-                  avatar: 'assets/flag.svg',
-                  email: topic.companyDetail?.email ?? '',
+                  name: widget.topic.companyDetail?.fullName ?? 'This Topic is not belong to comany',
+                  avatar: _defaultImage,
+                  email: widget.topic.companyDetail?.email ?? '',
                 ),
                 SizedBox(
                   height: 10,
@@ -160,7 +167,7 @@ class DetailTopicCard extends StatelessWidget {
                       ],
                     ),
                     child: Text(
-                      topic.description?? '',
+                      widget.topic.description?? '',
                       style: AppTextSytle.bodyTextStyle,
                       textAlign: TextAlign.left,
                     ))
@@ -171,4 +178,5 @@ class DetailTopicCard extends StatelessWidget {
       ),
     );
   }
+
 }

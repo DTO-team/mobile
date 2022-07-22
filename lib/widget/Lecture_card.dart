@@ -24,14 +24,14 @@ class lec_card extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.only(right: 5),
-            height: 35,
-            width: 35,
+            height: 32,
+            width: 32,
             decoration: BoxDecoration(
-                color: blue,
+                color: Colors.white,
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(avatar),
+                  image: avatar,
                 )),
           ),
           Column(

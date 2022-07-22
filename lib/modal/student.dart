@@ -23,6 +23,8 @@ class Student {
     required this.semester,
     required this.role,
     required this.status,
+     this.avatarUrl,
+
   });
 
   String id;
@@ -35,6 +37,9 @@ class Student {
   String semester;
   String role;
   Status status;
+  String? avatarUrl;
+
+
 
   factory Student.fromJson(Map<String, dynamic> json) => Student(
     id: json["id"],
@@ -42,6 +47,7 @@ class Student {
     email: json["email"],
     userName: json["userName"],
     fullName: json["fullName"],
+    avatarUrl: json["avatarUrl"],
     teamDetail: (json["teamDetail"] != null)
         ? TeamDetail.fromJson(json["teamDetail"])
         : null,
@@ -62,5 +68,6 @@ class Student {
     "semester": semester,
     "role": role,
     "status": status.toJson(),
+    "avatarUrl": avatarUrl,
   };
 }

@@ -11,7 +11,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../modal/lecturer.dart';
+import '../../modal/project.dart';
+import '../../modal/topic.dart';
 import '../../provider/app_user_provider.dart';
+import '../../repository/project_repository.dart';
+import '../../repository/topic_repository.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,6 +25,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<Topic>? _topics;
+  List<Project>? _project;
+  var isLoaded = false;
+  Future<void> loadTopics() async {
+    _topics = await TopicRepository().getAllTopic(_selectedSemester);
+    if(_topics != null){
+      setState(() {
+        isLoaded = true;
+      });
+    }
+  }
+  Future<void> loadProjects() async {
+    _project = await ProjectRepository().getAllProject();
+    if(_project != null){
+      setState(() {
+        isLoaded = true;
+      });
+    }
+  }
 
   List<NewFeed> nfs = [
     NewFeed(
@@ -121,12 +144,15 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     setState(() {
+      listSemester = Provider.of<SemestersProvider>(context, listen:  false).semesters;
+      _selectedSemester = Provider.of<SemestersProvider>(context, listen:  false).currentSemester;
       _appUser =
       Provider
           .of<AppUserProvider>(context, listen: false)
           .appUser!;
-      listSemester = Provider.of<SemestersProvider>(context, listen:  false).semesters;
-      _selectedSemester = Provider.of<SemestersProvider>(context, listen:  false).currentSemester;
+      loadTopics();
+      loadProjects();
+
     });
   }
 
@@ -136,7 +162,7 @@ class _HomePageState extends State<HomePage> {
 
     int _currentCard = 0;
 
-    List cardList = [WelcomeCard( name: _appUser.fullName?? '',), TimeLineCard(currentSemester: _selectedSemester,)];
+    List cardList = [WelcomeCard( name: _appUser.fullName?? '',), TimeLineCard(currentSemester: _selectedSemester, topics: _topics,project: _project)];
     return Scaffold(
       ///trao cho th nay
       ///ừ cái key đó, ta hoàn toàn có thể get được tham chiếu của chính Widget đó qua biến

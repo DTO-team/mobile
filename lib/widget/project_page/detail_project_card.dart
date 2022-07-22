@@ -1,8 +1,6 @@
 import 'package:capstone_management/modal/project.dart';
 import 'package:capstone_management/widget/project_page/project_information.dart';
 import 'package:capstone_management/widget/project_page/team_report.dart';
-import 'package:capstone_management/widget/topic_page/leader_card.dart';
-import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 
 import '../../constant/color.dart';

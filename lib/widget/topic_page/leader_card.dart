@@ -27,11 +27,11 @@ class leader_card extends StatelessWidget {
             height: 35,
             width: 35,
             decoration: BoxDecoration(
-                color: blue,
+                color: Colors.white,
                 shape: BoxShape.circle,
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(avatar),
+                  image: avatar,
                 )),
           ),
           Column(
